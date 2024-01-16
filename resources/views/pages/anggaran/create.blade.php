@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Anggaran')
+@section('title', '')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -38,7 +38,8 @@
                                             @foreach ($subs as $sub)
                                                 <option value="{{ $sub->id }}"
                                                     {{ old('sub_id') == $sub->id ? 'selected' : '' }}>
-                                                    {{ $sub->kegiatan->program->kode_program }}.{{ $sub->kegiatan->kode_kegiatan }}.{{ $sub->kode_sub }} / {{ $sub->nama_sub }}</option>
+                                                    {{ $sub->kegiatan->program->kode_program }}.{{ $sub->kegiatan->kode_kegiatan }}.{{ $sub->kode_sub }}
+                                                    / {{ $sub->nama_sub }}</option>
                                             @endforeach
                                         </select>
                                         @error('sub_id')
@@ -58,7 +59,8 @@
                                             @foreach ($rekenings as $rekening)
                                                 <option value="{{ $rekening->id }}"
                                                     {{ old('rekening_id') == $rekening->id ? 'selected' : '' }}>
-                                                    {{ $rekening->kode_rekening }} / {{ $rekening->nama_rekening }}</option>
+                                                    {{ $rekening->kode_rekening }} / {{ $rekening->nama_rekening }}
+                                                </option>
                                             @endforeach
                                         </select>
                                         @error('rekening_id')

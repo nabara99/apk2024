@@ -25,14 +25,16 @@ Route::get('/', function () {
     return view('pages.auth.login');
 });
 
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', function () {
         return view('pages.dashboard');
     })->name('dashboard');
-    Route::resource('user', UserController::class);
-    Route::resource('program', ProgramController::class);
-    Route::resource('kegiatan', KegiatanController::class);
-    Route::resource('sub', SubController::class);
-    Route::resource('rekening', RekeningController::class);
-    Route::resource('anggaran', AnggaranController::class);
+    // Route::resource('user', UserController::class);
+    Route::resource('user', UserController::class)->middleware('userAccess:admin');
+    Route::resource('program', ProgramController::class)->middleware('userAccess:user');
+    Route::resource('kegiatan', KegiatanController::class)->middleware('userAccess:user');
+    Route::resource('sub', SubController::class)->middleware('userAccess:user');
+    Route::resource('rekening', RekeningController::class)->middleware('userAccess:user');
+    Route::resource('anggaran', AnggaranController::class)->middleware('userAccess:user');
 });

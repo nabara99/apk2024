@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Rekening')
+@section('title', '')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -21,7 +21,8 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4>Buat Rekening</h4>
-                                <a href="{{ route('rekening.index') }}" class="btn btn-primary btn-icon"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+                                <a href="{{ route('rekening.index') }}" class="btn btn-primary btn-icon"><i
+                                        class="fa-solid fa-arrow-left"></i> Kembali</a>
                             </div>
                             <div class="card-body">
                                 <form action="{{ route('rekening.store') }}" method="POST">

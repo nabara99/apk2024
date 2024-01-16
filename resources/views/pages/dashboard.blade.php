@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'APK 2024')
+@section('title', '')
 
 @push('style')
     <!-- CSS Libraries -->

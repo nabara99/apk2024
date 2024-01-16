@@ -4,31 +4,42 @@
             <a href="{{ route('dashboard') }}">APK 2024</a>
         </div>
         <ul class="sidebar-menu">
-            <li class="menu-header">Otentikasi</li>
-            <li class="{{ str_contains(Route::currentRouteName(), 'user.index') ? 'active' : '' }}">
-                <a href="{{ route('user.index') }}"><i class="fa-solid fa-users"></i>
-                    <span>Pengguna</span></a>
-            </li>
-            <li class="menu-header">Anggaran</li>
-            <li class="{{ str_contains(Route::currentRouteName(), 'program.index') ? 'active' : '' }}">
-                <a href="{{ route('program.index') }}"><i class="fa-regular fa-note-sticky"></i><span>Program</span></a>
-            </li>
-            <li class="{{ str_contains(Route::currentRouteName(), 'kegiatan.index') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('kegiatan.index') }}"><i
-                        class="fa-solid fa-book"></i><span>Kegiatan</span></a>
-            </li>
-            <li class="{{ str_contains(Route::currentRouteName(), 'sub.index') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('sub.index') }}"><i class="fa-solid fa-file-pen"></i><span>Sub
-                        Kegiatan</span></a>
-            </li>
-            <li class="{{ str_contains(Route::currentRouteName(), 'rekening.index') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('rekening.index') }}"><i class="fa-solid fa-database"></i><span>Kode
-                        Rekening</span></a>
-            </li>
-            <li class="{{ str_contains(Route::currentRouteName(), 'anggaran.index') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('anggaran.index') }}"><i class="fa-solid fa-money-check-dollar"></i><span>Anggaran
-                    </span></a>
-            </li>
+            @if (auth()->user()->roles == 'admin')
+                <li class="menu-header">Otentikasi</li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'user.index') ? 'active' : '' }}">
+                    <a href="{{ route('user.index') }}"><i class="fa-solid fa-users"></i>
+                        <span>Pengguna</span></a>
+                </li>
+            @endif
+            @if (auth()->user()->roles == 'user')
+                <li class="menu-header">Anggaran</li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'program.index') ? 'active' : '' }}">
+                    <a href="{{ route('program.index') }}"><i
+                            class="fa-regular fa-note-sticky"></i><span>Program</span></a>
+                </li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'kegiatan.index') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('kegiatan.index') }}"><i
+                            class="fa-solid fa-book"></i><span>Kegiatan</span></a>
+                </li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'sub.index') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('sub.index') }}"><i class="fa-solid fa-file-pen"></i><span>Sub
+                            Kegiatan</span></a>
+                </li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'rekening.index') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('rekening.index') }}"><i
+                            class="fa-solid fa-database"></i><span>Kode
+                            Rekening</span></a>
+                </li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'anggaran.index') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('anggaran.index') }}"><i
+                            class="fa-solid fa-money-check-dollar"></i><span>Anggaran
+                        </span></a>
+                </li>
+                @if (auth()->user()->roles == 'ppk')
+                @endif
+                @if (auth()->user()->roles == 'bendahara')
+                @endif
+            @endif
         </ul>
     </aside>
 </div>

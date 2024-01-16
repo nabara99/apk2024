@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit User')
+@section('title', '')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -22,7 +22,7 @@
                             <div class="card-header">
                                 <h4>Edit Pengguna</h4>
                                 <a href="{{ route('user.index') }}" class="btn btn-primary btn-icon"><i
-                                    class="fa-solid fa-arrow-left"></i> Kembali</a>
+                                        class="fa-solid fa-arrow-left"></i> Kembali</a>
                             </div>
                             <div class="card-body">
                                 <form action="{{ route('user.update', $user) }}" method="POST">

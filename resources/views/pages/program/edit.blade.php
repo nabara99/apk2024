@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Program')
+@section('title', '')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -21,7 +21,8 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4>Edit Program</h4>
-                                <a href="{{ route('program.index') }}" class="btn btn-primary btn-icon"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+                                <a href="{{ route('program.index') }}" class="btn btn-primary btn-icon"><i
+                                        class="fa-solid fa-arrow-left"></i> Kembali</a>
                             </div>
                             <div class="card-body">
                                 <form action="{{ route('program.update', $program) }}" method="POST">

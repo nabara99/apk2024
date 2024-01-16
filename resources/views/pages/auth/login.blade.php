@@ -8,8 +8,9 @@
 @endpush
 
 @section('main')
-    <div class="">
-        <h4>Aplikasi Keuangan (APK) Kecamatan Teluk Kepayang</h4>
+    <div class="text-center">
+        <h4>Aplikasi Keuangan (APK)</h4>
+        <h5>Kecamatan Teluk Kepayang<br/>Tahun Anggaran 2024</h5>
     </div>
     <div class="card card-primary">
         <div class="card-header">

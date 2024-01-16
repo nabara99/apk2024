@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Program')
+@section('title', 'Edit Sub')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -20,41 +20,61 @@
                     <div class="col-12 col-md-12 col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Buat Program</h4>
-                                <a href="{{ route('program.index') }}" class="btn btn-primary btn-icon"><i
+                                <h4>Edit Sub Kegiatan</h4>
+                                <a href="{{ route('sub.index') }}" class="btn btn-primary btn-icon"><i
                                         class="fa-solid fa-arrow-left"></i> Kembali</a>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('program.store') }}" method="POST">
+                                <form action="{{ route('sub.update', $sub) }}" method="POST">
                                     @csrf
+                                    @method('PUT')
                                     <div class="form-group">
-                                        <label>Kode Program</label>
-                                        <input type="text" value="{{ old('kode_program') }}"
-                                            class="form-control @error('kode_program')
+                                        <label class="form-label">Kegiatan</label>
+                                        <select class="form-control selectric @error('kegiatan_id') is-invalid @enderror"
+                                            name="kegiatan_id">
+                                            <option value="{{ $sub->kegiatan_id }}">{{ $sub->kegiatan->nama_kegiatan }}
+                                            </option>
+                                            @foreach ($kegiatans as $kegiatan)
+                                                <option value="{{ $kegiatan->id }}"
+                                                    {{ $kegiatan->sub_id == $kegiatan->id ? 'selected' : '' }}>
+                                                    {{ $kegiatan->nama_kegiatan }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('kegiatan_id')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Kode Sub Kegiatan</label>
+                                        <input type="text"
+                                            class="form-control @error('kode_sub')
                                         is-invalid
                                     @enderror"
-                                            name="kode_program">
-                                        @error('kode_program')
+                                            name="kode_sub" value="{{ $sub->kode_sub }}">
+                                        @error('kode_sub')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label>Nama Program</label>
-                                        <input type="text" value="{{ old('nama_program') }}"
-                                            class="form-control @error('nama_program')
+                                        <label>Nama Sub Kegiatan</label>
+                                        <input type="text"
+                                            class="form-control @error('nama_sub')
                                         is-invalid
                                     @enderror"
-                                            name="nama_program">
-                                        @error('nama_program')
+                                            name="nama_sub" value="{{ $sub->nama_sub }}">
+                                        @error('nama_sub')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
                                     <div class="card-footer text-right">
-                                        <button class="btn btn-primary">Simpan</button>
+                                        <button class="btn btn-primary">Update</button>
                                     </div>
                                 </form>
                             </div>

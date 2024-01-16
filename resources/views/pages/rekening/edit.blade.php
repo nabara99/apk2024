@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Program')
+@section('title', 'Edit Rekening')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -20,41 +20,42 @@
                     <div class="col-12 col-md-12 col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Buat Program</h4>
-                                <a href="{{ route('program.index') }}" class="btn btn-primary btn-icon"><i
+                                <h4>Edit Rekening</h4>
+                                <a href="{{ route('rekening.index') }}" class="btn btn-primary btn-icon"><i
                                         class="fa-solid fa-arrow-left"></i> Kembali</a>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('program.store') }}" method="POST">
+                                <form action="{{ route('rekening.update', $rekening) }}" method="POST">
                                     @csrf
+                                    @method('PUT')
                                     <div class="form-group">
-                                        <label>Kode Program</label>
-                                        <input type="text" value="{{ old('kode_program') }}"
-                                            class="form-control @error('kode_program')
+                                        <label>Kode</label>
+                                        <input type="text"
+                                            class="form-control @error('kode_rekening')
                                         is-invalid
                                     @enderror"
-                                            name="kode_program">
-                                        @error('kode_program')
+                                            name="kode_rekening" value="{{ $rekening->kode_rekening }}">
+                                        @error('kode_rekening')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label>Nama Program</label>
-                                        <input type="text" value="{{ old('nama_program') }}"
-                                            class="form-control @error('nama_program')
+                                        <label>Nama Rekening</label>
+                                        <input type="text"
+                                            class="form-control @error('nama_rekening')
                                         is-invalid
                                     @enderror"
-                                            name="nama_program">
-                                        @error('nama_program')
+                                            name="nama_rekening" value="{{ $rekening->nama_rekening }}">
+                                        @error('nama_rekening')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
                                     <div class="card-footer text-right">
-                                        <button class="btn btn-primary">Simpan</button>
+                                        <button class="btn btn-primary">Update</button>
                                     </div>
                                 </form>
                             </div>

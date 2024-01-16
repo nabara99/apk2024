@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Kegiatan')
+@section('title', 'Sub')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -20,15 +20,15 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Daftar Kegiatan</h4>
-                                <a href="{{ route('kegiatan.create') }}" class="btn btn-primary">Tambah Kegiatan</a>
+                                <h4>Daftar Sub Kegiatan</h4>
+                                <a href="{{ route('sub.create') }}" class="btn btn-primary">Tambah Sub Kegiatan</a>
                             </div>
                             <div class="card-body">
                                 <div class="float-right">
                                     <form method="GET">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Cari kegiatan"
-                                                name="nama_kegiatan">
+                                            <input type="text" class="form-control" placeholder="Cari sub kegiatan"
+                                                name="nama_sub">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                             </div>
@@ -40,25 +40,25 @@
                                     <table class="table-striped table">
                                         <tr>
                                             <th>Kode</th>
-                                            <th>Nama Program</th>
                                             <th>Nama Kegiatan</th>
+                                            <th>Nama Sub Kegiatan</th>
                                             <th>Aksi</th>
                                         </tr>
-                                        @foreach ($kegiatans as $kegiatan)
+                                        @foreach ($subs as $sub)
                                             <tr>
-                                                <td>{{ $kegiatan->program->kode_program }}.{{ $kegiatan->kode_kegiatan }}
+                                                <td>{{ $sub->kegiatan->program->kode_program }}.{{ $sub->kegiatan->kode_kegiatan }}.{{ $sub->kode_sub }}
                                                 </td>
-                                                <td>{{ $kegiatan->program->nama_program }}</td>
-                                                <td>{{ $kegiatan->nama_kegiatan }}</td>
+                                                <td>{{ $sub->kegiatan->nama_kegiatan }}</td>
+                                                <td>{{ $sub->nama_sub }}</td>
                                                 <td>
                                                     <div class="d-flex justify-content-left">
-                                                        <a href="{{ route('kegiatan.edit', $kegiatan->id) }}"
+                                                        <a href="{{ route('sub.edit', $sub->id) }}"
                                                             class="btn btn-sm btn-info btn-icon">
                                                             <i class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
-                                                        <form action="{{ route('kegiatan.destroy', $kegiatan->id) }}"
-                                                            method="POST" class="ml-2">
+                                                        <form action="{{ route('sub.destroy', $sub->id) }}" method="POST"
+                                                            class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                             <input type="hidden" name="_token"
                                                                 value="{{ csrf_token() }}" />
@@ -75,7 +75,7 @@
                                     </table>
                                 </div>
                                 <div class="float-right">
-                                    {{ $kegiatans->withQueryString()->links() }}
+                                    {{ $subs->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>

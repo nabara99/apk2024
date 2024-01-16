@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Program')
+@section('title', 'Sub')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -20,34 +20,51 @@
                     <div class="col-12 col-md-12 col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Buat Program</h4>
-                                <a href="{{ route('program.index') }}" class="btn btn-primary btn-icon"><i
+                                <h4>Buat Sub Kegiatan</h4>
+                                <a href="{{ route('sub.index') }}" class="btn btn-primary btn-icon"><i
                                         class="fa-solid fa-arrow-left"></i> Kembali</a>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('program.store') }}" method="POST">
+                                <form action="{{ route('sub.store') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
-                                        <label>Kode Program</label>
-                                        <input type="text" value="{{ old('kode_program') }}"
-                                            class="form-control @error('kode_program')
-                                        is-invalid
-                                    @enderror"
-                                            name="kode_program">
-                                        @error('kode_program')
+                                        <label class="form-label">Kegiatan</label>
+                                        <select class="form-control selectric @error('kegiatan_id') is-invalid @enderror"
+                                            name="kegiatan_id">
+                                            <option value="" selected disabled>-- Pilih Kegiatan --</option>
+                                            @foreach ($kegiatans as $kegiatan)
+                                                <option value="{{ $kegiatan->id }}"
+                                                    {{ old('kegiatan_id') == $kegiatan->id ? 'selected' : '' }}>
+                                                    {{ $kegiatan->nama_kegiatan }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('kegiatan_id')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label>Nama Program</label>
-                                        <input type="text" value="{{ old('nama_program') }}"
-                                            class="form-control @error('nama_program')
+                                        <label>Kode Sub Kegiatan</label>
+                                        <input type="text" value="{{ old('kode_sub') }}"
+                                            class="form-control @error('kode_sub')
                                         is-invalid
                                     @enderror"
-                                            name="nama_program">
-                                        @error('nama_program')
+                                            name="kode_sub">
+                                        @error('kode_sub')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Nama Sub Kegiatan</label>
+                                        <input type="text" value="{{ old('nama_sub') }}"
+                                            class="form-control @error('nama_sub')
+                                        is-invalid
+                                    @enderror"
+                                            name="nama_sub">
+                                        @error('nama_sub')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>

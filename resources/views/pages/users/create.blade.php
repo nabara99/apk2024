@@ -21,13 +21,15 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4>Buat Pengguna</h4>
+                                <a href="{{ route('user.index') }}" class="btn btn-primary btn-icon"><i
+                                        class="fa-solid fa-arrow-left"></i> Kembali</a>
                             </div>
                             <div class="card-body">
                                 <form action="{{ route('user.store') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
                                         <label>Nama</label>
-                                        <input type="text"
+                                        <input type="text" value="{{ old('name') }}"
                                             class="form-control @error('name')
                                         is-invalid
                                     @enderror"
@@ -40,7 +42,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Email</label>
-                                        <input type="email"
+                                        <input type="email" value="{{ old('email') }}"
                                             class="form-control @error('email')
                                         is-invalid
                                     @enderror"
@@ -96,15 +98,14 @@
                                             </label>
                                         </div>
                                     </div>
+                                    <div class="card-footer text-right">
+                                        <button class="btn btn-primary">Simpan</button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="card-footer text-right">
-                                <button class="btn btn-primary">Simpan</button>
-                            </div>
-                            </form>
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
     </div>
 @endsection

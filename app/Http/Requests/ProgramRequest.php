@@ -22,8 +22,8 @@ class ProgramRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'kode_program' => 'required|min:7|max:7',
-            'nama_program' => 'required',
+            'kode_program' => 'required|size:7',
+            'nama_program' => 'required|unique:programs,nama_program',
         ];
     }
 }

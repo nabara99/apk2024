@@ -1,7 +1,12 @@
 <?php
 
+use App\Http\Controllers\AnggaranController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\RekeningController;
+use App\Http\Controllers\SearchSubController;
+use App\Http\Controllers\SubController;
+use App\Http\Controllers\SubSelectController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,4 +32,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('user', UserController::class);
     Route::resource('program', ProgramController::class);
     Route::resource('kegiatan', KegiatanController::class);
+    Route::resource('sub', SubController::class);
+    Route::resource('rekening', RekeningController::class);
+    Route::resource('anggaran', AnggaranController::class);
 });

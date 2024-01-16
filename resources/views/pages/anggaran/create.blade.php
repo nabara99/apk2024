@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Kegiatan')
+@section('title', 'Anggaran')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -20,51 +20,73 @@
                     <div class="col-12 col-md-12 col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Buat Kegiatan</h4>
-                                <a href="{{ route('kegiatan.index') }}" class="btn btn-primary btn-icon"><i
+                                <h4>Buat Anggaran</h4>
+                                <a href="{{ route('anggaran.index') }}" class="btn btn-primary btn-icon"><i
                                         class="fa-solid fa-arrow-left"></i> Kembali</a>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('kegiatan.store') }}" method="POST">
+                                <form action="{{ route('anggaran.store') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
-                                        <label class="form-label">Program</label>
-                                        <select class="form-control selectric @error('program_id') is-invalid @enderror"
-                                            name="program_id">
-                                            <option value="" selected disabled>-- Pilih Program --</option>
-                                            @foreach ($programs as $program)
-                                                <option value="{{ $program->id }}"
-                                                    {{ old('program_id') == $program->id ? 'selected' : '' }}>
-                                                    {{ $program->nama_program }}</option>
+                                        <label class="form-label">Sub Kegiatan</label>
+                                        <select
+                                            class="form-control select2 select2-hidden-accessible @error('sub_id')
+                                            is-invalid
+                                        @enderror"
+                                            style="width: 100%;" tabindex="-1" aria-hidden="true" name="sub_id">
+                                            <option value="" selected disabled>--Pilih Sub Kegiatan--</option>
+                                            @foreach ($subs as $sub)
+                                                <option value="{{ $sub->id }}"
+                                                    {{ old('sub_id') == $sub->id ? 'selected' : '' }}>
+                                                    {{ $sub->kegiatan->program->kode_program }}.{{ $sub->kegiatan->kode_kegiatan }}.{{ $sub->kode_sub }} / {{ $sub->nama_sub }}</option>
                                             @endforeach
                                         </select>
-                                        @error('program_id')
+                                        @error('sub_id')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label>Kode Kegiatan</label>
-                                        <input type="text" value="{{ old('kode_kegiatan') }}"
-                                            class="form-control @error('kode_kegiatan')
-                                        is-invalid
-                                    @enderror"
-                                            name="kode_kegiatan">
-                                        @error('kode_kegiatan')
+                                        <label class="form-label">Rekening</label>
+                                        <select
+                                            class="form-control select2 select2-hidden-accessible @error('rekening_id')
+                                            is-invalid
+                                        @enderror"
+                                            style="width: 100%;" tabindex="-1" aria-hidden="true" name="rekening_id">
+                                            <option value="" selected disabled>--Pilih Rekening--</option>
+                                            @foreach ($rekenings as $rekening)
+                                                <option value="{{ $rekening->id }}"
+                                                    {{ old('rekening_id') == $rekening->id ? 'selected' : '' }}>
+                                                    {{ $rekening->kode_rekening }} / {{ $rekening->nama_rekening }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('rekening_id')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
-                                    <div class="form-group">
-                                        <label>Nama Kegiatan</label>
-                                        <input type="text" value="{{ old('nama_kegiatan') }}"
-                                            class="form-control @error('nama_kegiatan')
+                                    <label>Uraian</label>
+                                    <input type="text" value="{{ old('uraian') }}"
+                                        class="form-control @error('uraian')
                                         is-invalid
                                     @enderror"
-                                            name="nama_kegiatan">
-                                        @error('nama_kegiatan')
+                                        name="uraian">
+                                    @error('uraian')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+
+                                    <div class="form-group">
+                                        <label>Pagu</label>
+                                        <input type="number" value="{{ old('pagu') }}"
+                                            class="form-control @error('pagu')
+                                        is-invalid
+                                    @enderror"
+                                            name="pagu">
+                                        @error('pagu')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -95,4 +117,16 @@
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('js/page/forms-advanced-forms.js') }}"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('.sub_id').select2({
+                closeOnSelect: false
+            });
+            $('.rekening_id').select2({
+                closeOnSelect: false
+            });
+        });
+    </script>
 @endpush

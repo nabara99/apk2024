@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Kegiatan')
+@section('title', 'Edit Anggaran')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -20,27 +20,55 @@
                     <div class="col-12 col-md-12 col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Edit Kegiatan</h4>
-                                <a href="{{ route('kegiatan.index') }}" class="btn btn-primary btn-icon"><i
+                                <h4>Edit Anggaran</h4>
+                                <a href="{{ route('anggaran.index') }}" class="btn btn-primary btn-icon"><i
                                         class="fa-solid fa-arrow-left"></i> Kembali</a>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('kegiatan.update', $kegiatan) }}" method="POST">
+                                <form action="{{ route('anggaran.update', $anggaran) }}" method="POST">
                                     @csrf
                                     @method('PUT')
                                     <div class="form-group">
-                                        <label class="form-label">Program</label>
-                                        <select class="form-control selectric @error('program_id') is-invalid @enderror"
-                                            name="program_id">
-                                            <option value="{{ $kegiatan->program_id }}">
-                                                {{ $kegiatan->program->nama_program }}</option>
-                                            @foreach ($programs as $program)
-                                                <option value="{{ $program->id }}"
-                                                    {{ $program->program_id == $program->id ? 'selected' : '' }}>
-                                                    {{ $program->nama_program }}</option>
+                                        <label class="form-label">Sub Kegiatan</label>
+                                        <select
+                                            class="form-control select2 select2-hidden-accessible @error('sub_id')
+                                            is-invalid
+                                        @enderror"
+                                            style="width: 100%;" tabindex="-1" aria-hidden="true" name="sub_id">
+                                            <option value="{{ $anggaran->sub_id }}">
+                                                {{ $anggaran->sub->kegiatan->program->kode_program }}.{{ $anggaran->sub->kegiatan->kode_kegiatan }}.{{ $anggaran->sub->kode_sub }}
+                                                / {{ $anggaran->sub->nama_sub }}</option>
+                                            @foreach ($subs as $sub)
+                                                <option value="{{ $sub->id }}"
+                                                    {{ old('sub_id') == $sub->id ? 'selected' : '' }}>
+                                                    {{ $sub->kegiatan->program->kode_program }}.{{ $sub->kegiatan->kode_kegiatan }}.{{ $sub->kode_sub }}
+                                                    / {{ $sub->nama_sub }}</option>
                                             @endforeach
                                         </select>
-                                        @error('program_id')
+                                        @error('sub_id')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Rekening</label>
+                                        <select
+                                            class="form-control select2 select2-hidden-accessible @error('rekening_id')
+                                            is-invalid
+                                        @enderror"
+                                            style="width: 100%;" tabindex="-1" aria-hidden="true" name="rekening_id">
+                                            <option value="{{ $anggaran->rekening_id }}">
+                                                {{ $anggaran->rekening->kode_rekening }} /
+                                                {{ $anggaran->rekening->nama_rekening }}</option>
+                                            @foreach ($rekenings as $rekening)
+                                                <option value="{{ $rekening->id }}"
+                                                    {{ old('rekening_id') == $rekening->id ? 'selected' : '' }}>
+                                                    {{ $rekening->kode_rekening }} / {{ $rekening->nama_rekening }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('rekening_id')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -48,26 +76,26 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Kode Kegiatan</label>
+                                        <label>Uraian</label>
                                         <input type="text"
-                                            class="form-control @error('kode_kegiatan')
+                                            class="form-control @error('uraian')
                                         is-invalid
                                     @enderror"
-                                            name="kode_kegiatan" value="{{ $kegiatan->kode_kegiatan }}">
-                                        @error('kode_kegiatan')
+                                            name="uraian" value="{{ $anggaran->uraian }}">
+                                        @error('uraian')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label>Nama Kegiatan</label>
+                                        <label>Pagu</label>
                                         <input type="text"
-                                            class="form-control @error('nama_kegiatan')
+                                            class="form-control @error('pagu')
                                         is-invalid
                                     @enderror"
-                                            name="nama_kegiatan" value="{{ $kegiatan->nama_kegiatan }}">
-                                        @error('nama_kegiatan')
+                                            name="pagu" value="{{ $anggaran->pagu }}">
+                                        @error('pagu')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>

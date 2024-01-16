@@ -21,6 +21,8 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4>Edit Pengguna</h4>
+                                <a href="{{ route('user.index') }}" class="btn btn-primary btn-icon"><i
+                                    class="fa-solid fa-arrow-left"></i> Kembali</a>
                             </div>
                             <div class="card-body">
                                 <form action="{{ route('user.update', $user) }}" method="POST">
@@ -81,15 +83,14 @@
                                             </label>
                                         </div>
                                     </div>
+                                    <div class="card-footer text-right">
+                                        <button class="btn btn-primary">Update</button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="card-footer text-right">
-                                <button class="btn btn-primary">Update</button>
-                            </div>
-                            </form>
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
     </div>
 @endsection

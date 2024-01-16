@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Kegiatan')
+@section('title', 'Rekening')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -20,15 +20,15 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Daftar Kegiatan</h4>
-                                <a href="{{ route('kegiatan.create') }}" class="btn btn-primary">Tambah Kegiatan</a>
+                                <h4>Daftar Rekening</h4>
+                                <a href="{{ route('rekening.create') }}" class="btn btn-primary">Tambah Rekening</a>
                             </div>
                             <div class="card-body">
                                 <div class="float-right">
                                     <form method="GET">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Cari kegiatan"
-                                                name="nama_kegiatan">
+                                            <input type="text" class="form-control" placeholder="Cari nama rekening"
+                                                name="nama_rekening">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                             </div>
@@ -40,24 +40,21 @@
                                     <table class="table-striped table">
                                         <tr>
                                             <th>Kode</th>
-                                            <th>Nama Program</th>
-                                            <th>Nama Kegiatan</th>
+                                            <th>Nama</th>
                                             <th>Aksi</th>
                                         </tr>
-                                        @foreach ($kegiatans as $kegiatan)
+                                        @foreach ($rekenings as $rekening)
                                             <tr>
-                                                <td>{{ $kegiatan->program->kode_program }}.{{ $kegiatan->kode_kegiatan }}
-                                                </td>
-                                                <td>{{ $kegiatan->program->nama_program }}</td>
-                                                <td>{{ $kegiatan->nama_kegiatan }}</td>
+                                                <td>{{ $rekening->kode_rekening }}</td>
+                                                <td>{{ $rekening->nama_rekening }}</td>
                                                 <td>
                                                     <div class="d-flex justify-content-left">
-                                                        <a href="{{ route('kegiatan.edit', $kegiatan->id) }}"
+                                                        <a href="{{ route('rekening.edit', $rekening->id) }}"
                                                             class="btn btn-sm btn-info btn-icon">
                                                             <i class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
-                                                        <form action="{{ route('kegiatan.destroy', $kegiatan->id) }}"
+                                                        <form action="{{ route('rekening.destroy', $rekening->id) }}"
                                                             method="POST" class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                             <input type="hidden" name="_token"
@@ -75,7 +72,7 @@
                                     </table>
                                 </div>
                                 <div class="float-right">
-                                    {{ $kegiatans->withQueryString()->links() }}
+                                    {{ $rekenings->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreKegiatanRequest extends FormRequest
+class UpdateKegiatanRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,7 @@ class StoreKegiatanRequest extends FormRequest
     {
         return [
             'kode_kegiatan' => 'required|size:4',
-            'nama_kegiatan' => 'required|unique:kegiatans,nama_kegiatan',
+            'nama_kegiatan' => 'required',
             'program_id' => 'required',
         ];
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProgramRequest;
+use App\Http\Requests\UpdateProgramRequest;
 use App\Models\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,7 @@ class ProgramController extends Controller
             ->when($request->input('nama_program'), function ($query, $name) {
                 return $query->where('nama_program', 'like', '%' . $name . '%');
             })
-            ->orderBy('id', 'desc')
+            ->orderBy('id', 'asc')
             ->paginate(10);
         return view('pages.program.index', compact('programs'));
     }
@@ -52,17 +53,20 @@ class ProgramController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $program = Program::findOrFail($id);
+        return view('pages.program.edit', compact('program'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateProgramRequest $request,Program $program)
     {
-        //
+        $data = $request->validated();
+        $program->update($data);
+        return redirect()->route('program.index')->with('success', 'Program berhasil diupdate');
     }
 
     /**

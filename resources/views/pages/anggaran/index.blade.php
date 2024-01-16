@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Kegiatan')
+@section('title', 'Anggaran')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -20,15 +20,15 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Daftar Kegiatan</h4>
-                                <a href="{{ route('kegiatan.create') }}" class="btn btn-primary">Tambah Kegiatan</a>
+                                <h4>Daftar Anggaran</h4>
+                                <a href="{{ route('anggaran.create') }}" class="btn btn-primary">Tambah Anggaran</a>
                             </div>
                             <div class="card-body">
                                 <div class="float-right">
                                     <form method="GET">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Cari kegiatan"
-                                                name="nama_kegiatan">
+                                            <input type="text" class="form-control" placeholder="Cari anggaran"
+                                                name="uraian">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                             </div>
@@ -39,25 +39,27 @@
                                 <div class="table-responsive">
                                     <table class="table-striped table">
                                         <tr>
-                                            <th>Kode</th>
-                                            <th>Nama Program</th>
-                                            <th>Nama Kegiatan</th>
+                                            <th>Sub Kegiatan</th>
+                                            <th>Kode & Nama Rekening</th>
+                                            <th>Uraian</th>
+                                            <th>Pagu (Rp)</th>
                                             <th>Aksi</th>
                                         </tr>
-                                        @foreach ($kegiatans as $kegiatan)
+                                        @foreach ($anggarans as $anggaran)
                                             <tr>
-                                                <td>{{ $kegiatan->program->kode_program }}.{{ $kegiatan->kode_kegiatan }}
+                                                <td>{{ $anggaran->sub->nama_sub }}</td>
+                                                <td>{{ $anggaran->rekening->kode_rekening }}<br />{{ $anggaran->rekening->nama_rekening }}
                                                 </td>
-                                                <td>{{ $kegiatan->program->nama_program }}</td>
-                                                <td>{{ $kegiatan->nama_kegiatan }}</td>
+                                                <td>{{ $anggaran->uraian }}</td>
+                                                <td>{{ number_format($anggaran->pagu) }}</td>
                                                 <td>
                                                     <div class="d-flex justify-content-left">
-                                                        <a href="{{ route('kegiatan.edit', $kegiatan->id) }}"
+                                                        <a href="{{ route('anggaran.edit', $anggaran->id) }}"
                                                             class="btn btn-sm btn-info btn-icon">
                                                             <i class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
-                                                        <form action="{{ route('kegiatan.destroy', $kegiatan->id) }}"
+                                                        <form action="{{ route('anggaran.destroy', $anggaran->id) }}"
                                                             method="POST" class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                             <input type="hidden" name="_token"
@@ -75,7 +77,7 @@
                                     </table>
                                 </div>
                                 <div class="float-right">
-                                    {{ $kegiatans->withQueryString()->links() }}
+                                    {{ $anggarans->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>

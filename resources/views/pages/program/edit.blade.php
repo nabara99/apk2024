@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit User')
+@section('title', 'Edit Program')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -20,76 +20,48 @@
                     <div class="col-12 col-md-12 col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Edit Pengguna</h4>
+                                <h4>Edit Program</h4>
+                                <a href="{{ route('program.index') }}" class="btn btn-primary btn-icon"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('user.update', $user) }}" method="POST">
+                                <form action="{{ route('program.update', $program) }}" method="POST">
                                     @csrf
                                     @method('PUT')
                                     <div class="form-group">
-                                        <label>Nama</label>
+                                        <label>Kode Program</label>
                                         <input type="text"
-                                            class="form-control @error('name')
+                                            class="form-control @error('kode_program')
                                         is-invalid
                                     @enderror"
-                                            name="name" value="{{ $user->name }}">
-                                        @error('name')
+                                            name="kode_program" value="{{ $program->kode_program }}">
+                                        @error('kode_program')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
+
                                     <div class="form-group">
-                                        <label>Email</label>
-                                        <input type="email"
-                                            class="form-control @error('email')
+                                        <label>Nama Program</label>
+                                        <input type="text"
+                                            class="form-control @error('nama_program')
                                         is-invalid
                                     @enderror"
-                                            name="email" value="{{ $user->email }}">
-                                        @error('email')
+                                            name="nama_program" value="{{ $program->nama_program }}">
+                                        @error('nama_program')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
-                                    <div class="form-group">
-                                        <div class="form-label">Status</div>
-                                        <div class="selectgroup w-100">
-                                            <label class="selectgroup-item">
-                                                <input type="radio" name="roles" value="admin"
-                                                    class="selectgroup-input"
-                                                    @if ($user->roles == 'admin') checked @endif>
-                                                <span class="selectgroup-button">Admin</span>
-                                            </label>
-                                            <label class="selectgroup-item">
-                                                <input type="radio" name="roles" value="bendahara"
-                                                    class="selectgroup-input"
-                                                    @if ($user->roles == 'bendahara') checked @endif>
-                                                <span class="selectgroup-button">Bendahara</span>
-                                            </label>
-                                            <label class="selectgroup-item">
-                                                <input type="radio" name="roles" value="user"
-                                                    class="selectgroup-input"
-                                                    @if ($user->roles == 'user') checked @endif>
-                                                <span class="selectgroup-button">User</span>
-                                            </label>
-                                            <label class="selectgroup-item">
-                                                <input type="radio" name="roles" value="ppk"
-                                                    class="selectgroup-input"
-                                                    @if ($user->roles == 'ppk') checked @endif>
-                                                <span class="selectgroup-button">PPK</span>
-                                            </label>
-                                        </div>
+                                    <div class="card-footer text-right">
+                                        <button class="btn btn-primary">Update</button>
                                     </div>
+                                </form>
                             </div>
-                            <div class="card-footer text-right">
-                                <button class="btn btn-primary">Update</button>
-                            </div>
-                            </form>
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
     </div>
 @endsection

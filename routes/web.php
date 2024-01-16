@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnggaranController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RekeningController;

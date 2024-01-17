@@ -25,7 +25,7 @@
                                 <h4>DPA 2024</h4>
                             </div>
                             <div class="card-body">
-                                <h6>Rp. {{ number_format($anggarans) }}</h6>
+                                {{-- <h6>Rp. {{ number_format($anggarans) }}</h6> --}}
                             </div>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                                 <h4>Sisa Anggaran</h4>
                             </div>
                             <div class="card-body">
-                                42
+
                             </div>
                         </div>
                     </div>
@@ -72,6 +72,36 @@
                             <div class="card-body">
                                 10
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Dokumen Pelaksanaan Anggaran (DPA) Tahun Anggaran 2024</h4>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table-striped mb-0 table">
+                                <thead>
+                                    <tr>
+                                        <th>Kode Sub Kegiatan</th>
+                                        <th>Nama Sub Kegiatan</th>
+                                        <th>Pagu</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($anggarans as $dpa)
+                                        <tr>
+                                            <td>{{ $dpa->kode_program }}.{{ $dpa->kode_kegiatan }}.{{ $dpa->kode_sub }}</td>
+                                            <td>{{ $dpa->nama_sub }}</td>
+                                            <td>{{ number_format($dpa->nilai) }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

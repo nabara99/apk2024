@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anggaran;
+use App\Models\Sub;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -12,7 +14,22 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $anggarans = Anggaran::sum('pagu');
+        // $anggarans = Anggaran::sum('pagu');
+
+        $dpas = DB::table('anggarans')
+            ->join('subs', 'anggarans.sub_id', '=', 'subs.id')
+            ->select(DB::raw('SUM(anggarans.pagu) as pagu'), 'subs.nama_sub')
+            ->groupBy('subs.nama_sub', 'pagu')
+            ->get();
+
+        $anggarans = DB::table('anggarans')
+            ->join('subs', 'anggarans.sub_id', '=', 'subs.id')
+            ->join('kegiatans', 'subs.kegiatan_id', '=', 'kegiatans.id')
+            ->join('programs', 'kegiatans.program_id', '=', 'programs.id')
+            ->selectRaw('sum(pagu) as nilai, nama_sub, kode_sub, kode_kegiatan, kode_program')
+            ->groupBy('nama_sub', 'kode_sub', 'kode_kegiatan', 'kode_program')
+            ->get();
+
         return view('pages.dashboard', compact('anggarans'));
     }
 

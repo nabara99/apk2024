@@ -25,6 +25,13 @@ class AnggaranController extends Controller
         return view('pages.anggaran.index', compact('anggarans', 'total_pagu'));
     }
 
+    public function dashboard()
+    {
+        $total_pagu = Anggaran::sum('pagu');
+        dd($total_pagu);
+        return view('pages.dashboard', compact('total_pagu'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

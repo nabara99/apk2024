@@ -22,10 +22,10 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Jumlah DPA</h4>
+                                <h4>DPA 2024</h4>
                             </div>
                             <div class="card-body">
-
+                                Rp. {{ number_format($anggarans) }}
                             </div>
                         </div>
                     </div>

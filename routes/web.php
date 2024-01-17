@@ -10,6 +10,7 @@ use App\Http\Controllers\SubController;
 use App\Http\Controllers\SubSelectController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,9 +29,7 @@ Route::get('/', function () {
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/home', function () {
-        return view('pages.dashboard');
-    })->name('dashboard');
+    Route::get('/home', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('user', UserController::class)->middleware('userAccess:admin');
     Route::resource('program', ProgramController::class)->middleware('userAccess:user');
     Route::resource('kegiatan', KegiatanController::class)->middleware('userAccess:user');

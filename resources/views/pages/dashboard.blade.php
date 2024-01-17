@@ -25,7 +25,7 @@
                                 <h4>Jumlah DPA</h4>
                             </div>
                             <div class="card-body">
-                                {{-- {{ $users }} --}}
+
                             </div>
                         </div>
                     </div>

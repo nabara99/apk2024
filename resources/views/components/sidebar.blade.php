@@ -6,31 +6,31 @@
         <ul class="sidebar-menu">
             @if (auth()->user()->roles == 'admin')
                 <li class="menu-header">Otentikasi</li>
-                <li class="{{ str_contains(Route::currentRouteName(), 'user.index') ? 'active' : '' }}">
+                <li class="{{ str_contains(Route::currentRouteName(), 'user') ? 'active' : '' }}">
                     <a href="{{ route('user.index') }}"><i class="fa-solid fa-users"></i>
                         <span>Pengguna</span></a>
                 </li>
             @endif
             @if (auth()->user()->roles == 'user')
                 <li class="menu-header">Anggaran</li>
-                <li class="{{ str_contains(Route::currentRouteName(), 'program.index') ? 'active' : '' }}">
+                <li class="{{ str_contains(Route::currentRouteName(), 'program') ? 'active' : '' }}">
                     <a href="{{ route('program.index') }}"><i
                             class="fa-regular fa-note-sticky"></i><span>Program</span></a>
                 </li>
-                <li class="{{ str_contains(Route::currentRouteName(), 'kegiatan.index') ? 'active' : '' }}">
+                <li class="{{ str_contains(Route::currentRouteName(), 'kegiatan') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('kegiatan.index') }}"><i
                             class="fa-solid fa-book"></i><span>Kegiatan</span></a>
                 </li>
-                <li class="{{ str_contains(Route::currentRouteName(), 'sub.index') ? 'active' : '' }}">
+                <li class="{{ str_contains(Route::currentRouteName(), 'sub') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('sub.index') }}"><i class="fa-solid fa-file-pen"></i><span>Sub
                             Kegiatan</span></a>
                 </li>
-                <li class="{{ str_contains(Route::currentRouteName(), 'rekening.index') ? 'active' : '' }}">
+                <li class="{{ str_contains(Route::currentRouteName(), 'rekening') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('rekening.index') }}"><i
                             class="fa-solid fa-database"></i><span>Kode
                             Rekening</span></a>
                 </li>
-                <li class="{{ str_contains(Route::currentRouteName(), 'anggaran.index') ? 'active' : '' }}">
+                <li class="{{ str_contains(Route::currentRouteName(), 'anggaran') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('anggaran.index') }}"><i
                             class="fa-solid fa-money-check-dollar"></i><span>Anggaran
                         </span></a>

@@ -31,7 +31,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', function () {
         return view('pages.dashboard');
     })->name('dashboard');
-    // Route::resource('user', UserController::class);
     Route::resource('user', UserController::class)->middleware('userAccess:admin');
     Route::resource('program', ProgramController::class)->middleware('userAccess:user');
     Route::resource('kegiatan', KegiatanController::class)->middleware('userAccess:user');

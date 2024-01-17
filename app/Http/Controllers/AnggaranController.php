@@ -15,12 +15,14 @@ class AnggaranController extends Controller
      */
     public function index(Request $request)
     {
+
+        $total_pagu = Anggaran::sum('pagu');
         $anggarans = Anggaran::when($request->input('uraian'), function ($query, $name) {
             return $query->where('uraian', 'like', '%' . $name . '%');
         })
             ->orderBy('id', 'asc')
             ->paginate(10);
-        return view('pages.anggaran.index', compact('anggarans'));
+        return view('pages.anggaran.index', compact('anggarans', 'total_pagu'));
     }
 
     /**

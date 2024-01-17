@@ -20,7 +20,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Daftar Anggaran</h4>
+                                <h4>Daftar Anggaran | Pagu Anggaran = Rp. {{ number_format($total_pagu) }}.-</h4>
                                 <a href="{{ route('anggaran.create') }}" class="btn btn-primary">Tambah Anggaran</a>
                             </div>
                             <div class="card-body">

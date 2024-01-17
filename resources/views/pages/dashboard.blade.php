@@ -25,7 +25,7 @@
                                 <h4>DPA 2024</h4>
                             </div>
                             <div class="card-body">
-                                Rp. {{ number_format($anggarans) }}
+                                <h6>Rp. {{ number_format($anggarans) }}</h6>
                             </div>
                         </div>
                     </div>

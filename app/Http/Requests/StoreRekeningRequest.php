@@ -22,8 +22,8 @@ class StoreRekeningRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'kode_rekening' => 'required|size:17',
-            'nama_rekening' => 'required|min:5',
+            'kode_rekening' => 'required|size:17|unique:rekenings,kode_rekening',
+            'nama_rekening' => 'required|min:5|unique:rekenings,nama_rekening',
         ];
     }
 }

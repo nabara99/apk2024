@@ -6,9 +6,12 @@ use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\SearchSubController;
+use App\Http\Controllers\SpdController;
+use App\Http\Controllers\SpdGuController;
 use App\Http\Controllers\SubController;
 use App\Http\Controllers\SubSelectController;
 use App\Http\Controllers\UserController;
+use App\Models\SpdGu;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -27,7 +30,6 @@ Route::get('/', function () {
     return view('pages.auth.login');
 });
 
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('user', UserController::class)->middleware('userAccess:admin');
@@ -36,4 +38,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('sub', SubController::class)->middleware('userAccess:user');
     Route::resource('rekening', RekeningController::class)->middleware('userAccess:user');
     Route::resource('anggaran', AnggaranController::class)->middleware('userAccess:user');
+    Route::resource('spd', SpdController::class);
 });

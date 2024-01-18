@@ -1,67 +1,118 @@
-@extends('layouts.auth')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('title', '')
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>APK &mdash; 2024</title>
 
-@push('style')
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="{{ asset('library/bootstrap/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{ asset('library/bootstrap-social/bootstrap-social.css') }}">
-@endpush
 
-@section('main')
-    <div class="text-center">
-        <h4>Aplikasi Keuangan (APK)</h4>
-        <h5>Kecamatan Teluk Kepayang<br/>Tahun Anggaran 2024</h5>
-    </div>
-    <div class="card card-primary">
-        <div class="card-header">
-            <h4>Silakan masuk</h4>
-        </div>
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components.css') }}">
+</head>
 
-        <div class="card-body">
-            <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate="">
-                @csrf
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input id="email" type="email"
-                        class="form-control @error('email')
-                            is-invalid
-                        @enderror"
-                        name="email" value="{{ old('email') }}" tabindex="1" autofocus>
-                    @error('email')
-                        <div class="invalid-feedback">
-                            {{ $message }}
+<body>
+    <div id="app">
+        <section class="section">
+            <div class="d-flex align-items-stretch flex-wrap">
+                <div class="col-lg-4 col-md-6 col-12 order-lg-1 min-vh-100 order-2 bg-white">
+                    <div class="m-3 p-4">
+                        <img src="{{ asset('img/tanbu.png') }}" alt="logo" width="70"
+                            class="shadow-light  mb-5 mt-2">
+                        <h4 class="text-dark font-weight-normal">Welcome to <span class="font-weight-bold">APK
+                                2024</span>
+                        </h4>
+                        <p class="text-muted">Aplikasi Keuangan (APK) Kecamatan Teluk Kepayang, membuat penatausahaan
+                            keuangan menjadi lebih cepat</p>
+                        <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate="">
+                            @csrf
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input id="email" type="email" value="{{ old('email') }}"
+                                    class="form-control @error('email')
+                                    is-invalid
+                                @enderror"
+                                    name="email" tabindex="1" autofocus>
+                                @error('email')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <div class="d-block">
+                                    <label for="password" class="control-label">Password</label>
+                                </div>
+                                <input id="password" type="password"
+                                    class="form-control @error('password')
+                                    is-invalid
+                                @enderror"
+                                    name="password" tabindex="2">
+                                @error('password')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group text-right">
+                                <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right"
+                                    tabindex="4">
+                                    Login
+                                </button>
+                            </div>
+
+                        </form>
+
+                        <div class="text-small mt-5 text-center">
+                            Copyright &copy; Kecamatan Teluk Kepayang. Made with 💙 by Ellypsis
                         </div>
-                    @enderror
-                </div>
-
-                <div class="form-group">
-                    <div class="d-block">
-                        <label for="password" class="control-label">Password</label>
                     </div>
-                    <input id="password" type="password"
-                        class="form-control @error('password')
-                        is-invalid
-                    @enderror"
-                        name="password" tabindex="2">
-                    @error('password')
-                        <div class="invalid-feedback">
-                            {{ $message }}
+                </div>
+                <div class="col-lg-8 col-12 order-lg-2 min-vh-100 background-walk-y position-relative overlay-gradient-bottom order-1"
+                    data-background="{{ asset('img/unsplash/luca-massimilian-nl21NzVRRlo-unsplash.jpg') }}">
+                    <div class="absolute-bottom-left index-2">
+                        <div class="text-light p-5 pb-2">
+                            <div class="mb-5 pb-3">
+                                <h1 class="display-4 font-weight-bold mb-2">Good Morning</h1>
+                            </div>
+                            Photo by <a class="text-light bb" target="_blank"
+                                href="https://unsplash.com/photos/person-using-black-laptop-computer-nl21NzVRRlo">Luca
+                                Massimilian</a> on <a class="text-light bb" target="_blank"
+                                href="https://unsplash.com">Unsplash</a>
                         </div>
-                    @enderror
+                    </div>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                        Login
-                    </button>
-                </div>
-            </form>
-
-        </div>
+            </div>
+        </section>
     </div>
-@endsection
 
-@push('scripts')
+    <!-- General JS Scripts -->
+    <script src="{{ asset('library/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('library/popper.js/dist/umd/popper.js') }}"></script>
+    <script src="{{ asset('library/tooltip.js/dist/umd/tooltip.js') }}"></script>
+    <script src="{{ asset('library/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('library/jquery.nicescroll/dist/jquery.nicescroll.min.js') }}"></script>
+    <script src="{{ asset('library/moment/min/moment.min.js') }}"></script>
+    <script src="{{ asset('js/stisla.js') }}"></script>
+
     <!-- JS Libraies -->
 
     <!-- Page Specific JS File -->
-@endpush
+
+    <!-- Template JS File -->
+    <script src="{{ asset('js/scripts.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
+</body>
+
+</html>

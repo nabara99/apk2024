@@ -20,15 +20,15 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Daftar Anggaran | Pagu Anggaran = Rp. {{ number_format($total_pagu) }}.-</h4>
-                                <a href="{{ route('anggaran.create') }}" class="btn btn-primary">Tambah Anggaran</a>
+                                <h4>Daftar SP2D</h4>
+                                <a href="{{ route('spd.create') }}" class="btn btn-primary">Tambah SP2D</a>
                             </div>
                             <div class="card-body">
                                 <div class="float-right">
                                     <form method="GET">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Cari anggaran"
-                                                name="uraian">
+                                            <input type="text" class="form-control" placeholder="Cari SP2D"
+                                                name="spd_uraian">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                             </div>
@@ -39,28 +39,27 @@
                                 <div class="table-responsive">
                                     <table class="table-striped table">
                                         <tr>
-                                            <th>Sub Kegiatan</th>
-                                            <th>Kode & Nama Rekening</th>
+                                            <th>Nomor</th>
+                                            <th>Tanggal</th>
                                             <th>Uraian</th>
-                                            <th>Pagu (Rp)</th>
+                                            <th>Nilai (Rp)</th>
                                             <th>Aksi</th>
                                         </tr>
-                                        @foreach ($anggarans as $anggaran)
+                                        @foreach ($spds as $spd)
                                             <tr>
-                                                <td>{{ $anggaran->sub->nama_sub }}</td>
-                                                <td>{{ $anggaran->rekening->kode_rekening }}<br />{{ $anggaran->rekening->nama_rekening }}
-                                                </td>
-                                                <td>{{ $anggaran->uraian }}</td>
-                                                <td>{{ number_format($anggaran->pagu) }}</td>
+                                                <td>{{ $spd->no_spd }}</td>
+                                                <td>{{ date('d F Y', strtotime($spd->spd_tgl)) }}</td>
+                                                <td>{{ $spd->spd_uraian }}</td>
+                                                <td>{{ number_format($spd->spd_nilai) }}</td>
                                                 <td>
-                                                    {{-- <div class="d-flex justify-content-left">
-                                                        <a href="{{ route('anggaran.edit', $anggaran->id) }}"
+                                                    <div class="d-flex justify-content-left">
+                                                        <a href="{{ route('spd.edit', $spd->id) }}"
                                                             class="btn btn-sm btn-info btn-icon">
                                                             <i class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
-                                                        <form action="{{ route('anggaran.destroy', $anggaran->id) }}"
-                                                            method="POST" class="ml-2">
+                                                        <form action="{{ route('spd.destroy', $spd->id) }}" method="POST"
+                                                            class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                             <input type="hidden" name="_token"
                                                                 value="{{ csrf_token() }}" />
@@ -69,7 +68,7 @@
                                                                 <i class="fas fa-times"></i> Hapus
                                                             </button>
                                                         </form>
-                                                    </div> --}}
+                                                    </div>
                                                 </td>
                                             </tr>
                                             </tr>
@@ -77,7 +76,7 @@
                                     </table>
                                 </div>
                                 <div class="float-right">
-                                    {{ $anggarans->withQueryString()->links() }}
+                                    {{ $spds->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>

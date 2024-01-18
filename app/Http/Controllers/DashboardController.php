@@ -14,13 +14,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        // $anggarans = Anggaran::sum('pagu');
-
-        $dpas = DB::table('anggarans')
-            ->join('subs', 'anggarans.sub_id', '=', 'subs.id')
-            ->select(DB::raw('SUM(anggarans.pagu) as pagu'), 'subs.nama_sub')
-            ->groupBy('subs.nama_sub', 'pagu')
-            ->get();
+        $dpas = Anggaran::sum('pagu');
 
         $anggarans = DB::table('anggarans')
             ->join('subs', 'anggarans.sub_id', '=', 'subs.id')
@@ -31,7 +25,7 @@ class DashboardController extends Controller
             ->orderBy('programs.kode_program', 'asc')
             ->get();
 
-        return view('pages.dashboard', compact('anggarans'));
+        return view('pages.dashboard', compact('anggarans', 'dpas'));
     }
 
     /**

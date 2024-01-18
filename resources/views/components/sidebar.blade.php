@@ -35,10 +35,16 @@
                             class="fa-solid fa-money-check-dollar"></i><span>Anggaran
                         </span></a>
                 </li>
-                @if (auth()->user()->roles == 'ppk')
-                @endif
-                @if (auth()->user()->roles == 'bendahara')
-                @endif
+            @endif
+            <li class="menu-header">Perbendaharaan</li>
+            <li class="{{ str_contains(Route::currentRouteName(), 'spd') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('spd.index') }}"><i
+                        class="fa-solid fa-comments-dollar"></i></i><span>SP2D
+                    </span></a>
+            </li>
+            @if (auth()->user()->roles == 'ppk')
+            @endif
+            @if (auth()->user()->roles == 'bendahara')
             @endif
         </ul>
     </aside>

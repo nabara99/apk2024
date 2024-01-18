@@ -10,6 +10,16 @@ class Kwitansi extends Model
     use HasFactory;
 
     protected $fillable = [
-        
+        'kw_id',
+        'tgl',
+        'hal',
+        'nilai',
+        'ppn',
+        'pph21',
+        'pph22',
+        'pph23',
+        'pdaerah',
+        'sisa',
+        'penerima_id',
     ];
 }

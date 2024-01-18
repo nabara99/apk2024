@@ -13,7 +13,8 @@ class Anggaran extends Model
         'sub_id',
         'rekening_id',
         'uraian',
-        'pagu'
+        'pagu',
+        'sisa_pagu'
     ];
 
     public function sub()

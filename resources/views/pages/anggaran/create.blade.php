@@ -83,7 +83,7 @@
 
                                     <div class="form-group">
                                         <label>Pagu</label>
-                                        <input type="number" value="{{ old('pagu') }}"
+                                        <input type="text" value="{{ old('pagu') }}"
                                             class="form-control @error('pagu')
                                         is-invalid
                                     @enderror"

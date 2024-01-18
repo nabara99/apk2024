@@ -48,8 +48,14 @@ class AnggaranController extends Controller
      */
     public function store(StoreAnggaranRequest $request)
     {
-        $data = $request->all();
-        Anggaran::create($data);
+        $anggaran = new Anggaran();
+        $anggaran->sub_id = $request->sub_id;
+        $anggaran->rekening_id = $request->rekening_id;
+        $anggaran->uraian = $request->uraian;
+        $anggaran->pagu = (int) $request->pagu;
+        $anggaran->sisa_pagu = (int) $request->pagu;
+
+        $anggaran->save();
         return redirect()->route('anggaran.index')->with('success', 'Anggaran berhasil disimpan');
     }
 
@@ -78,7 +84,14 @@ class AnggaranController extends Controller
     public function update(Request $request, $id)
     {
         $anggaran = Anggaran::findOrFail($id);
-        $anggaran->update($request->all());
+
+        $anggaran->update([
+            'sub_id' => $request->sub_id,
+            'rekening_id' => $request->rekening_id,
+            'uraian' => $request->uraian,
+            'pagu' => (int) $request->pagu,
+            'sisa_pagu' => (int)$request->pagu,
+        ]);
 
         return redirect()->route('anggaran.index')->with('success', 'Anggaran berhasil diupdate');
     }

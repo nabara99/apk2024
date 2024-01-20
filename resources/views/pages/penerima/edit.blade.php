@@ -20,76 +20,94 @@
                     <div class="col-12 col-md-12 col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Buat Kegiatan</h4>
-                                <a href="{{ route('kegiatan.index') }}" class="btn btn-primary btn-icon"><i
+                                <h4>Edit Rekanan</h4>
+                                <a href="{{ route('penerima.index') }}" class="btn btn-primary btn-icon"><i
                                         class="fa-solid fa-arrow-left"></i> Kembali</a>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('kegiatan.store') }}" method="POST">
+                                <form action="{{ route('penerima.update', $penerima) }}" method="POST">
                                     @csrf
+                                    @method('PUT')
                                     <div class="form-group">
-                                        <label class="form-label">Program</label>
-                                        <select class="form-control selectric @error('program_id') is-invalid @enderror"
-                                            name="program_id">
-                                            <option value="" selected disabled>-- Pilih Program --</option>
-                                            @foreach ($programs as $program)
-                                                <option value="{{ $program->id }}"
-                                                    {{ old('program_id') == $program->id ? 'selected' : '' }}>
-                                                    {{ $program->nama_program }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('program_id')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Kode Kegiatan</label>
-                                        <input type="text" value="{{ old('kode_kegiatan') }}"
-                                            class="form-control @error('kode_kegiatan')
+                                        <label>Nama</label>
+                                        <input type="text"
+                                            class="form-control @error('nama_penerima')
                                         is-invalid
                                     @enderror"
-                                            name="kode_kegiatan">
-                                        @error('kode_kegiatan')
+                                            name="nama_penerima" value="{{ $penerima->nama_penerima }}">
+                                        @error('nama_penerima')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label>Nama Kegiatan</label>
-                                        <input type="text" value="{{ old('nama_kegiatan') }}"
-                                            class="form-control @error('nama_kegiatan')
+                                        <label>Jabatan</label>
+                                        <input type="text"
+                                            class="form-control @error('jabatan_penerima')
                                         is-invalid
                                     @enderror"
-                                            name="nama_kegiatan">
-                                        @error('nama_kegiatan')
+                                            name="jabatan_penerima" value="{{ $penerima->jabatan_penerima }}">
+                                        @error('jabatan_penerima')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
-
                                     <div class="form-group">
-                                        <label class="form-label">PPTK</label>
-                                        <select class="form-control selectric @error('pptk_id') is-invalid @enderror"
-                                            name="pptk_id">
-                                            <option value="" selected disabled>-- Pilih PPTK --</option>
-                                            @foreach ($pptks as $pptk)
-                                                <option value="{{ $pptk->id }}"
-                                                    {{ old('pptk_id') == $pptk->id ? 'selected' : '' }}>
-                                                    {{ $pptk->nip_pptk }} / {{ $pptk->nama_pptk }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('pptk_id')
+                                        <label>Alamat</label>
+                                        <input type="text"
+                                            class="form-control @error('alamat')
+                                        is-invalid
+                                    @enderror"
+                                            name="alamat" value="{{ $penerima->alamat }}">
+                                        @error('alamat')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Bank</label>
+                                        <input type="text"
+                                            class="form-control @error('bank')
+                                        is-invalid
+                                    @enderror"
+                                            name="bank" value="{{ $penerima->bank }}">
+                                        @error('bank')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label>No Rekening</label>
+                                        <input type="text"
+                                            class="form-control @error('rek_bank')
+                                        is-invalid
+                                    @enderror"
+                                            name="rek_bank" value="{{ $penerima->rek_bank }}">
+                                        @error('rek_bank')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label>NPWP</label>
+                                        <input type="text"
+                                            class="form-control @error('npwp')
+                                        is-invalid
+                                    @enderror"
+                                            name="npwp" value="{{ $penerima->npwp }}">
+                                        @error('npwp')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
                                     <div class="card-footer text-right">
-                                        <button class="btn btn-primary">Simpan</button>
+                                        <button class="btn btn-primary">Update</button>
                                     </div>
                                 </form>
                             </div>

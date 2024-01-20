@@ -84,7 +84,7 @@
                                     <div class="form-group">
                                         <label>Pagu</label>
                                         <input type="text" value="{{ old('pagu') }}"
-                                            class="form-control @error('pagu')
+                                            class="number-separator form-control @error('pagu')
                                         is-invalid
                                     @enderror"
                                             name="pagu">
@@ -116,6 +116,7 @@
     <script src="{{ asset('library/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
     <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>
+    <script src="{{ asset('library/easy-number/easy-number-separator.js') }}"></script>
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('js/page/forms-advanced-forms.js') }}"></script>

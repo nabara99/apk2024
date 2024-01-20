@@ -13,10 +13,16 @@ class Kegiatan extends Model
         'kode_kegiatan',
         'nama_kegiatan',
         'program_id',
+        'pptk_id',
     ];
 
     public function program()
     {
         return $this->belongsTo(Program::class);
+    }
+
+    public function pptk()
+    {
+        return $this->belongsTo(Pptk::class);
     }
 }

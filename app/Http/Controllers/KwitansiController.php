@@ -3,42 +3,51 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anggaran;
-use App\Models\Sub;
+use App\Models\Kwitansi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class DashboardController extends Controller
+class KwitansiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $dpas = Anggaran::sum('pagu');
-
-        $anggarans = DB::table('anggarans')
-            ->join('subs', 'anggarans.sub_id', '=', 'subs.id')
-            ->join('kegiatans', 'subs.kegiatan_id', '=', 'kegiatans.id')
-            ->join('programs', 'kegiatans.program_id', '=', 'programs.id')
-            ->selectRaw('sum(pagu) as nilai, sum(sisa_pagu) as realisasi,nama_sub, kode_sub, kode_kegiatan, kode_program')
-            ->groupBy('nama_sub', 'kode_sub', 'kode_kegiatan', 'kode_program')
-            ->orderBy('programs.kode_program', 'asc')
-            ->get();
-
-        return view('pages.dashboard', compact('anggarans', 'dpas'));
+        return view('pages.kwitansi.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $data = new Kwitansi();
+        $data->kw_id = $this->generateKwitansiNumber();
+        $anggarans = Anggaran::all();
+
+        return view('pages.kwitansi.create', compact('data', 'anggarans'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    private function generateKwitansiNumber()
+    {
+        $lastFaktur = Kwitansi::latest()->first();
+        $nextNumber = $lastFaktur ? (int)substr($lastFaktur->kw_id, 3) + 1 : 1;
+        return $nextNumber . '/KTK/2024';
+    }
+
+    public function modalcaripagu()
+    {
+        $anggarans = DB::table('anggarans')
+            ->join('subs', 'anggarans.sub_id', '=', 'subs.id')
+            ->join('rekenings', 'anggarans.rekening_id', '=', 'rekenings.id')
+            ->join('kegiatans', 'subs.kegiatan_id', '=', 'kegiatans.id')
+            ->join('programs', 'kegiatans.program_id', '=', 'programs.id')
+            ->selectRaw('anggarans.id, sisa_pagu,nama_sub, kode_sub, kode_kegiatan, kode_program, uraian, kode_rekening')
+            ->get();
+
+        return response()->json(['data' => $anggarans]);
+    }
+
+    
+
     public function store(Request $request)
     {
         //

@@ -53,11 +53,6 @@
                                                 <td>{{ number_format($spd->spd_nilai) }}</td>
                                                 <td>
                                                     <div class="d-flex justify-content-left">
-                                                        <a href="{{ route('spd.edit', $spd->id) }}"
-                                                            class="btn btn-sm btn-info btn-icon">
-                                                            <i class="fas fa-edit"></i>
-                                                            Edit
-                                                        </a>
                                                         <form action="{{ route('spd.destroy', $spd->id) }}" method="POST"
                                                             class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE" />
@@ -65,7 +60,7 @@
                                                                 value="{{ csrf_token() }}" />
                                                             <button class="btn btn-sm btn-danger btn-icon confirm-delete"
                                                                 onclick="return confirm('Yakin menghapus data?')">
-                                                                <i class="fas fa-times"></i> Hapus
+                                                                <i class="fas fa-trash"></i> Hapus
                                                             </button>
                                                         </form>
                                                     </div>

@@ -36,6 +36,13 @@ class AnggaranController extends Controller
      * Show the form for creating a new resource.
      */
 
+    public function getAnggaranData($id)
+    {
+        $anggaran = Anggaran::findOrFail($id);
+
+        return response()->json(['data' => $anggaran]);
+    }
+
     public function create(Request $request)
     {
         $subs = Sub::all();
@@ -52,8 +59,8 @@ class AnggaranController extends Controller
         $anggaran->sub_id = $request->sub_id;
         $anggaran->rekening_id = $request->rekening_id;
         $anggaran->uraian = $request->uraian;
-        $anggaran->pagu = (int) $request->pagu;
-        $anggaran->sisa_pagu = (int) $request->pagu;
+        $anggaran->pagu = str_replace(",", "", $request->pagu);
+        $anggaran->sisa_pagu = str_replace(",", "", $request->pagu);
 
         $anggaran->save();
         return redirect()->route('anggaran.index')->with('success', 'Anggaran berhasil disimpan');
@@ -72,10 +79,10 @@ class AnggaranController extends Controller
      */
     public function edit($id)
     {
-        $anggaran = Anggaran::findOrFail($id);
-        $subs = Sub::all();
-        $rekenings = Rekening::all();
-        return view('pages.anggaran.edit', compact('anggaran', 'subs', 'rekenings'));
+        // $anggaran = Anggaran::findOrFail($id);
+        // $subs = Sub::all();
+        // $rekenings = Rekening::all();
+        // return view('pages.anggaran.edit', compact('anggaran', 'subs', 'rekenings'));
     }
 
     /**
@@ -83,17 +90,17 @@ class AnggaranController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $anggaran = Anggaran::findOrFail($id);
+        // $anggaran = Anggaran::findOrFail($id);
 
-        $anggaran->update([
-            'sub_id' => $request->sub_id,
-            'rekening_id' => $request->rekening_id,
-            'uraian' => $request->uraian,
-            'pagu' => (int) $request->pagu,
-            'sisa_pagu' => (int)$request->pagu,
-        ]);
+        // $anggaran->update([
+        //     'sub_id' => $request->sub_id,
+        //     'rekening_id' => $request->rekening_id,
+        //     'uraian' => $request->uraian,
+        //     'pagu' => (int) $request->pagu,
+        //     'sisa_pagu' => (int)$request->pagu,
+        // ]);
 
-        return redirect()->route('anggaran.index')->with('success', 'Anggaran berhasil diupdate');
+        // return redirect()->route('anggaran.index')->with('success', 'Anggaran berhasil diupdate');
     }
 
     /**
@@ -101,7 +108,7 @@ class AnggaranController extends Controller
      */
     public function destroy(Anggaran $anggaran)
     {
-        $anggaran->delete();
-        return redirect()->route('anggaran.index')->with('success', 'Anggaran berhasil dihapus');
+        // $anggaran->delete();
+        // return redirect()->route('anggaran.index')->with('success', 'Anggaran berhasil dihapus');
     }
 }

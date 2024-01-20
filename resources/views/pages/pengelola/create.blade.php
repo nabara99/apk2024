@@ -20,42 +20,67 @@
                     <div class="col-12 col-md-12 col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Edit Rekening</h4>
-                                <a href="{{ route('rekening.index') }}" class="btn btn-primary btn-icon"><i
+                                <h4>Pengelola Keuangan</h4>
+                                <a href="{{ route('pengelola.index') }}" class="btn btn-primary btn-icon"><i
                                         class="fa-solid fa-arrow-left"></i> Kembali</a>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('rekening.update', $rekening) }}" method="POST">
+                                <form action="{{ route('pengelola.store') }}" method="POST">
                                     @csrf
-                                    @method('PUT')
                                     <div class="form-group">
-                                        <label>Kode</label>
-                                        <input type="text"
-                                            class="form-control @error('kode_rekening')
+                                        <label>NIP Pengguna Anggaran</label>
+                                        <input type="text" value="{{ old('nip_pa') }}"
+                                            class="form-control @error('nip_pa')
                                         is-invalid
                                     @enderror"
-                                            name="kode_rekening" value="{{ $rekening->kode_rekening }}">
-                                        @error('kode_rekening')
+                                            name="nip_pa">
+                                        @error('nip_pa')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label>Nama Rekening</label>
-                                        <input type="text"
-                                            class="form-control @error('nama_rekening')
+                                        <label>Nama Pengguna Anggaran</label>
+                                        <input type="text" value="{{ old('nama_pa') }}"
+                                            class="form-control @error('nama_pa')
                                         is-invalid
                                     @enderror"
-                                            name="nama_rekening" value="{{ $rekening->nama_rekening }}">
-                                        @error('nama_rekening')
+                                            name="nama_pa">
+                                        @error('nama_pa')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label>NIP Bendahara</label>
+                                        <input type="text" value="{{ old('nip_bp') }}"
+                                            class="form-control @error('nip_bp')
+                                        is-invalid
+                                    @enderror"
+                                            name="nip_bp">
+                                        @error('nip_bp')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Nama Bendahara</label>
+                                        <input type="text" value="{{ old('nama_bp') }}"
+                                            class="form-control @error('nama_bp')
+                                        is-invalid
+                                    @enderror"
+                                            name="nama_bp">
+                                        @error('nama_bp')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
                                     <div class="card-footer text-right">
-                                        <button class="btn btn-primary">Update</button>
+                                        <button class="btn btn-primary">Simpan</button>
                                     </div>
                                 </form>
                             </div>

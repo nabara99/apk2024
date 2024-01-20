@@ -90,6 +90,8 @@
                                         <th>Kode Sub Kegiatan</th>
                                         <th>Nama Sub Kegiatan</th>
                                         <th>Pagu</th>
+                                        <th>Realisasi</th>
+                                        <th>Sisa</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -98,6 +100,8 @@
                                             <td>{{ $dpa->kode_program }}.{{ $dpa->kode_kegiatan }}.{{ $dpa->kode_sub }}</td>
                                             <td>{{ $dpa->nama_sub }}</td>
                                             <td>{{ number_format($dpa->nilai) }}</td>
+                                            <td>{{ number_format($dpa->realisasi ?? '0') }}</td>
+                                            <td>{{ number_format(($dpa->nilai ) - ($dpa->realisasi ?? '0'))}}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

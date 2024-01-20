@@ -42,8 +42,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Tanggal</label>
-                                        <input type="date" value="{{ old('spd_tgl') }}"
-                                            class="form-control @error('spd_tgl')
+                                        <input type="text" value="{{ old('spd_tgl') }}"
+                                            class="form-control datepicker @error('spd_tgl')
                                         is-invalid
                                     @enderror"
                                             name="spd_tgl">

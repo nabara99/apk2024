@@ -20,41 +20,47 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Daftar Rekening</h4>
-                                <a href="{{ route('rekening.create') }}" class="btn btn-primary">Tambah Rekening</a>
+                                <h4>Daftar Kwitansi</h4>
+                                <a href="{{ route('kwitansi.create') }}" class="btn btn-primary">Buat Kwitansi</a>
                             </div>
                             <div class="card-body">
                                 <div class="float-right">
                                     <form method="GET">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Cari nama rekening"
-                                                name="nama_rekening">
+                                        {{-- <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Cari rekanan"
+                                                name="nama_penerima">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </form>
                                 </div>
                                 <div class="clearfix mb-3"></div>
                                 <div class="table-responsive">
                                     <table class="table-striped table">
                                         <tr>
-                                            <th>Kode</th>
-                                            <th>Nama</th>
+                                            <th>No. Kwitansi</th>
+                                            <th>Tanggal</th>
+                                            <th>Uraian</th>
+                                            <th>Penerima</th>
+                                            <th>Total Bayar</th>
                                             <th>Aksi</th>
                                         </tr>
-                                        @foreach ($rekenings as $rekening)
+                                        {{-- @foreach ($penerimas as $penerima)
                                             <tr>
-                                                <td>{{ $rekening->kode_rekening }}</td>
-                                                <td>{{ $rekening->nama_rekening }}</td>
+                                                <td>{{ $penerima->nama_penerima }}</td>
+                                                <td>{{ $penerima->jabatan_penerima }}</td>
+                                                <td>{{ $penerima->alamat }}</td>
+                                                <td>{{ $penerima->bank }} <br> {{ $penerima->rek_bank }}</td>
+                                                <td>{{ $penerima->npwp }}</td>
                                                 <td>
                                                     <div class="d-flex justify-content-left">
-                                                        <a href="{{ route('rekening.edit', $rekening->id) }}"
+                                                        <a href="{{ route('penerima.edit', $penerima->id) }}"
                                                             class="btn btn-sm btn-info btn-icon">
                                                             <i class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
-                                                        <form action="{{ route('rekening.destroy', $rekening->id) }}"
+                                                        <form action="{{ route('penerima.destroy', $penerima->id) }}"
                                                             method="POST" class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                             <input type="hidden" name="_token"
@@ -68,11 +74,11 @@
                                                 </td>
                                             </tr>
                                             </tr>
-                                        @endforeach
+                                        @endforeach --}}
                                     </table>
                                 </div>
                                 <div class="float-right">
-                                    {{ $rekenings->withQueryString()->links() }}
+                                    {{-- {{ $penerimas->withQueryString()->links() }} --}}
                                 </div>
                             </div>
                         </div>

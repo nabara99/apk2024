@@ -81,8 +81,9 @@ class SpdController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Spd $spd)
     {
-        //
+        $spd->delete();
+        return redirect()->route('spd.index')->with('success', 'SP2D telah dihapus');
     }
 }

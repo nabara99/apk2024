@@ -64,7 +64,7 @@
                                                                 value="{{ csrf_token() }}" />
                                                             <button class="btn btn-sm btn-danger btn-icon confirm-delete"
                                                                 onclick="return confirm('Yakin menghapus data?')">
-                                                                <i class="fas fa-times"></i> Hapus
+                                                                <i class="fas fa-trash"></i> Hapus
                                                             </button>
                                                         </form>
                                                     </div>

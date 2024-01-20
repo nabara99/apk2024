@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreKegiatanRequest;
 use App\Models\Kegiatan;
+use App\Models\Pptk;
 use App\Models\Program;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class KegiatanController extends Controller
 {
@@ -29,7 +29,8 @@ class KegiatanController extends Controller
     public function create()
     {
         $programs = Program::all();
-        return view('pages.kegiatan.create', compact('programs'));
+        $pptks = Pptk::all();
+        return view('pages.kegiatan.create', compact('programs', 'pptks'));
     }
 
     /**
@@ -57,7 +58,8 @@ class KegiatanController extends Controller
     {
         $kegiatan = Kegiatan::findOrFail($id);
         $programs = Program::all();
-        return view('pages.kegiatan.edit', compact('kegiatan', 'programs'));
+        $pptks = Pptk::all();
+        return view('pages.kegiatan.edit', compact('kegiatan', 'programs', 'pptks'));
     }
 
     /**

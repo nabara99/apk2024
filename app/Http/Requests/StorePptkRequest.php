@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreKegiatanRequest extends FormRequest
+class StorePptkRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,8 @@ class StoreKegiatanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'kode_kegiatan' => 'required|size:4',
-            'nama_kegiatan' => 'required|unique:kegiatans,nama_kegiatan',
-            'program_id' => 'required',
-            'pptk_id' => 'required',
+            'nip_pptk' => 'required|unique:pptks,nip_pptk|size:21',
+            'nama_pptk' => 'required|unique:pptks,nama_pptk|min:5',
         ];
     }
 }

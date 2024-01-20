@@ -43,7 +43,7 @@
                                             <th>Kode & Nama Rekening</th>
                                             <th>Uraian</th>
                                             <th>Pagu (Rp)</th>
-                                            <th>Aksi</th>
+                                            {{-- <th>Aksi</th> --}}
                                         </tr>
                                         @foreach ($anggarans as $anggaran)
                                             <tr>

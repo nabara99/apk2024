@@ -2,18 +2,17 @@
 
 use App\Http\Controllers\AnggaranController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DecisionController;
 use App\Http\Controllers\KegiatanController;
+use App\Http\Controllers\KwitansiController;
+use App\Http\Controllers\PenerimaContoller;
+use App\Http\Controllers\PptkContoller;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RekeningController;
-use App\Http\Controllers\SearchSubController;
 use App\Http\Controllers\SpdController;
-use App\Http\Controllers\SpdGuController;
 use App\Http\Controllers\SubController;
-use App\Http\Controllers\SubSelectController;
 use App\Http\Controllers\UserController;
-use App\Models\SpdGu;
 use Illuminate\Support\Facades\Route;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +38,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('rekening', RekeningController::class)->middleware('userAccess:user');
     Route::resource('anggaran', AnggaranController::class)->middleware('userAccess:user');
     Route::resource('spd', SpdController::class);
+    Route::resource('pptk', PptkContoller::class);
+    Route::resource('penerima', PenerimaContoller::class);
+    Route::resource('pengelola', DecisionController::class);
+    Route::resource('kwitansi', KwitansiController::class);
+    Route::get('/modalcaripagu', [KwitansiController::class, 'modalCariPagu']);
+    Route::get('/get-anggaran-data/{$id}', [AnggaranController::class, 'getAnggaranData']);
 });

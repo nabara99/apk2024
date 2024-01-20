@@ -42,6 +42,7 @@
                                             <th>Kode</th>
                                             <th>Nama Program</th>
                                             <th>Nama Kegiatan</th>
+                                            <th>PPTK</th>
                                             <th>Aksi</th>
                                         </tr>
                                         @foreach ($kegiatans as $kegiatan)
@@ -50,6 +51,7 @@
                                                 </td>
                                                 <td>{{ $kegiatan->program->nama_program }}</td>
                                                 <td>{{ $kegiatan->nama_kegiatan }}</td>
+                                                <td>{{ $kegiatan->pptk->nama_pptk ?? '' }}</td>
                                                 <td>
                                                     <div class="d-flex justify-content-left">
                                                         <a href="{{ route('kegiatan.edit', $kegiatan->id) }}"
@@ -64,12 +66,11 @@
                                                                 value="{{ csrf_token() }}" />
                                                             <button class="btn btn-sm btn-danger btn-icon confirm-delete"
                                                                 onclick="return confirm('Yakin menghapus data?')">
-                                                                <i class="fas fa-times"></i> Hapus
+                                                                <i class="fas fa-trash"></i> Hapus
                                                             </button>
                                                         </form>
                                                     </div>
                                                 </td>
-                                            </tr>
                                             </tr>
                                         @endforeach
                                     </table>

@@ -20,27 +20,22 @@
                     <div class="col-12 col-md-12 col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Edit Kegiatan</h4>
-                                <a href="{{ route('kegiatan.index') }}" class="btn btn-primary btn-icon"><i
+                                <h4>Edit PPTK</h4>
+                                <a href="{{ route('pptk.index') }}" class="btn btn-primary btn-icon"><i
                                         class="fa-solid fa-arrow-left"></i> Kembali</a>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('kegiatan.update', $kegiatan) }}" method="POST">
+                                <form action="{{ route('pptk.update', $pptk) }}" method="POST">
                                     @csrf
                                     @method('PUT')
                                     <div class="form-group">
-                                        <label class="form-label">Program</label>
-                                        <select class="form-control selectric @error('program_id') is-invalid @enderror"
-                                            name="program_id">
-                                            <option value="{{ $kegiatan->program_id }}">
-                                                {{ $kegiatan->program->nama_program }}</option>
-                                            @foreach ($programs as $program)
-                                                <option value="{{ $program->id }}"
-                                                    {{ $program->program_id == $program->id ? 'selected' : '' }}>
-                                                    {{ $program->nama_program }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('program_id')
+                                        <label>NIP</label>
+                                        <input type="text"
+                                            class="form-control @error('nip_pptk')
+                                        is-invalid
+                                    @enderror"
+                                            name="nip_pptk" value="{{ $pptk->nip_pptk }}">
+                                        @error('nip_pptk')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -48,45 +43,13 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Kode Kegiatan</label>
+                                        <label>Nama</label>
                                         <input type="text"
-                                            class="form-control @error('kode_kegiatan')
+                                            class="form-control @error('nama_pptk')
                                         is-invalid
                                     @enderror"
-                                            name="kode_kegiatan" value="{{ $kegiatan->kode_kegiatan }}">
-                                        @error('kode_kegiatan')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Nama Kegiatan</label>
-                                        <input type="text"
-                                            class="form-control @error('nama_kegiatan')
-                                        is-invalid
-                                    @enderror"
-                                            name="nama_kegiatan" value="{{ $kegiatan->nama_kegiatan }}">
-                                        @error('nama_kegiatan')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">PPTK</label>
-                                        <select class="form-control selectric @error('pptk_id') is-invalid @enderror"
-                                            name="pptk_id">
-                                            <option value="{{ $kegiatan->pptk_id }}">
-                                                {{ $kegiatan?->pptk?->nama_pptk }}
-                                            </option>
-                                            @foreach ($pptks as $pptk)
-                                                <option value="{{ $pptk->id }}"
-                                                    {{ $pptk->pptk_id == $pptk->id ? 'selected' : '' }}>
-                                                    {{ $pptk->nama_pptk }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('pptk_id')
+                                            name="nama_pptk" value="{{ $pptk->nama_pptk }}">
+                                        @error('nama_pptk')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>

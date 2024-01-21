@@ -36,12 +36,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('kegiatan', KegiatanController::class)->middleware('userAccess:user');
     Route::resource('sub', SubController::class)->middleware('userAccess:user');
     Route::resource('rekening', RekeningController::class)->middleware('userAccess:user');
-    Route::resource('anggaran', AnggaranController::class)->middleware('userAccess:user');
+    Route::resource('anggaran', AnggaranController::class);
     Route::resource('spd', SpdController::class);
     Route::resource('pptk', PptkContoller::class);
     Route::resource('penerima', PenerimaContoller::class);
     Route::resource('pengelola', DecisionController::class);
     Route::resource('kwitansi', KwitansiController::class);
     Route::get('/modalcaripagu', [KwitansiController::class, 'modalCariPagu']);
-    Route::get('/get-anggaran-data/{$id}', [AnggaranController::class, 'getAnggaranData']);
+    Route::get('/modalcaripenerima', [KwitansiController::class, 'modalCariPenerima']);
 });

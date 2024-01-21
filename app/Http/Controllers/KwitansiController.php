@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Anggaran;
 use App\Models\Kwitansi;
+use App\Models\Penerima;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,18 +20,21 @@ class KwitansiController extends Controller
 
     public function create()
     {
-        $data = new Kwitansi();
-        $data->kw_id = $this->generateKwitansiNumber();
-        $anggarans = Anggaran::all();
+        $lastFaktur = DB::table('kwitansis')->orderBy('kw_id', 'desc')->first();
+        $item = new Kwitansi();
+        $item->no_faktur = $lastFaktur ? $lastFaktur->kw_id + 1 : 1;
 
-        return view('pages.kwitansi.create', compact('data', 'anggarans'));
+        $anggarans = Anggaran::all();
+        $penerimas = Penerima::all();
+
+        return view('pages.kwitansi.create', compact('item', 'anggarans', 'penerimas'));
     }
 
     private function generateKwitansiNumber()
     {
         $lastFaktur = Kwitansi::latest()->first();
         $nextNumber = $lastFaktur ? (int)substr($lastFaktur->kw_id, 3) + 1 : 1;
-        return $nextNumber . '/KTK/2024';
+        return $nextNumber;
     }
 
     public function modalcaripagu()
@@ -46,7 +50,14 @@ class KwitansiController extends Controller
         return response()->json(['data' => $anggarans]);
     }
 
-    
+    public function modalcaripenerima()
+    {
+        $penerimas = Penerima::all();
+
+        return response()->json(['data' => $penerimas]);
+    }
+
+
 
     public function store(Request $request)
     {

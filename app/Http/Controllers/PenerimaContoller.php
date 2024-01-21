@@ -44,9 +44,11 @@ class PenerimaContoller extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $penerima = Penerima::findOrFail($id);
+
+        return response()->json(['data' => $penerima]);
     }
 
     /**

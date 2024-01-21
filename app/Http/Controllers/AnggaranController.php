@@ -36,12 +36,6 @@ class AnggaranController extends Controller
      * Show the form for creating a new resource.
      */
 
-    public function getAnggaranData($id)
-    {
-        $anggaran = Anggaran::findOrFail($id);
-
-        return response()->json(['data' => $anggaran]);
-    }
 
     public function create(Request $request)
     {
@@ -69,14 +63,13 @@ class AnggaranController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $anggaran = Anggaran::findOrFail($id);
+
+        return response()->json(['data' => $anggaran]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         // $anggaran = Anggaran::findOrFail($id);

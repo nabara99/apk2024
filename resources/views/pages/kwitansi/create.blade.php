@@ -1,4 +1,5 @@
 @extends('layouts.app')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 @section('title', '')
 
@@ -29,8 +30,8 @@
                                     <div class="row gutters-sm">
                                         <div class="col-3 col-md-2 col-sm-2">
                                             <label for="">No. Kwitansi</label>
-                                            <input type="text" name="kw_id" id="kw_id" value="<?= $item->no_faktur ?>"
-                                                class="form-control" readonly>
+                                            <input type="text" name="kw_id" id="kw_id"
+                                                value="<?= $item->no_faktur ?>" class="form-control" readonly>
                                         </div>
                                         <div class="col-4 col-md-3 col-sm-3">
                                             <label for="">Tgl Transaksi</label>
@@ -46,9 +47,9 @@
                                                 <div class="input-group-append">
                                                     @foreach ($penerimas as $penerima)
                                                     @endforeach
-                                                    <button type="button" id="tombolCariPenerima"
-                                                        class="btn btn-primary open-modal-penerima" data-toggle="modal"
-                                                        data-target="#modalPenerima" data-id="{{ $penerima->id }}">
+                                                    <button type="button" class="btn btn-primary open-modal-penerima"
+                                                        data-toggle="modal" data-target="#modalPenerima"
+                                                        data-id="{{ $penerima->id }}">
                                                         <i class="fa fa-search"></i>
                                                     </button>
                                                 </div>
@@ -57,14 +58,14 @@
                                         <div class="col-3 col-md-2 col-sm-2">
                                             <label for="">Cari Pagu</label>
                                             <div class="input-group mb-3">
-                                                <input type="text" class="form-control" name="kodepagu" id="kodepagu"
+                                                <input type="text" class="form-control" name="kode_pagu" id="kode_pagu"
                                                     readonly>
                                                 <div class="input-group-append">
                                                     @foreach ($anggarans as $anggaran)
                                                     @endforeach
-                                                    <button type="button" id="tombolCariPagu"
-                                                        class="btn btn-primary open-modal" data-toggle="modal"
-                                                        data-target="#modalAnggaran" data-id="{{ $anggaran->id }}">
+                                                    <button type="button" class="btn btn-primary open-modal"
+                                                        data-toggle="modal" data-target="#modalAnggaran"
+                                                        data-id="{{ $anggaran->id }}">
                                                         <i class="fa fa-search"></i>
                                                     </button>
                                                 </div>
@@ -86,16 +87,14 @@
                                         </div>
                                         <div class="col-4 col-md-2 col-sm-2">
                                             <label for="">Nilai Belanja</label>
-                                            <input type="text" name="nilaibelanja" id="nilaibelanja" class="form-control"
-                                                value="0" onkeydown="return numbersonly(this, event);"
-                                                onkeyup="javascript:tandaPemisahTitik(this);">
+                                            <input type="text" name="nilai_belanja" id="nilai_belanja"
+                                                class="number-separator form-control" value="0">
                                         </div>
                                         <div class="col-4 col-md-3 col-sm-3">
                                             <label for="">#</label>
                                             <div class="input-group">
-                                                <button type="button" class="btn btn-success" title="Simpan Item"
-                                                    id="tombolSimpanItem">
-                                                    <i class="fa fa-save"></i>
+                                                <button type="button" class="btn btn-success" onclick="simpanItem()">
+                                                    <i class="fa fa-save"></i> Simpan
                                                 </button>&nbsp
                                                 <button type="button" class="btn btn-info" title="Selesai Transaksi"
                                                     id="tombolSelesaiTransaksi">
@@ -219,12 +218,137 @@
     <script src="{{ asset('library/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
     <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>
+    <script src="{{ asset('library/easy-number/easy-number-separator.js') }}"></script>
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('js/page/forms-advanced-forms.js') }}"></script>
 
     <script>
+        function kosong() {
+            $('#kode_pagu').val('');
+            $('#uraian').val('');
+            $('#sisa_pagu').val('');
+            $('#nilai_belanja').val(0);
+        }
+
+        function simpanItem() {
+            var kwitansi_id = $('#kw_id').val();
+            var anggaran_id = $('#kode_pagu').val();
+            var total = $('#nilai_belanja').val();
+
+            if (anggaran_id.length == 0) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-right',
+                    iconColor: 'white',
+                    customClass: {
+                        popup: 'colored-toast',
+                    },
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true,
+                })
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Pagu masih kosong !',
+                })
+                return;
+            } else if (total < 1) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-right',
+                    iconColor: 'white',
+                    customClass: {
+                        popup: 'colored-toast',
+                    },
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true,
+                })
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Nilai belanja belum ada !',
+                })
+                return;
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "/tempkwitansi",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        kwitansi_id: kwitansi_id,
+                        anggaran_id: anggaran_id,
+                        total: total,
+                    },
+                    success: function(response) {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-right',
+                            iconColor: 'white',
+                            customClass: {
+                                popup: 'colored-toast',
+                            },
+                            showConfirmButton: false,
+                            timer: 1500,
+                            timerProgressBar: true,
+                        })
+                        Toast.fire({
+                            icon: 'success',
+                            title: response.message,
+                        })
+                        kosong();
+                    },
+                    error: function(xhr, status, error) {
+                        var jsonResponse = JSON.parse(xhr.responseText);
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-right',
+                            iconColor: 'white',
+                            customClass: {
+                                popup: 'colored-toast',
+                            },
+                            showConfirmButton: false,
+                            timer: 1500,
+                            timerProgressBar: true,
+                        })
+                        Toast.fire({
+                            icon: 'error',
+                            title: jsonResponse.message,
+                        })
+                    }
+                });
+            }
+
+        }
+
+        function tampilDataTemp() {
+            var faktur = $('#kw_id').val();
+            $.ajax({
+                type: "POST",
+                url: "/tempkwitansi",
+                data: {
+                    faktur: faktur
+                },
+                dataType: "json",
+                beforeSend: function() {
+                    $('.tampilDataTemp').html("<i class='fa fa-spin fa-spinner'></i>");
+                },
+                success: function(response) {
+                    if (response.data) {
+                        $('.tampilDataTemp').html(response.data);
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    // alert(xhr.status + '\n' + thrownError);
+                }
+            });
+        }
+
         $(document).ready(function() {
+
+            //modal anggaran
             $(".open-modal").click(function() {
                 var anggaranId = $(this).data('id');
 
@@ -285,8 +409,6 @@
                 // Set nilai input dengan ID anggaran yang dipilih
                 $("#anggaranIdInput").val(selectedAnggaranId);
 
-                console.log(selectedAnggaranId);
-
                 // Memunculkan data field berdasarkan ID anggaran
                 displayAnggaranData(selectedAnggaranId);
             });
@@ -297,7 +419,7 @@
                     type: "GET",
                     url: "/anggaran/" + anggaranId,
                     success: function(response) {
-                        $('#kodepagu').val(response.data.id);
+                        $('#kode_pagu').val(response.data.id);
                         $('#uraian').val(response.data.uraian);
                         $('#sisa_pagu').val(response.data.sisa_pagu.toLocaleString());
                     },
@@ -307,6 +429,7 @@
                 });
             };
 
+            //modal penerima
             $(".open-modal-penerima").click(function() {
                 var penerimaId = $(this).data('id');
 
@@ -363,8 +486,6 @@
 
                 $("#penerimaIdInput").val(selectedPenerimaId);
 
-                console.log(selectedPenerimaId);
-
                 displayPenerimaData(selectedPenerimaId);
             });
 
@@ -381,6 +502,10 @@
                     }
                 });
             };
+
+            $('.nilai_belanja').select2({
+                closeOnSelect: false
+            });
 
         });
     </script>

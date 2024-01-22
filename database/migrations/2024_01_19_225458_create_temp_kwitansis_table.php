@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('temp_kwitansis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kwitansi_id')->constrained('kwitansis')->onDelete('cascade');
+            $table->string('kwitansi_id');
             $table->foreignId('anggaran_id')->constrained('anggarans')->onDelete('cascade');
             $table->integer('total');
             $table->timestamps();

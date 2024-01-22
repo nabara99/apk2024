@@ -11,6 +11,7 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\SpdController;
 use App\Http\Controllers\SubController;
+use App\Http\Controllers\TempKwitansiController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('penerima', PenerimaContoller::class);
     Route::resource('pengelola', DecisionController::class);
     Route::resource('kwitansi', KwitansiController::class);
+    Route::resource('tempkwitansi', TempKwitansiController::class);
     Route::get('/modalcaripagu', [KwitansiController::class, 'modalCariPagu']);
     Route::get('/modalcaripenerima', [KwitansiController::class, 'modalCariPenerima']);
 });

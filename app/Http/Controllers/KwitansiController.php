@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Anggaran;
 use App\Models\Kwitansi;
 use App\Models\Penerima;
+use App\Models\TempKwitansi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -30,13 +31,6 @@ class KwitansiController extends Controller
         return view('pages.kwitansi.create', compact('item', 'anggarans', 'penerimas'));
     }
 
-    private function generateKwitansiNumber()
-    {
-        $lastFaktur = Kwitansi::latest()->first();
-        $nextNumber = $lastFaktur ? (int)substr($lastFaktur->kw_id, 3) + 1 : 1;
-        return $nextNumber;
-    }
-
     public function modalcaripagu()
     {
         $anggarans = DB::table('anggarans')
@@ -56,8 +50,6 @@ class KwitansiController extends Controller
 
         return response()->json(['data' => $penerimas]);
     }
-
-
 
     public function store(Request $request)
     {

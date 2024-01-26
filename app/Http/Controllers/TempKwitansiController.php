@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Anggaran;
 use App\Models\TempKwitansi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TempKwitansiController extends Controller
 {
@@ -13,9 +14,6 @@ class TempKwitansiController extends Controller
      */
     public function index(Request $request)
     {
-        $faktur = $request->input('faktur');
-
-        
     }
 
     /**
@@ -41,6 +39,7 @@ class TempKwitansiController extends Controller
                 'anggaran_id' => $request->input('anggaran_id'),
                 'total' => str_replace(",", "", $request->input('total')),
             ]);
+            $data = TempKwitansi::find($request->input('kwitansi_id'));
             return response()->json(['message' => 'Data berhasil disimpan', 'data' => $data], 200);
         }
     }
@@ -48,9 +47,19 @@ class TempKwitansiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($kwitansi_id)
     {
-        //
+        $detailKwitansi = DB::table('temp_kwitansis')
+            ->join('anggarans', 'temp_kwitansis.anggaran_id', '=', 'anggarans.id')
+            ->join('rekenings', 'anggarans.rekening_id', '=', 'rekenings.id')
+            ->join('subs', 'anggarans.sub_id', '=', 'subs.id')
+            ->join('kegiatans', 'subs.kegiatan_id', '=', 'kegiatans.id')
+            ->join('programs', 'kegiatans.program_id', '=', 'programs.id')
+            ->selectRaw('uraian, total, temp_kwitansis.id, nama_sub, kode_sub, kode_kegiatan, kode_program, kode_rekening, nama_rekening',)
+            ->where('kwitansi_id', $kwitansi_id)
+            ->get();
+
+        return response()->json(['detailKwitansi' => $detailKwitansi]);
     }
 
     /**
@@ -72,8 +81,16 @@ class TempKwitansiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($detail_id)
     {
-        //
+        $detailKwitansi = TempKwitansi::find($detail_id);
+
+        if (!$detailKwitansi) {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
+
+        $detailKwitansi->delete();
+
+        return response()->json(['message' => 'Data berhasil dihapus']);
     }
 }

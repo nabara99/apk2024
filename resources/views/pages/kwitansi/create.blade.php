@@ -29,17 +29,17 @@
                                 <div class="form-group">
                                     <div class="row gutters-sm">
                                         <div class="col-3 col-md-2 col-sm-2">
-                                            <label for="">No. Kwitansi</label>
+                                            <label>No. Kwitansi</label>
                                             <input type="text" name="kw_id" id="kw_id"
                                                 value="<?= $item->no_faktur ?>" class="form-control" readonly>
                                         </div>
                                         <div class="col-4 col-md-3 col-sm-3">
-                                            <label for="">Tgl Transaksi</label>
+                                            <label>Tgl Transaksi</label>
                                             <input type="text" name="ktgl" id="ktgl"
                                                 class="form-control datepicker">
                                         </div>
                                         <div class="col-6 col-md-5 col-sm-5">
-                                            <label for="">Cari Penerima</label>
+                                            <label>Cari Penerima</label>
                                             <div class="input-group mb-3">
                                                 <input type="text" class="form-control" placeholder="Nama Penerima"
                                                     name="namapenerima" id="namapenerima" readonly>
@@ -56,7 +56,7 @@
                                             </div>
                                         </div>
                                         <div class="col-3 col-md-2 col-sm-2">
-                                            <label for="">Cari Pagu</label>
+                                            <label>Cari Pagu</label>
                                             <div class="input-group mb-3">
                                                 <input type="text" class="form-control" name="kode_pagu" id="kode_pagu"
                                                     readonly>
@@ -76,22 +76,22 @@
                                 <div class="form-group">
                                     <div class="row gutters-sm">
                                         <div class="col-6 col-md-5 col-sm-5">
-                                            <label for="">Uraian</label>
+                                            <label>Uraian</label>
                                             <input type="text" name="uraian" id="uraian" class="form-control"
                                                 readonly>
                                         </div>
                                         <div class="col-4 col-md-2 col-sm-2">
-                                            <label for="">Anggaran (Rp)</label>
+                                            <label>Anggaran (Rp)</label>
                                             <input type="text" name="sisa_pagu" id="sisa_pagu" class="form-control"
                                                 readonly>
                                         </div>
                                         <div class="col-4 col-md-2 col-sm-2">
-                                            <label for="">Nilai Belanja</label>
+                                            <label>Nilai Belanja</label>
                                             <input type="text" name="nilai_belanja" id="nilai_belanja"
                                                 class="number-separator form-control" value="0">
                                         </div>
                                         <div class="col-4 col-md-3 col-sm-3">
-                                            <label for="">#</label>
+                                            <label>#</label>
                                             <div class="input-group">
                                                 <button type="button" class="btn btn-success" onclick="simpanItem()">
                                                     <i class="fa fa-save"></i> Simpan
@@ -102,20 +102,29 @@
                                                 </button>
                                             </div>
                                         </div>
-
-
                                     </div>
                                 </div>
+                                <table style="width: 100%" id="tabel-detailkwitansi"
+                                    class="table table-striped table-responsive-lg table-responsive-md table-responsive-sm table-bordered table-hover dataTable dtr-inline collapsed">
+                                    <thead>
+                                        <tr>
+                                            <th>Sub Kegiatan</th>
+                                            <th>Rekening</th>
+                                            <th>Uraian</th>
+                                            <th>Jumlah</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-
-                                <div class="row">
-                                    {{-- <div class="col-lg-12 tampilDataTemp"></div> --}}
-                                </div>
+                                    </tbody>
+                                </table>
                                 <div class="viewmodal" style="display: none;"></div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
         </section>
     </div>
 
@@ -298,6 +307,7 @@
                             icon: 'success',
                             title: response.message,
                         })
+                        loadDetailKwitansi(kwitansi_id);
                         kosong();
                     },
                     error: function(xhr, status, error) {
@@ -323,30 +333,44 @@
 
         }
 
-        function tampilDataTemp() {
-            var faktur = $('#kw_id').val();
+        function loadDetailKwitansi(kwitansi_id) {
             $.ajax({
-                type: "POST",
-                url: "/tempkwitansi",
-                data: {
-                    faktur: faktur
-                },
-                dataType: "json",
-                beforeSend: function() {
-                    $('.tampilDataTemp').html("<i class='fa fa-spin fa-spinner'></i>");
-                },
+                type: 'GET',
+                url: '/tempkwitansi/' + kwitansi_id,
                 success: function(response) {
-                    if (response.data) {
-                        $('.tampilDataTemp').html(response.data);
-                    }
+                    $('#tabel-detailkwitansi tbody').empty();
+
+                    $.each(response.detailKwitansi, function(index, detail) {
+                        var newRow = '<tr>' +
+                            '<td>' + detail.kode_program + '.' + detail.kode_kegiatan + '.' + detail
+                            .kode_sub + ' / ' + detail.nama_sub + '</td>' +
+                            '<td>' + detail.kode_rekening + ' / ' + detail.nama_rekening + '</td>' +
+                            '<td>' + detail.uraian + '</td>' +
+                            '<td>' + detail.total.toLocaleString() + '</td>' +
+                            '<td>' +
+                            '<button class="btn btn-sm btn-danger btn-hapus" data-id="' + detail.id +
+                            '">Hapus</button>' +
+                            '</td>' +
+                            '</tr>';
+                        $('#tabel-detailkwitansi tbody').append(newRow);
+                    });
                 },
-                error: function(xhr, ajaxOptions, thrownError) {
-                    // alert(xhr.status + '\n' + thrownError);
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
                 }
             });
         }
 
+        var kwitansi_id = $('#kw_id').val();
+        loadDetailKwitansi(kwitansi_id);
+
+        $('#kw_id').change(function() {
+            kwitansi_id = $(this).val();
+            loadDetailKwitansi(kwitansi_id);
+        });
+
         $(document).ready(function() {
+            // tampilDataTemp();
 
             //modal anggaran
             $(".open-modal").click(function() {
@@ -358,12 +382,10 @@
                     var anggaranList = $("#anggaranList");
                     anggaranList.empty();
 
-                    // Filter data anggaran berdasarkan pencarian
                     var filteredAnggarans = anggaransData.filter(function(anggaran) {
                         return anggaran.uraian.toLowerCase().includes(searchTerm.toLowerCase());
                     });
 
-                    // Tampilkan data anggaran yang sesuai dengan hasil pencarian
                     $.each(filteredAnggarans, function(index, anggaran) {
                         var row = $("<tr>");
                         row.append("<td>" + anggaran.nama_sub + "</td>");
@@ -506,6 +528,61 @@
             $('.nilai_belanja').select2({
                 closeOnSelect: false
             });
+
+
+            $('.btn-hapus').click(function() {
+                var detail_id = $(this).data('id');
+
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: 'Data akan dihapus permanen!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, hapus!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: 'DELETE',
+                            url: '/tempkwitansi/' + detail_id,
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function(response) {
+                                $(this).closest('tr').remove();
+
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: response.message,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                });
+                            },
+                            error: function(xhr, status, error) {
+                                var jsonResponse = JSON.parse(xhr.responseText);
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-right',
+                                    iconColor: 'white',
+                                    customClass: {
+                                        popup: 'colored-toast',
+                                    },
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                    timerProgressBar: true,
+                                })
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: jsonResponse.message,
+                                })
+                            }
+                        });
+                    }
+                });
+            });
+
 
         });
     </script>

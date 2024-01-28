@@ -53,7 +53,7 @@
                                                 <td>{{ $anggaran->uraian }}</td>
                                                 <td>{{ number_format($anggaran->pagu) }}</td>
                                                 <td>
-                                                    {{-- <div class="d-flex justify-content-left">
+                                                    <div class="d-flex justify-content-left">
                                                         <a href="{{ route('anggaran.edit', $anggaran->id) }}"
                                                             class="btn btn-sm btn-info btn-icon">
                                                             <i class="fas fa-edit"></i>
@@ -69,7 +69,7 @@
                                                                 <i class="fas fa-times"></i> Hapus
                                                             </button>
                                                         </form>
-                                                    </div> --}}
+                                                    </div>
                                                 </td>
                                             </tr>
                                             </tr>

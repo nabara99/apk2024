@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anggaran;
+use App\Models\Decision;
 use App\Models\Kwitansi;
 use App\Models\Penerima;
-use App\Models\TempKwitansi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,9 +14,14 @@ class KwitansiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('pages.kwitansi.index');
+        $kwitansis = Kwitansi::when($request->input('hal'), function ($query, $name) {
+            return $query->where('hal', 'like', '%' . $name . '%');
+        })
+            ->orderBy('kw_id', 'asc')
+            ->paginate(5);
+        return view('pages.kwitansi.index', compact('kwitansis'));
     }
 
     public function create()
@@ -55,7 +60,7 @@ class KwitansiController extends Controller
     public function store(Request $request)
     {
         try {
-            $requiredInputs = ['kwitansi_id', 'tgl', 'hal', 'total_belanja', 'idpenerima', 'ppn', 'pph21', 'pph22', 'pph23', 'pajakdaerah', 'sisa'];
+            $requiredInputs = ['kwitansi_id', 'tgl', 'hal', 'total_belanja', 'idpenerima', 'ppn', 'pph21', 'pph22', 'pph23', 'pajakdaerah', 'sisa', 'anggaran_id'];
             foreach ($requiredInputs as $input) {
                 if (!$request->has($input)) {
                     return response()->json(['message' => 'Data tidak lengkap'], 400);
@@ -67,6 +72,7 @@ class KwitansiController extends Controller
                 'hal' => $request->input('hal'),
                 'nilai' => str_replace(",", "", $request->input('total_belanja')),
                 'penerima_id' => $request->input('idpenerima'),
+                'anggaran_id' => $request->input('anggaran_id'),
                 'ppn' => str_replace(",", "", $request->input('ppn')),
                 'pph21' => str_replace(",", "", $request->input('pph21')),
                 'pph22' => str_replace(",", "", $request->input('pph22')),
@@ -84,9 +90,17 @@ class KwitansiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($kwitansi_id)
     {
-        //
+        $pengelolas = Decision::all();
+        $kwitansi = Kwitansi::where('kw_id', $kwitansi_id)->firstOrFail();
+        return view(
+            'pages.kwitansi.cetak',
+            [
+                'kwitansi' => $kwitansi,
+                'pengelolas' => $pengelolas
+            ]
+        );
     }
 
     /**

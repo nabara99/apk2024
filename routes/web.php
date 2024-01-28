@@ -45,6 +45,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('kwitansi', KwitansiController::class);
     Route::resource('tempkwitansi', TempKwitansiController::class);
     Route::get('/modalcaripagu', [KwitansiController::class, 'modalCariPagu']);
-    // Route::delete('/hapusdetail/{$id}', [TempKwitansiController::class, 'hapusDetail']);
     Route::get('/modalcaripenerima', [KwitansiController::class, 'modalCariPenerima']);
 });

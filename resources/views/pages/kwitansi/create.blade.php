@@ -43,7 +43,7 @@
                                                     @endforeach
                                                     <button type="button" class="btn btn-primary open-modal-penerima"
                                                         data-toggle="modal" data-target="#modalPenerima"
-                                                        data-id="{{ $penerima->id }}">
+                                                        data-id="{{ $penerima->id ?? '' }}">
                                                         <i class="fa fa-search"></i>
                                                     </button>
                                                 </div>
@@ -237,6 +237,7 @@
                                 <label for="kwitansi_id">Nomor Kwitansi</label>
                                 <input type="text" class="form-control" id="kwitansi_id" name="kwitansi_id" readonly>
                                 <input type="hidden" class="form-control" id="idpenerima" name="idpenerima" readonly>
+                                <input type="hidden" class="form-control" id="anggaran_id" name="anggaran_id" readonly>
                             </div>
                             <div class="col-6">
                                 <label for="total_belanja">Total Pembayaran</label>
@@ -318,7 +319,7 @@
 
     <script>
         function kosong() {
-            $('#kode_pagu').val('');
+            // $('#kode_pagu').val('');
             $('#uraian').val('');
             $('#sisa_pagu').val('');
             $('#nilai_belanja').val(0);
@@ -695,6 +696,7 @@
             $('#btn-simpan-kwitansi').click(function() {
                 var kwitansi_id = $('#kw_id').val();
                 var idpenerima = $('#idpenerima').val();
+                var anggaran_id = $('#kode_pagu').val();
 
                 if ($('#idpenerima').val() === '') {
                     const Toast = Swal.mixin({
@@ -725,6 +727,7 @@
                         $('#total_belanja').val(total_belanja.toLocaleString());
                         $('#penerima').val(penerima);
                         $('#kwitansi_id').val(kwitansi_id);
+                        $('#anggaran_id').val(anggaran_id);
 
                         $('#modal-simpan-kwitansi').modal('show');
                     },
@@ -750,6 +753,7 @@
                 var pph23 = $('#pph23').val();
                 var pajakdaerah = $('#pajakdaerah').val();
                 var sisa = $('#sisa').val();
+                var anggaran_id = $('#anggaran_id').val();
 
                 if (!uraian || sisa == '') {
                     const Toast = Swal.mixin({
@@ -786,7 +790,8 @@
                         pph22: pph22,
                         pph23: pph23,
                         pajakdaerah: pajakdaerah,
-                        sisa: sisa
+                        sisa: sisa,
+                        anggaran_id: anggaran_id,
                     },
                     success: function(response) {
                         window.location.reload();
@@ -800,7 +805,7 @@
                                 popup: 'colored-toast',
                             },
                             showConfirmButton: false,
-                            timer: 3000,
+                            timer: 2000,
                             timerProgressBar: true,
                         });
                         Toast.fire({

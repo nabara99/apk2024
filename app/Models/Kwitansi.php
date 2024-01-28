@@ -22,10 +22,21 @@ class Kwitansi extends Model
         'pdaerah',
         'sisa',
         'penerima_id',
+        'anggaran_id',
     ];
 
     public function tempKwitansis()
     {
-        return $this->hasMany(TempKwitansi::class);
+        return $this->belongsTo(TempKwitansi::class);
+    }
+
+    public function penerima()
+    {
+        return $this->belongsTo(Penerima::class);
+    }
+
+    public function anggaran()
+    {
+        return $this->belongsTo(Anggaran::class);
     }
 }

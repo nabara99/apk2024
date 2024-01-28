@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+<?php
+use Carbon\Carbon;
+setlocale(LC_TIME, 'id_ID');
+?>
+
 @section('title', '')
 
 @push('style')
@@ -26,59 +31,49 @@
                             <div class="card-body">
                                 <div class="float-right">
                                     <form method="GET">
-                                        {{-- <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Cari rekanan"
-                                                name="nama_penerima">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Cari transaksi"
+                                                name="hal">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                             </div>
-                                        </div> --}}
+                                        </div>
                                     </form>
                                 </div>
                                 <div class="clearfix mb-3"></div>
                                 <div class="table-responsive">
-                                    <table class="table-striped table">
+                                    <table class="table-striped table table-hover">
                                         <tr>
-                                            <th>No. Kwitansi</th>
+                                            <th>No.Kwitansi</th>
                                             <th>Tanggal</th>
                                             <th>Uraian</th>
                                             <th>Penerima</th>
-                                            <th>Total Bayar</th>
+                                            <th>Total Bayar (Rp)</th>
                                             <th>Aksi</th>
                                         </tr>
-                                        {{-- @foreach ($penerimas as $penerima)
+                                        @foreach ($kwitansis as $kwitansi)
                                             <tr>
-                                                <td>{{ $penerima->nama_penerima }}</td>
-                                                <td>{{ $penerima->jabatan_penerima }}</td>
-                                                <td>{{ $penerima->alamat }}</td>
-                                                <td>{{ $penerima->bank }} <br> {{ $penerima->rek_bank }}</td>
-                                                <td>{{ $penerima->npwp }}</td>
+                                                <td>{{ $kwitansi->kw_id }}/KTK/2024
+                                                </td>
+                                                <td>{{ Carbon::parse($kwitansi->tgl)->formatLocalized('%e %B %Y') }}</td>
+                                                <td>{{ $kwitansi->hal }}</td>
+                                                <td>{{ $kwitansi->penerima->nama_penerima }}</td>
+                                                <td>{{ number_format($kwitansi->nilai) }}</td>
                                                 <td>
                                                     <div class="d-flex justify-content-left">
-                                                        <a href="{{ route('penerima.edit', $penerima->id) }}"
-                                                            class="btn btn-sm btn-info btn-icon">
-                                                            <i class="fas fa-edit"></i>
-                                                            Edit
-                                                        </a>
-                                                        <form action="{{ route('penerima.destroy', $penerima->id) }}"
-                                                            method="POST" class="ml-2">
-                                                            <input type="hidden" name="_method" value="DELETE" />
-                                                            <input type="hidden" name="_token"
-                                                                value="{{ csrf_token() }}" />
-                                                            <button class="btn btn-sm btn-danger btn-icon confirm-delete"
-                                                                onclick="return confirm('Yakin menghapus data?')">
-                                                                <i class="fas fa-trash"></i> Hapus
-                                                            </button>
-                                                        </form>
+                                                        <button class="btn btn-sm btn-info"
+                                                            onclick="cetak({{ $kwitansi->kw_id }})" title="cetak">
+                                                            <i class="fa fa-print"></i>
+                                                        </button>
                                                     </div>
                                                 </td>
                                             </tr>
                                             </tr>
-                                        @endforeach --}}
+                                        @endforeach
                                     </table>
                                 </div>
                                 <div class="float-right">
-                                    {{-- {{ $penerimas->withQueryString()->links() }} --}}
+                                    {{ $kwitansis->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>
@@ -95,4 +90,13 @@
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('js/page/features-posts.js') }}"></script>
+
+    <script>
+        function cetak(kwitansi_id) {
+            var windowCetak = window.open('/kwitansi/' + kwitansi_id,
+                "Cetak Kwitansi",
+                "width=1200, height=800");
+            windowCetak.focus();
+        }
+    </script>
 @endpush

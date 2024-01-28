@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pajak_daerahs', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('kwitansis', function (Blueprint $table) {
+            $table->string('anggaran_id')->nullable()->after('penerima_id');
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pajak_daerahs');
+        Schema::table('kwitansis', function (Blueprint $table) {
+            $table->dropColumn('anggaran_id');
+        });
     }
 };

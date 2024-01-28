@@ -72,7 +72,7 @@ setlocale(LC_TIME, 'id_ID');
             <td></td>
             <td>Buku Kas No.</td>
             <td>:</td>
-            <td>{{ $kwitansi->kw_id }}/KTK/2024</td>
+            <td>{{ $kwitansi->kw_id }}/ KTK/ 2024</td>
         </tr>
         <tr style="font-size: 8pt;">
             <td>Kode Sub Kegiatan</td>

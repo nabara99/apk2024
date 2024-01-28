@@ -51,9 +51,34 @@ class KwitansiController extends Controller
         return response()->json(['data' => $penerimas]);
     }
 
+
     public function store(Request $request)
     {
-        //
+        try {
+            $requiredInputs = ['kwitansi_id', 'tgl', 'hal', 'total_belanja', 'idpenerima', 'ppn', 'pph21', 'pph22', 'pph23', 'pajakdaerah', 'sisa'];
+            foreach ($requiredInputs as $input) {
+                if (!$request->has($input)) {
+                    return response()->json(['message' => 'Data tidak lengkap'], 400);
+                }
+            }
+            $data = Kwitansi::create([
+                'kw_id' => $request->input('kwitansi_id'),
+                'tgl' => $request->input('tgl'),
+                'hal' => $request->input('hal'),
+                'nilai' => str_replace(",", "", $request->input('total_belanja')),
+                'penerima_id' => $request->input('idpenerima'),
+                'ppn' => str_replace(",", "", $request->input('ppn')),
+                'pph21' => str_replace(",", "", $request->input('pph21')),
+                'pph22' => str_replace(",", "", $request->input('pph22')),
+                'pph23' => str_replace(",", "", $request->input('pph23')),
+                'pdaerah' => str_replace(",", "", $request->input('pajakdaerah')),
+                'sisa' => str_replace(",", "", $request->input('sisa')),
+            ]);
+
+            return response()->json(['message' => 'Data berhasil disimpan', 'data' => $data], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Terjadi kesalahan saat menyimpan data'], 500);
+        }
     }
 
     /**

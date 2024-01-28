@@ -65,10 +65,6 @@
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                             <input type="hidden" name="_token"
                                                                 value="{{ csrf_token() }}" />
-                                                            {{-- <button class="btn btn-danger btn-icon"
-                                                                data-confirm="Yakin?|Anda mau menghapus data?"
-                                                                data-confirm-yes="alert('Deleted :)');"><i
-                                                                    class="fas fa-trash"></i> Hapus</button> --}}
                                                             <button class="btn btn-sm btn-danger btn-icon confirm-delete"
                                                                 onclick="return confirm('Yakin menghapus data?')">
                                                                 <i class="fas fa-trash"></i> Hapus

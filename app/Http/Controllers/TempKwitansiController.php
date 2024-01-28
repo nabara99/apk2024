@@ -58,8 +58,12 @@ class TempKwitansiController extends Controller
             ->selectRaw('uraian, total, temp_kwitansis.id, nama_sub, kode_sub, kode_kegiatan, kode_program, kode_rekening, nama_rekening',)
             ->where('kwitansi_id', $kwitansi_id)
             ->get();
+        $total_belanja = $detailKwitansi->sum('total');
 
-        return response()->json(['detailKwitansi' => $detailKwitansi]);
+        return response()->json([
+            'detailKwitansi' => $detailKwitansi,
+            'total_belanja' => $total_belanja,
+        ]);
     }
 
     /**
@@ -91,6 +95,6 @@ class TempKwitansiController extends Controller
 
         $detailKwitansi->delete();
 
-        return response()->json(['message' => 'Data berhasil dihapus']);
+        return response()->json(['message' => 'Data berhasil dihapus', 'status' => 'success']);
     }
 }

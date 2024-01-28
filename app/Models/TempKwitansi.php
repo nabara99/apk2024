@@ -14,4 +14,9 @@ class TempKwitansi extends Model
         'anggaran_id',
         'total',
     ];
+
+    public function kwitansi()
+    {
+        return $this->belongsTo(Kwitansi::class);
+    }
 }

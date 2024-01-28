@@ -23,4 +23,9 @@ class Kwitansi extends Model
         'sisa',
         'penerima_id',
     ];
+
+    public function tempKwitansis()
+    {
+        return $this->hasMany(TempKwitansi::class);
+    }
 }

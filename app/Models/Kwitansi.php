@@ -10,6 +10,8 @@ class Kwitansi extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'kw_id';
+
     protected $fillable = [
         'kw_id',
         'tgl',

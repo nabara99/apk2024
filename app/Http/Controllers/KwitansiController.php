@@ -109,9 +109,11 @@ class KwitansiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($kwitansi_id)
     {
-        //
+        $penerimas = Penerima::all();
+        $kwitansis = Kwitansi::findOrFail($kwitansi_id);
+        return view('pages.kwitansi.edit', compact('penerimas', 'kwitansis'));
     }
 
     /**
@@ -119,7 +121,22 @@ class KwitansiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $kwitansi = Kwitansi::findOrFail($id);
+
+        $kwitansi->update([
+            'tgl' => $request->tgl,
+            'hal' => $request->hal,
+            'nilai' => str_replace(",", "", $request->nilai),
+            'ppn' => str_replace(",", "", $request->ppn),
+            'pph21' => str_replace(",", "", $request->pph21),
+            'pph22' => str_replace(",", "", $request->pph22),
+            'pph23' => str_replace(",", "", $request->pph23),
+            'pdaerah' => str_replace(",", "", $request->pdaerah),
+            'sisa' => str_replace(",", "", $request->sisa),
+            'penerima_id' => $request->penerima_id,
+        ]);
+
+        return redirect()->route('kwitansi.index')->with('success', 'Kwitansi berhasil diupdate');
     }
 
     /**

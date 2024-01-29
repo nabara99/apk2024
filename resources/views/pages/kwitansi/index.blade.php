@@ -64,6 +64,10 @@ setlocale(LC_TIME, 'id_ID');
                                                         <button class="btn btn-sm btn-info"
                                                             onclick="cetak({{ $kwitansi->kw_id }})" title="cetak">
                                                             <i class="fa fa-print"></i>
+                                                        </button> &nbsp
+                                                        <button class="btn btn-sm btn-warning"
+                                                            onclick="edit({{ $kwitansi->kw_id }})" title="edit">
+                                                            <i class="fa fa-edit"></i>
                                                         </button>
                                                     </div>
                                                 </td>
@@ -97,6 +101,10 @@ setlocale(LC_TIME, 'id_ID');
                 "Cetak Kwitansi",
                 "width=1200, height=800");
             windowCetak.focus();
+        }
+
+        function edit(kwitansi_id) {
+            window.location.href = '/kwitansi/' + kwitansi_id + '/edit';
         }
     </script>
 @endpush

@@ -25,10 +25,10 @@ class Kwitansi extends Model
         'anggaran_id',
     ];
 
-    public function tempKwitansis()
-    {
-        return $this->belongsTo(TempKwitansi::class);
-    }
+    // public function tempKwitansis()
+    // {
+    //     return $this->belongsTo(TempKwitansi::class);
+    // }
 
     public function penerima()
     {

@@ -406,7 +406,7 @@
                                 popup: 'colored-toast',
                             },
                             showConfirmButton: false,
-                            timer: 1500,
+                            timer: 60000,
                             timerProgressBar: true,
                         })
                         Toast.fire({
@@ -794,7 +794,28 @@
                         anggaran_id: anggaran_id,
                     },
                     success: function(response) {
-                        window.location.reload();
+                        if (response.message) {
+                            Swal.fire({
+                                title: 'Cetak Kwitansi',
+                                text: response.message + " , cetak kwitansi?",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Ya, cetak'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    var windowCetak = window.open('/kwitansi/' +
+                                        kwitansi_id,
+                                        "Cetak Kwitansi",
+                                        "width=1200, height=800");
+                                    windowCetak.focus();
+                                    window.location.reload();
+                                } else {
+                                    window.location.reload();
+                                }
+                            });
+                        }
                     },
                     error: function(xhr, status, error) {
                         const Toast = Swal.mixin({

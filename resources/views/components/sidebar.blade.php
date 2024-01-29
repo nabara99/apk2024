@@ -47,6 +47,12 @@
                         class="fa-solid fa-comments-dollar"></i><span>Kwitansi
                     </span></a>
             </li>
+            <li class="menu-header">Data Pajak</li>
+            <li class="{{ str_contains(Route::currentRouteName(), 'pajakdaerah') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('pajakdaerah.index') }}"><i
+                        class="fa-solid fa-user-check"></i><span>Pajak Daerah
+                    </span></a>
+            </li>
             <li class="menu-header">Data Umum</li>
             <li class="{{ str_contains(Route::currentRouteName(), 'pptk') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('pptk.index') }}"><i class="fa-solid fa-user-check"></i><span>PPTK

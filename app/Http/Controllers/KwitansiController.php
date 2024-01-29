@@ -66,9 +66,12 @@ class KwitansiController extends Controller
                     return response()->json(['message' => 'Data tidak lengkap'], 400);
                 }
             }
+            $kw_id = $request->input('kwitansi_id');
+            $tgl = $request->input('tgl');
+
             $data = Kwitansi::create([
-                'kw_id' => $request->input('kwitansi_id'),
-                'tgl' => $request->input('tgl'),
+                'kw_id' => $kw_id,
+                'tgl' => $tgl,
                 'hal' => $request->input('hal'),
                 'nilai' => str_replace(",", "", $request->input('total_belanja')),
                 'penerima_id' => $request->input('idpenerima'),

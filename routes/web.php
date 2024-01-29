@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DecisionController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\KwitansiController;
+use App\Http\Controllers\PajakDaerahController;
 use App\Http\Controllers\PenerimaContoller;
 use App\Http\Controllers\PptkContoller;
 use App\Http\Controllers\ProgramController;
@@ -46,4 +47,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('tempkwitansi', TempKwitansiController::class);
     Route::get('/modalcaripagu', [KwitansiController::class, 'modalCariPagu']);
     Route::get('/modalcaripenerima', [KwitansiController::class, 'modalCariPenerima']);
+    Route::resource('pajakdaerah', PajakDaerahController::class);
+    Route::post('/pajakdaerah/generate-pajak-daerah', [PajakDaerahController::class, 'generatePajakDaerah'])->name('pajakdaerah.generatePajakDaerah');
 });

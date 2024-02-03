@@ -48,5 +48,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/modalcaripagu', [KwitansiController::class, 'modalCariPagu']);
     Route::get('/modalcaripenerima', [KwitansiController::class, 'modalCariPenerima']);
     Route::resource('pajakdaerah', PajakDaerahController::class);
-    Route::post('/pajakdaerah/generate-pajak-daerah', [PajakDaerahController::class, 'generatePajakDaerah'])->name('pajakdaerah.generatePajakDaerah');
+    Route::post('/kwitansi/generate-pajak-daerah', [KwitansiController::class, 'generatePajakDaerah'])->name('kwitansi.generatePajakDaerah');
 });

@@ -28,21 +28,10 @@
                         </div>
                     </div>
                 </div>
-                @if ($message = Session::get('success'))
-                    <div>
-                        <strong>{{ $message }}</strong>
-                    </div>
-                @endif
 
-                @if ($message = Session::get('error'))
-                    <div>
-                        <strong>{{ $message }}</strong>
-                    </div>
-                @endif
-
-                <form action="{{ route('pajakdaerah.generatePajakDaerah') }}" method="POST">
+                <form id="generatePajakForm" action="{{ route('kwitansi.generatePajakDaerah') }}" method="POST">
                     @csrf
-                    <button type="submit">Generate Pajak Daerah</button>
+                    <button type="button" id="generatePajakButton">Generate Pajak Daerah</button>
                 </form>
             </div>
         </section>
@@ -55,4 +44,29 @@
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('js/page/features-posts.js') }}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('generatePajakButton').addEventListener('click', function() {
+                var form = document.getElementById('generatePajakForm');
+                var formData = new FormData(form);
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', form.action);
+                xhr.setRequestHeader('X-CSRF-Token', '{{ csrf_token() }}');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            // Sukses, lakukan sesuatu jika diperlukan
+                            alert('Pajak Daerah berhasil di-generate');
+                        } else {
+                            // Gagal, tampilkan pesan kesalahan jika diperlukan
+                            alert('Terjadi kesalahan saat meng-generate Pajak Daerah');
+                        }
+                    }
+                };
+                xhr.send(formData);
+            });
+        });
+    </script>
 @endpush

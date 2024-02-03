@@ -51,29 +51,6 @@ class PajakDaerahController extends Controller
         // }
     }
 
-    public function generatePajakDaerah(Request $request)
-    {
-        try {
-            // Ambil semua kwitansi yang memiliki pajak daerah
-            $kwitansiDenganPajakDaerah = Kwitansi::where('pajakdaerah', '>', 0)->get();
-
-            // Loop melalui setiap kwitansi dan buat entri pajak daerah
-            foreach ($kwitansiDenganPajakDaerah as $kwitansi) {
-                $pajakDaerah = new PajakDaerah([
-                    'kwitan_id' => $kwitansi->kw_id,
-                    // Masukkan nilai lain sesuai kebutuhan
-                ]);
-
-                $pajakDaerah->save();
-            }
-
-            return redirect()->back()->with('success', 'Pajak Daerah berhasil di-generate');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan saat meng-generate Pajak Daerah');
-        }
-
-        return redirect()->route('kwitansi.index')->with('success', 'Pajak Daerah berhasil di-generate');
-    }
 
     /**
      * Display the specified resource.

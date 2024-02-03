@@ -60,7 +60,7 @@ class TempKwitansiController extends Controller
             ->join('subs', 'anggarans.sub_id', '=', 'subs.id')
             ->join('kegiatans', 'subs.kegiatan_id', '=', 'kegiatans.id')
             ->join('programs', 'kegiatans.program_id', '=', 'programs.id')
-            ->selectRaw('uraian, total, temp_kwitansis.id, nama_sub, kode_sub, kode_kegiatan, kode_program, kode_rekening, nama_rekening',)
+            ->selectRaw('uraian, total, temp_kwitansis.id, nama_sub, kode_sub, kode_kegiatan, kode_program, kode_rekening, nama_rekening, anggarans.id',)
             ->where('kwitansi_id', $kwitansi_id)
             ->get();
         $total_belanja = $detailKwitansi->sum('total');

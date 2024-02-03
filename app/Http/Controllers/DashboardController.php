@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anggaran;
+use App\Models\Kwitansi;
 use App\Models\Sub;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +16,8 @@ class DashboardController extends Controller
     public function index()
     {
         $dpas = Anggaran::sum('pagu');
+        $sisas = Anggaran::sum('sisa_pagu');
+        $kwitansi = Kwitansi::count('kw_id');
 
         $anggarans = DB::table('anggarans')
             ->join('subs', 'anggarans.sub_id', '=', 'subs.id')
@@ -25,7 +28,7 @@ class DashboardController extends Controller
             ->orderBy('programs.kode_program', 'asc')
             ->get();
 
-        return view('pages.dashboard', compact('anggarans', 'dpas'));
+        return view('pages.dashboard', compact('anggarans', 'dpas', 'sisas', 'kwitansi'));
     }
 
     /**

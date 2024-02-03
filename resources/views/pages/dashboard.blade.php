@@ -40,7 +40,7 @@
                                 <h4>Sisa Anggaran</h4>
                             </div>
                             <div class="card-body">
-
+                                <h6>Rp. {{ number_format($sisas) }}</h6>
                             </div>
                         </div>
                     </div>
@@ -52,10 +52,10 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Sisa Pagu</h4>
+                                <h4>Realisasi</h4>
                             </div>
                             <div class="card-body">
-                                1,201
+                                <h6>Rp. {{ number_format($dpas - $sisas) }}</h6>
                             </div>
                         </div>
                     </div>
@@ -67,10 +67,10 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Dana Tersedia</h4>
+                                <h4>Jumlah Transaksi</h4>
                             </div>
                             <div class="card-body">
-                                10
+                                <h6>Rp. {{ number_format($kwitansi) }}</h6>
                             </div>
                         </div>
                     </div>

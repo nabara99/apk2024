@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Anggaran;
 use App\Models\Decision;
 use App\Models\Kwitansi;
+use App\Models\PajakDaerah;
 use App\Models\Penerima;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -112,8 +113,9 @@ class KwitansiController extends Controller
     public function edit($kwitansi_id)
     {
         $penerimas = Penerima::all();
+        $anggarans = Anggaran::all();
         $kwitansis = Kwitansi::findOrFail($kwitansi_id);
-        return view('pages.kwitansi.edit', compact('penerimas', 'kwitansis'));
+        return view('pages.kwitansi.edit', compact('penerimas', 'kwitansis', 'anggarans'));
     }
 
     /**
@@ -126,7 +128,7 @@ class KwitansiController extends Controller
         $kwitansi->update([
             'tgl' => $request->tgl,
             'hal' => $request->hal,
-            'nilai' => str_replace(",", "", $request->nilai),
+            // 'nilai' => str_replace(",", "", $request->nilai),
             'ppn' => str_replace(",", "", $request->ppn),
             'pph21' => str_replace(",", "", $request->pph21),
             'pph22' => str_replace(",", "", $request->pph22),
@@ -137,6 +139,28 @@ class KwitansiController extends Controller
         ]);
 
         return redirect()->route('kwitansi.index')->with('success', 'Kwitansi berhasil diupdate');
+    }
+
+    public function generatePajakDaerah(Request $request)
+    {
+        try {
+            // Ambil semua kwitansi yang memiliki pajak daerah
+            $kwitansis = Kwitansi::where('pdaerah', '>', 0)->get();
+
+            // Loop melalui setiap kwitansi dan buat entri pajak daerah
+            foreach ($kwitansis as $kwitansi) {
+                $pajakDaerah = new PajakDaerah([
+                    'kwitan_id' => $kwitansi->kw_id,
+                    // Masukkan nilai lain sesuai kebutuhan
+                ]);
+
+                $pajakDaerah->save();
+            }
+
+            return response()->json(['message' => 'Pajak Daerah berhasil di-generate'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Terjadi kesalahan saat meng-generate Pajak Daerah'], 500);
+        }
     }
 
     /**

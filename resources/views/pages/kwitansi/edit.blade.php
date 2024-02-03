@@ -49,7 +49,7 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
-                                                @error('rekening_id')
+                                                @error('penerima_id')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>

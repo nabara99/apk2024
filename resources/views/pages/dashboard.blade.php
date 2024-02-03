@@ -70,7 +70,7 @@
                                 <h4>Jumlah Transaksi</h4>
                             </div>
                             <div class="card-body">
-                                <h6>Rp. {{ number_format($kwitansi) }}</h6>
+                                <h6>{{ number_format($kwitansi) }}</h6>
                             </div>
                         </div>
                     </div>

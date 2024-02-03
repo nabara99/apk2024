@@ -406,7 +406,7 @@
                                 popup: 'colored-toast',
                             },
                             showConfirmButton: false,
-                            timer: 60000,
+                            timer: 2000,
                             timerProgressBar: true,
                         })
                         Toast.fire({
@@ -480,13 +480,21 @@
                 success: function(response) {
                     $('.btn-hapus[data-id="' + detail_id + '"]').closest('tr').remove();
 
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: response.message,
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-right',
+                        iconColor: 'white',
+                        customClass: {
+                            popup: 'colored-toast',
+                        },
                         showConfirmButton: false,
-                        timer: 2000
-                    });
+                        timer: 1500,
+                        timerProgressBar: true,
+                    })
+                    Toast.fire({
+                        icon: 'success',
+                        title: response.message,
+                    })
                     updateTotalBelanja(kwitansi_id);
                 },
                 error: function(xhr, status, error) {

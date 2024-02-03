@@ -49,7 +49,8 @@
             </li>
             <li class="menu-header">Data Pajak</li>
             <li class="{{ str_contains(Route::currentRouteName(), 'pajakdaerah') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('pajakdaerah.index') }}"><i class="fa-solid fa-file-invoice-dollar"></i><span>Pajak Daerah
+                <a class="nav-link" href="{{ route('pajakdaerah.index') }}"><i
+                        class="fa-solid fa-file-invoice-dollar"></i><span>Pajak Daerah
                     </span></a>
             </li>
             <li class="menu-header">Data Umum</li>
@@ -65,6 +66,12 @@
             <li class="{{ str_contains(Route::currentRouteName(), 'penerima') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('penerima.index') }}"><i
                         class="fa-solid fa-users-gear"></i><span>Rekanan
+                    </span></a>
+            </li>
+            <li class="menu-header">Laporan</li>
+            <li class="{{ str_contains(Route::currentRouteName(), 'laporan') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('laporan.index') }}"><i
+                        class="fa-regular fa-file-pdf"></i><span>Perbendaharaan
                     </span></a>
             </li>
             @if (auth()->user()->roles == 'ppk')

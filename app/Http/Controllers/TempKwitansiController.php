@@ -40,9 +40,9 @@ class TempKwitansiController extends Controller
                 'total' => str_replace(",", "", $request->input('total')),
             ]);
 
-            $anggaran->update([
-                'sisa_pagu' => $anggaran->sisa_pagu - str_replace(",", "", $request->input('total')),
-            ]);
+            // $anggaran->update([
+            //     'sisa_pagu' => $anggaran->sisa_pagu - str_replace(",", "", $request->input('total')),
+            // ]);
 
             $data = TempKwitansi::find($request->input('kwitansi_id'));
             return response()->json(['message' => 'Data berhasil disimpan', 'data' => $data], 200);
@@ -60,7 +60,7 @@ class TempKwitansiController extends Controller
             ->join('subs', 'anggarans.sub_id', '=', 'subs.id')
             ->join('kegiatans', 'subs.kegiatan_id', '=', 'kegiatans.id')
             ->join('programs', 'kegiatans.program_id', '=', 'programs.id')
-            ->selectRaw('uraian, total, temp_kwitansis.id, nama_sub, kode_sub, kode_kegiatan, kode_program, kode_rekening, nama_rekening, anggarans.id',)
+            ->selectRaw('uraian, total, temp_kwitansis.id, nama_sub, kode_sub, kode_kegiatan, kode_program, kode_rekening, nama_rekening, temp_kwitansis.id',)
             ->where('kwitansi_id', $kwitansi_id)
             ->get();
         $total_belanja = $detailKwitansi->sum('total');

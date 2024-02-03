@@ -52,7 +52,7 @@
                                                 </td>
                                                 <td>{{ $anggaran->uraian }}</td>
                                                 <td>{{ number_format($anggaran->pagu) }}</td>
-                                                <td>
+                                                {{-- <td>
                                                     <div class="d-flex justify-content-left">
                                                         <a href="{{ route('anggaran.edit', $anggaran->id) }}"
                                                             class="btn btn-sm btn-info btn-icon">
@@ -70,7 +70,7 @@
                                                             </button>
                                                         </form>
                                                     </div>
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                             </tr>
                                         @endforeach

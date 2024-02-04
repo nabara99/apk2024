@@ -115,7 +115,7 @@ class KwitansiController extends Controller
         $penerimas = Penerima::all();
         $anggarans = Anggaran::all();
         $kwitansis = Kwitansi::findOrFail($kwitansi_id);
-        return view('pages.kwitansi.edit', compact('penerimas', 'kwitansis', 'anggarans'));
+        return view('pages.kwitansi.editkwitansi', compact('penerimas', 'kwitansis', 'anggarans'));
     }
 
     /**
@@ -128,7 +128,7 @@ class KwitansiController extends Controller
         $kwitansi->update([
             'tgl' => $request->tgl,
             'hal' => $request->hal,
-            // 'nilai' => str_replace(",", "", $request->nilai),
+            'nilai' => str_replace(",", "", $request->nilai),
             'ppn' => str_replace(",", "", $request->ppn),
             'pph21' => str_replace(",", "", $request->pph21),
             'pph22' => str_replace(",", "", $request->pph22),

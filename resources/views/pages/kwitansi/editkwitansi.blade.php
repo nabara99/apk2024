@@ -35,7 +35,7 @@
                                                 <input type="text" name="kw_id" id="kw_id"
                                                     value="<?= $kwitansis->kw_id ?>" class="form-control" readonly>
                                             </div>
-                                            <div class="col-4 col-md-3 col-sm-3">
+                                            <div class="col-5 col-md-4 col-sm-4">
                                                 <label for="namapenerima">Cari Penerima</label>
                                                 <div class="input-group mb-3">
                                                     <select
@@ -67,81 +67,126 @@
                                                 <input type="text" class="form-control datepicker" id="tgl"
                                                     name="tgl" value="{{ $kwitansis->tgl }}">
                                             </div>
-                                            <div class="col-6 col-md-5 col-sm-5">
+                                            <div class="col-2 col-md-2 col-sm-2">
+                                                <label for="nilai">Total Pembayaran</label>
+                                                <input type="text" class="number-separator form-control" id="nilai"
+                                                    name="nilai" value="{{ number_format($kwitansis->nilai) }}">
+                                            </div>
+                                            <div class="col-2 col-md-2 col-sm-2">
+                                                <label for="ppn">PPN</label>
+                                                <input type="text" class="number-separator form-control" id="ppn"
+                                                    name="ppn" value="{{ number_format($kwitansis->ppn) }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row gutters-sm">
+                                            <div class="col-2 col-md-2 col-sm-2">
+                                                <label for="pph21">PPh 21</label>
+                                                <input type="text" class="number-separator form-control" id="pph21"
+                                                    name="pph21" value="{{ number_format($kwitansis->pph21) }}">
+                                            </div>
+                                            <div class="col-2 col-md-2 col-sm-2">
+                                                <label for="pph22">PPh 22</label>
+                                                <input type="text" class="number-separator form-control" id="pph22"
+                                                    name="pph22" value="{{ number_format($kwitansis->pph22) }}">
+                                            </div>
+                                            <div class="col-2 col-md-2 col-sm-2">
+                                                <label for="pph23">PPh 23</label>
+                                                <input type="text" class="number-separator form-control" id="pph23"
+                                                    name="pph23" value="{{ number_format($kwitansis->pph23) }}">
+                                            </div>
+                                            <div class="col-2 col-md-2 col-sm-2">
+                                                <label for="pdaerah">Pajak Daerah</label>
+                                                <input type="text" class="number-separator form-control" id="pdaerah"
+                                                    name="pdaerah" value="{{ number_format($kwitansis->pdaerah) }}">
+                                            </div>
+                                            <div class="col-2 col-md-2 col-sm-2">
+                                                <label for="sisa">Sisa</label>
+                                                <input type="text" class="form-control" id="sisa" name="sisa"
+                                                    value="{{ number_format($kwitansis->sisa) }}" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row gutters-sm">
+                                            <div class="col-10 col-md-8 col-sm-8">
                                                 <label for="uraian">Uraian</label>
-                                                <input type="text" name="hal" id="hal"
-                                                    value="{{ $kwitansis->hal }}" class="form-control">
+                                                <textarea name="hal" id="hal" data-height="100" class="form-control">{{ $kwitansis->hal }}</textarea>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row gutters-sm">
-                                            <div class="col-4 col-md-3 col-sm-3">
-                                                <label for="kode_pagu">Cari Pagu Anggaran</label>
-                                                <div class="input-group mb-3">
-                                                    <input type="hidden" class="form-control" name="kode_pagu"
-                                                        id="kode_pagu" readonly>
-                                                    <input type="text" name="sisa_pagu" id="sisa_pagu"
-                                                        class="form-control" readonly>
-                                                    <div class="input-group-append">
-                                                        @foreach ($anggarans as $anggaran)
-                                                        @endforeach
-                                                        <button type="button" class="btn btn-primary open-modal"
-                                                            data-toggle="modal" data-target="#modalAnggaran"
-                                                            data-id="{{ $anggaran->id }}">
-                                                            <i class="fa fa-search"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-5 col-md-3 col-sm-3">
-                                                <label for="nilai_belanja">Nilai Belanja</label>
-                                                <input type="text" name="nilai_belanja" id="nilai_belanja"
-                                                    class="number-separator form-control" value="0">
-                                            </div>
-                                            <div class="col-4 col-md-3 col-sm-3">
-                                                <label for="">#</label>
+                                            <div class="col-4 col-md-4 col-sm-4">
+                                                <label for="">Aksi</label>
                                                 <div class="input-group">
-                                                    <button type="button" class="btn btn-success" onclick="simpanItem()">
-                                                        <i class="fa fa-save"></i> Simpan
-                                                    </button>&nbsp
-                                                    <button class="btn btn-primary">Selesai</button>
-
+                                                    <button class="btn btn-lg btn-primary">Update</button>
                                                 </div>
-                                            </div>
-                                            <div class="col-3">
-                                                <label>Total</label>
-                                                <div id="nilai">
-                                                    <h4> <b> Rp. <span id="total-belanja"></span>,-</b></h4>
-                                                </div>
-                                                <input type="text" id="total_belanja_input" name="total_belanja">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="row gutters-sm">
-                                            <div class="col-9">
-                                            </div>
 
-                                        </div>
-                                    </div>
-                                    <table style="width: 100%"
-                                        class="table table-striped table-responsive-lg table-responsive-md table-responsive-sm table-bordered table-hover dataTable">
-                                        <thead>
-                                            <tr>
-                                                <th>Sub Kegiatan</th>
-                                                <th>Rekening</th>
-                                                <th>Uraian</th>
-                                                <th>Jumlah</th>
-                                                <th>Aksi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="detailKwitansi">
-                                        </tbody>
-                                    </table>
-                                    <div class="viewmodal" style="display: none;"></div>
                                 </form>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Rincian Kwitansi</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <div class="row gutters-sm">
+                                        <div class="col-4 col-md-3 col-sm-3">
+                                            <label for="kode_pagu">Cari Pagu Anggaran</label>
+                                            <div class="input-group mb-3">
+                                                <input type="hidden" class="form-control" name="kode_pagu"
+                                                    id="kode_pagu" readonly>
+                                                <input type="text" name="sisa_pagu" id="sisa_pagu"
+                                                    class="form-control" readonly>
+                                                <div class="input-group-append">
+                                                    @foreach ($anggarans as $anggaran)
+                                                    @endforeach
+                                                    <button type="button" class="btn btn-primary open-modal"
+                                                        data-toggle="modal" data-target="#modalAnggaran"
+                                                        data-id="{{ $anggaran->id }}">
+                                                        <i class="fa fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-5 col-md-3 col-sm-3">
+                                            <label for="nilai_belanja">Nilai Belanja</label>
+                                            <input type="text" name="nilai_belanja" id="nilai_belanja"
+                                                class="number-separator form-control" value="0">
+                                        </div>
+                                        <div class="col-4 col-md-3 col-sm-3">
+                                            <label for="">#</label>
+                                            <div class="input-group">
+                                                <button type="button" class="btn btn-success" onclick="simpanItem()">
+                                                    <i class="fa fa-save"></i> Simpan
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <label>Total</label>
+                                            <div id="nilai">
+                                                <h4> <b> Rp. <span id="total-belanja"></span>,-</b></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table style="width: 100%"
+                                    class="table table-striped table-responsive-lg table-responsive-md table-responsive-sm table-bordered table-hover dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Sub Kegiatan</th>
+                                            <th>Rekening</th>
+                                            <th>Uraian</th>
+                                            <th>Jumlah</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="detailKwitansi">
+                                    </tbody>
+                                </table>
+                                <div class="viewmodal" style="display: none;"></div>
                             </div>
                         </div>
                     </div>
@@ -476,7 +521,7 @@
         }
 
         function hitungSisa() {
-            var total_belanja = parseFloat($('#total_belanja').val().replace(/[^0-9.-]/g, '')) || 0;
+            var total_belanja = parseFloat($('#nilai').val().replace(/[^0-9.-]/g, '')) || 0;
 
             var ppn = parseFloat($('#ppn').val().replace(/[^0-9.-]/g, '')) || 0;
             var pph21 = parseFloat($('#pph21').val().replace(/[^0-9.-]/g, '')) || 0;
@@ -491,13 +536,10 @@
             $('#sisa').val(sisa_pembayaran.toLocaleString());
         }
         var totalBelanja = document.getElementById('total-belanja').innerText;
-        // Atur nilai input hidden dengan nilai total belanja
         window.addEventListener('DOMContentLoaded', function() {
-                // Ambil nilai total belanja dari elemen dengan ID "total-belanja"
-                var totalBelanja = document.getElementById('total-belanja').innerText;
-                // Set nilai input dengan nilai total belanja
-                document.getElementById('total_belanja_input').value = totalBelanja;
-            });
+            var totalBelanja = document.getElementById('total-belanja').innerText;
+            document.getElementById('total_belanja_input').value = totalBelanja;
+        });
 
 
         $(document).ready(function() {
@@ -578,6 +620,10 @@
 
             $('.nilai_belanja').select2({
                 closeOnSelect: false
+            });
+
+            $('#ppn, #pph21, #pph22, #pph23, #pajakdaerah').on('input', function() {
+                hitungSisa();
             });
 
             var kwitansi_id = $('#kw_id').val();

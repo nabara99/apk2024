@@ -28,22 +28,44 @@
                                     <table class="table-striped table">
                                         <thead>
                                             <tr>
-                                                <th>Kode Sub</th>
-                                                @for ($i = 1; $i <= 12; $i++)
-                                                    <th>{{ date('F', mktime(0, 0, 0, $i, 1)) }}</th>
-                                                @endfor
+                                                <th rowspan="2">Sub Kegiatan</th>
+                                                <th rowspan="2">Kode Rekening</th>
+                                                <th rowspan="2">Nama Rekening</th>
+                                                <th colspan="12">Total per Bulan</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Januari</th>
+                                                <th>Februari</th>
+                                                <th>Maret</th>
+                                                <th>April</th>
+                                                <th>Mei</th>
+                                                <th>Juni</th>
+                                                <th>Juli</th>
+                                                <th>Agustus</th>
+                                                <th>September</th>
+                                                <th>Oktober</th>
+                                                <th>November</th>
+                                                <th>Desember</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($realisasiBelanja as $kodeSub => $realisasiPerSub)
+                                            @foreach ($realisasiBelanja as $realisasi)
                                                 <tr>
-                                                    <td>{{ $kodeSub }}</td>
-                                                    @for ($i = 1; $i <= 12; $i++)
-                                                        @php
-                                                            $totalBulanIni = $realisasiPerSub->where('bulan', $i)->sum('total');
-                                                        @endphp
-                                                        <td>{{ number_format($totalBulanIni)  }}</td>
-                                                    @endfor
+                                                    <td>{{ $realisasi->nama_sub }}</td>
+                                                    <td>{{ $realisasi->kode_rekening }}</td>
+                                                    <td>{{ $realisasi->nama_rekening }}</td>
+                                                    <td>{{ number_format($realisasi->januari_total) }}</td>
+                                                    <td>{{ number_format($realisasi->februari_total) }}</td>
+                                                    <td>{{ $realisasi->maret_total }}</td>
+                                                    <td>{{ $realisasi->april_total }}</td>
+                                                    <td>{{ $realisasi->mei_total }}</td>
+                                                    <td>{{ $realisasi->juni_total }}</td>
+                                                    <td>{{ $realisasi->juli_total }}</td>
+                                                    <td>{{ $realisasi->agustus_total }}</td>
+                                                    <td>{{ $realisasi->september_total }}</td>
+                                                    <td>{{ $realisasi->oktober_total }}</td>
+                                                    <td>{{ $realisasi->november_total }}</td>
+                                                    <td>{{ $realisasi->desember_total }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

@@ -43,7 +43,7 @@
                                             <th>Kode & Nama Rekening</th>
                                             <th>Uraian</th>
                                             <th>Pagu (Rp)</th>
-                                            {{-- <th>Aksi</th> --}}
+                                            <th>Aksi</th>
                                         </tr>
                                         @foreach ($anggarans as $anggaran)
                                             <tr>
@@ -52,14 +52,14 @@
                                                 </td>
                                                 <td>{{ $anggaran->uraian }}</td>
                                                 <td>{{ number_format($anggaran->pagu) }}</td>
-                                                {{-- <td>
+                                                <td>
                                                     <div class="d-flex justify-content-left">
                                                         <a href="{{ route('anggaran.edit', $anggaran->id) }}"
                                                             class="btn btn-sm btn-info btn-icon">
                                                             <i class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
-                                                        <form action="{{ route('anggaran.destroy', $anggaran->id) }}"
+                                                        {{-- <form action="{{ route('anggaran.destroy', $anggaran->id) }}"
                                                             method="POST" class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                             <input type="hidden" name="_token"
@@ -68,9 +68,9 @@
                                                                 onclick="return confirm('Yakin menghapus data?')">
                                                                 <i class="fas fa-times"></i> Hapus
                                                             </button>
-                                                        </form>
+                                                        </form> --}}
                                                     </div>
-                                                </td> --}}
+                                                </td>
                                             </tr>
                                             </tr>
                                         @endforeach

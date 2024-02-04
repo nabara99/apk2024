@@ -94,7 +94,7 @@
                                             class="form-control @error('pagu')
                                         is-invalid
                                     @enderror"
-                                            name="pagu" value="{{ $anggaran->pagu }}">
+                                            name="pagu" value="{{ $anggaran->pagu }}" readonly>
                                         @error('pagu')
                                             <div class="invalid-feedback">
                                                 {{ $message }}

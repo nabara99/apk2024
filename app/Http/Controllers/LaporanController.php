@@ -21,6 +21,9 @@ class LaporanController extends Controller
             ->join('kegiatans', 'subs.kegiatan_id', '=', 'kegiatans.id')
             ->join('programs', 'kegiatans.program_id', '=', 'programs.id')
             ->select(
+                'kode_program',
+                'kode_kegiatan',
+                'kode_sub',
                 'nama_sub',
                 'kode_rekening',
                 'nama_rekening',
@@ -37,10 +40,43 @@ class LaporanController extends Controller
                 DB::raw('SUM(CASE WHEN MONTH(tgl) = 11 THEN total ELSE 0 END) AS november_total'),
                 DB::raw('SUM(CASE WHEN MONTH(tgl) = 12 THEN total ELSE 0 END) AS desember_total')
             )
-            ->groupBy('kode_rekening', 'nama_rekening', 'nama_sub')
+            ->groupBy('kode_program', 'kode_kegiatan', 'kode_sub', 'kode_rekening', 'nama_rekening', 'nama_sub')
+            ->orderBy('kode_program', 'asc')
+            ->orderBy('kode_kegiatan', 'asc')
+            ->orderBy('kode_sub', 'asc')
+            ->orderBy('kode_rekening', 'asc')
             ->get();
 
-        return view('pages.laporan.lapbendahara', compact('realisasiBelanja'));
+        // Menghitung total per bulan
+        $totalJanuari = 0;
+        $totalFebruari = 0;
+        $totalMaret = 0;
+        $totalApril = 0;
+        $totalMei = 0;
+        $totalJuni = 0;
+        $totalJuli = 0;
+        $totalAgustus = 0;
+        $totalSeptember = 0;
+        $totalOktober = 0;
+        $totalNovember = 0;
+        $totalDesember = 0;
+
+        foreach ($realisasiBelanja as $realisasi) {
+            $totalJanuari += $realisasi->januari_total;
+            $totalFebruari += $realisasi->februari_total;
+            $totalMaret += $realisasi->maret_total;
+            $totalApril += $realisasi->april_total;
+            $totalMei += $realisasi->mei_total;
+            $totalJuni += $realisasi->juni_total;
+            $totalJuli += $realisasi->juli_total;
+            $totalAgustus += $realisasi->agustus_total;
+            $totalSeptember += $realisasi->september_total;
+            $totalOktober += $realisasi->oktober_total;
+            $totalNovember += $realisasi->november_total;
+            $totalDesember += $realisasi->desember_total;
+        }
+
+        return view('pages.laporan.lapbendahara', compact('realisasiBelanja', 'totalJanuari', 'totalFebruari', 'totalMaret', 'totalApril', 'totalMei', 'totalJuni', 'totalJuli', 'totalAgustus', 'totalSeptember', 'totalOktober', 'totalNovember', 'totalDesember',));
     }
 
     /**

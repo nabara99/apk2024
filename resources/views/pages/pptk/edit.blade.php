@@ -21,8 +21,10 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4>Edit PPTK</h4>
-                                <a href="{{ route('pptk.index') }}" class="btn btn-primary btn-icon"><i
-                                        class="fa-solid fa-arrow-left"></i> Kembali</a>
+                                <div class="card-header-action">
+                                    <a href="{{ route('pptk.index') }}" class="btn btn-primary btn-icon"><i
+                                            class="fa-solid fa-arrow-rotate-left"></i></a>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <form action="{{ route('pptk.update', $pptk) }}" method="POST">

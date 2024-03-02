@@ -25,7 +25,7 @@ class StoreSpdRequest extends FormRequest
             'no_spd' => 'required|unique:spds,no_spd',
             'spd_tgl' => 'required',
             'spd_uraian' => 'required',
-            'spd_nilai' => 'required',
+            'spd_nilai' => 'required'
         ];
     }
 }

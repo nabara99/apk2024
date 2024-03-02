@@ -53,16 +53,14 @@
                                                 <td>{{ number_format($spd->spd_nilai) }}</td>
                                                 <td>
                                                     <div class="d-flex justify-content-left">
-                                                        <form action="{{ route('spd.destroy', $spd->id) }}" method="POST"
-                                                            class="ml-2">
-                                                            <input type="hidden" name="_method" value="DELETE" />
-                                                            <input type="hidden" name="_token"
-                                                                value="{{ csrf_token() }}" />
-                                                            <button class="btn btn-sm btn-danger btn-icon confirm-delete"
-                                                                onclick="return confirm('Yakin menghapus data?')">
-                                                                <i class="fas fa-trash"></i>
-                                                            </button>
-                                                        </form>
+                                                        <a href="{{ route('spd.edit', $spd->id) }}"
+                                                            class="btn btn-sm btn-info btn-icon">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a><br>
+                                                        <a href="{{ route('detail', $spd->id) }}"
+                                                            class="btn btn-sm btn-warning btn-icon">
+                                                            <i class="fa-solid fa-circle-info"></i>
+                                                        </a>
                                                     </div>
                                                 </td>
                                             </tr>

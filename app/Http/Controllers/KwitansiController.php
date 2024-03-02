@@ -136,6 +136,7 @@ class KwitansiController extends Controller
             'pdaerah' => str_replace(",", "", $request->pdaerah),
             'sisa' => str_replace(",", "", $request->sisa),
             'penerima_id' => $request->penerima_id,
+            'anggaran_id' => $request->anggaran_id,
         ]);
 
         return redirect()->route('kwitansi.index')->with('success', 'Kwitansi berhasil diupdate');

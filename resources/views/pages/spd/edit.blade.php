@@ -20,42 +20,29 @@
                     <div class="col-12 col-md-12 col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Buat SP2D</h4>
+                                <h4>Edit SP2D</h4>
                                 <div class="card-header-action">
                                     <a href="{{ route('spd.index') }}" class="btn btn-primary btn-icon"><i
                                             class="fa-solid fa-arrow-rotate-left"></i></a>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('spd.store') }}" method="POST">
+                                <form action="{{ route('spd.update', $spd) }}" method="POST">
                                     @csrf
+                                    @method('PUT')
                                     <div class="form-group">
                                         <div class="row gutters-sm">
                                             <div class="col-8 col-md-8 col-sm-8">
-                                            <label>Nomor</label>
-                                            <input type="text" value="{{ old('no_spd') }}"
-                                                class="form-control @error('no_spd')
-                                                is-invalid
-                                                @enderror"
-                                                    name="no_spd">
-                                                @error('no_spd')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
+                                                <label>Nomor</label>
+                                                <input type="text" value="{{$spd->no_spd}}"
+                                                    class="form-control"
+                                                    name="no_spd" required>
                                             </div>
                                             <div class="col-4 col-md-4 col-sm-4">
                                                 <label>Tanggal</label>
-                                                <input type="text" value="{{ old('spd_tgl') }}"
-                                                    class="form-control datepicker @error('spd_tgl')
-                                                    is-invalid
-                                                @enderror"
-                                                    name="spd_tgl">
-                                                @error('spd_tgl')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
+                                                <input type="text" value="{{$spd->spd_tgl}}"
+                                                    class="form-control datepicker"
+                                                    name="spd_tgl" required>
                                             </div>
                                         </div>
                                     </div>
@@ -63,29 +50,15 @@
                                         <div class="row gutters-sm">
                                             <div class="col-9 col-md-9 col-sm-9">
                                                 <label>Uraian</label>
-                                                <textarea class="form-control @error('spd_uraian')
-                                                    is-invalid
-                                                @enderror"
-                                                data-height="120"
-                                                name="spd_uraian">{{old('spd_uraian')}}</textarea>
-                                                    @error('spd_uraian')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
+                                                <textarea class="form-control"
+                                                    data-height="120" required
+                                                    name="spd_uraian">{{$spd->spd_uraian}}</textarea>
                                             </div>
                                             <div class="col-3 col-md-3 col-sm-3">
                                                 <label>Nilai</label>
-                                                <input type="text" value="{{ old('spd_nilai') }}"
-                                                    class="number-separator form-control @error('spd_nilai')
-                                                is-invalid
-                                            @enderror"
+                                                <input type="text" value="{{ number_format($spd->spd_nilai) }}"
+                                                    class="number-separator form-control" required
                                                     name="spd_nilai">
-                                                @error('spd_nilai')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -93,38 +66,38 @@
                                         <div class="row">
                                             <div class="col-2 col-md-2 col-sm-2">
                                                 <label>IWP 1%</label>
-                                                <input type="text" value="0"
+                                                <input type="text" value="{{ number_format($spd->iwp1) }}"
                                                     class="number-separator form-control"
-                                                    name="iwp1">
+                                                    name="iwp1" required>
                                             </div>
                                             <div class="col-2 col-md-2 col-sm-2">
                                                 <label>IWP 8%</label>
-                                                <input type="text" value="0"
-                                                    class="number-separator form-control"
+                                                <input type="text" value="{{ number_format($spd->iwp8) }}"
+                                                    class="number-separator form-control" required
                                                     name="iwp8">
                                             </div>
                                             <div class="col-2 col-md-2 col-sm-2">
                                                 <label>PPh21</label>
-                                                <input type="text" value="0"
-                                                    class="number-separator form-control"
+                                                <input type="text" value="{{ number_format($spd->pph21) }}"
+                                                    class="number-separator form-control" required
                                                     name="pph21">
                                             </div>
                                             <div class="col-2 col-md-2 col-sm-2">
                                                 <label>PPh22</label>
-                                                <input type="text" value="0"
+                                                <input type="text" value="{{ number_format($spd->pph22) }}"
                                                     class="number-separator form-control"
-                                                    name="pph22">
+                                                    name="pph22" required>
                                             </div>
                                             <div class="col-2 col-md-2 col-sm-2">
                                                 <label>PPh23</label>
-                                                <input type="text" value="0"
-                                                    class="number-separator form-control"
+                                                <input type="text" value="{{ number_format($spd->pph23) }}"
+                                                    class="number-separator form-control" required
                                                     name="pph23">
                                             </div>
-                                            <div class="col-2 col-md-2 col-sm-2">
-                                                <label>PPN</label>
-                                                <input type="text" value="0"
-                                                    class="number-separator form-control"
+                                            <div class="col-2">
+                                                <label class="form-label">PPN</label>
+                                                <input type="text" value="{{ number_format($spd->ppn) }}"
+                                                    class="number-separator form-control" required
                                                     name="ppn">
                                             </div>
                                         </div>
@@ -134,28 +107,32 @@
                                         <div class="selectgroup w-100">
                                             <label class="selectgroup-item">
                                                 <input type="radio" name="jenis" value="UP"
-                                                    class="selectgroup-input">
+                                                    class="selectgroup-input"
+                                                    @if ($spd->jenis == 'UP') checked @endif>
                                                 <span class="selectgroup-button">UP</span>
                                             </label>
                                             <label class="selectgroup-item">
                                                 <input type="radio" name="jenis" value="GU"
-                                                    class="selectgroup-input">
+                                                    class="selectgroup-input"
+                                                    @if ($spd->jenis == 'GU') checked @endif>
                                                 <span class="selectgroup-button">GU</span>
                                             </label>
                                             <label class="selectgroup-item">
                                                 <input type="radio" name="jenis" value="LS"
-                                                    class="selectgroup-input">
+                                                    class="selectgroup-input"
+                                                    @if ($spd->jenis == 'LS') checked @endif>
                                                 <span class="selectgroup-button">LS</span>
                                             </label>
                                             <label class="selectgroup-item">
                                                 <input type="radio" name="jenis" value="TU"
-                                                    class="selectgroup-input">
+                                                    class="selectgroup-input"
+                                                    @if ($spd->jenis == 'TU') checked @endif>
                                                 <span class="selectgroup-button">TU</span>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="card-footer text-right">
-                                        <button class="btn btn-primary">Simpan</button>
+                                        <button class="btn btn-primary">Update</button>
                                     </div>
                                 </form>
                             </div>

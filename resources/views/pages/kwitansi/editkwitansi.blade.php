@@ -37,8 +37,38 @@
                                                 <input type="text" name="kw_id" id="kw_id"
                                                     value="<?= $kwitansis->kw_id ?>" class="form-control" readonly>
                                             </div>
+                                            <div class="col-6 col-md-6 col-sm-6">
+                                                <label for="namaanggaran">Penerima</label>
+                                                <div class="input-group mb-3">
+                                                    <select
+                                                        class="form-control select2 select2-hidden-accessible @error('anggaran_id')
+                                                        is-invalid
+                                                    @enderror"
+                                                        style="width: 100%;" tabindex="-1" aria-hidden="true"
+                                                        name="anggaran_id">
+                                                        <option value="{{ $kwitansis->anggaran_id }}">
+                                                            {{ $kwitansis->anggaran->sub->nama_sub }} |
+                                                            {{ $kwitansis->anggaran->rekening->kode_rekening }} |
+                                                            {{ $kwitansis->anggaran->uraian }}
+                                                        </option>
+                                                        @foreach ($anggarans as $anggaran)
+                                                            <option value="{{ $anggaran->id }}"
+                                                                {{ old('anggaran_id') == $anggaran->id ? 'selected' : '' }}>
+                                                                {{ $anggaran->sub->nama_sub }} |
+                                                                {{ $anggaran->rekening->kode_rekening }} |
+                                                                {{ $anggaran->uraian }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('anggaran_id')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                            </div>
                                             <div class="col-5 col-md-4 col-sm-4">
-                                                <label for="namapenerima">Cari Penerima</label>
+                                                <label for="namapenerima">Anggaran</label>
                                                 <div class="input-group mb-3">
                                                     <select
                                                         class="form-control select2 select2-hidden-accessible @error('penerima_id')
@@ -64,6 +94,10 @@
                                                     @enderror
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row gutters-sm">
                                             <div class="col-2 col-md-2 col-sm-2">
                                                 <label for="tgl">Tanggal</label>
                                                 <input type="text" class="form-control datepicker" id="tgl"
@@ -79,10 +113,6 @@
                                                 <input type="text" class="number-separator form-control" id="ppn"
                                                     name="ppn" value="{{ number_format($kwitansis->ppn) }}">
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row gutters-sm">
                                             <div class="col-2 col-md-2 col-sm-2">
                                                 <label for="pph21">PPh 21</label>
                                                 <input type="text" class="number-separator form-control" id="pph21"
@@ -98,6 +128,10 @@
                                                 <input type="text" class="number-separator form-control" id="pph23"
                                                     name="pph23" value="{{ number_format($kwitansis->pph23) }}">
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row gutters-sm">
                                             <div class="col-2 col-md-2 col-sm-2">
                                                 <label for="pdaerah">Pajak Daerah</label>
                                                 <input type="text" class="number-separator form-control" id="pdaerah"
@@ -108,23 +142,15 @@
                                                 <input type="text" class="form-control" id="sisa" name="sisa"
                                                     value="{{ number_format($kwitansis->sisa) }}" readonly>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row gutters-sm">
                                             <div class="col-10 col-md-8 col-sm-8">
                                                 <label for="uraian">Uraian</label>
                                                 <textarea name="hal" id="hal" data-height="100" class="form-control">{{ $kwitansis->hal }}</textarea>
                                             </div>
-                                            <div class="col-4 col-md-4 col-sm-4">
-                                                <label for="">Aksi</label>
-                                                <div class="input-group">
-                                                    <button class="btn btn-lg btn-primary">Update</button>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
-
+                                    <div class="form-group text-right">
+                                        <button type="submit]" class="btn btn-primary btn-lg btn-icon icon-right">Update</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>

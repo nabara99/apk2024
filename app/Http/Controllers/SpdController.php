@@ -41,14 +41,15 @@ class SpdController extends Controller
         $spd->no_spd = $request->no_spd;
         $spd->spd_tgl = $request->spd_tgl;
         $spd->spd_uraian = $request->spd_uraian;
-        $spd->spd_nilai = (int) $request->spd_nilai;
-        $spd->spd_sisa = (int) $request->spd_nilai;
-        $spd->iwp1 = $request->iwp1;
-        $spd->iwp8 = $request->iwp8;
-        $spd->pph21 = $request->pph21;
-        $spd->pph22 = $request->pph22;
-        $spd->pph23 = $request->pph23;
-        $spd->ppn = $request->ppn;
+        $spd->jenis = $request->jenis;
+        $spd->spd_nilai = str_replace(",", "", $request->spd_nilai);
+        $spd->spd_sisa = str_replace(",", "", $request->spd_nilai);
+        $spd->iwp1 = str_replace(",", "", $request->iwp1);
+        $spd->iwp8 = str_replace(",", "", $request->iwp8);
+        $spd->pph21 = str_replace(",", "", $request->pph21);
+        $spd->pph22 = str_replace(",", "", $request->pph22);
+        $spd->pph23 = str_replace(",", "", $request->pph23);
+        $spd->ppn = str_replace(",", "", $request->ppn);
 
         $spd->save();
         return redirect()->route('spd.index')->with('success', 'SP2D berhasil disimpan');
@@ -65,17 +66,41 @@ class SpdController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $spd = Spd::findOrFail($id);
+
+        return view('pages.spd.edit', compact('spd'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $spd = Spd::findOrFail($id);
+        $spd->update([
+            'no_spd' => $request->no_spd,
+            'spd_tgl' => $request->spd_tgl,
+            'spd_uraian' => $request->spd_uraian,
+            'jenis' => $request->jenis,
+            'spd_nilai' => str_replace(",", "", $request->spd_nilai),
+            'iwp1' => str_replace(",", "", $request->iwp1),
+            'iwp8' => str_replace(",", "", $request->iwp8),
+            'pph21' => str_replace(",", "", $request->pph21),
+            'pph22' => str_replace(",", "", $request->pph22),
+            'pph23' => str_replace(",", "", $request->pph23),
+            'ppn' => str_replace(",", "", $request->ppn),
+        ]);
+
+        return redirect()->route('spd.index')->with('success', 'SP2D berhasil diupdate');
+    }
+
+    public function detail($id)
+    {
+        $spd = Spd::findOrFail($id);
+
+        return view('pages.spd.input_detail', compact('spd'));
     }
 
     /**
@@ -83,7 +108,7 @@ class SpdController extends Controller
      */
     public function destroy(Spd $spd)
     {
-        $spd->delete();
-        return redirect()->route('spd.index')->with('success', 'SP2D telah dihapus');
+        // $spd->delete();
+        // return redirect()->route('spd.index')->with('success', 'SP2D telah dihapus');
     }
 }

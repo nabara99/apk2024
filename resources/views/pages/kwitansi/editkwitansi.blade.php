@@ -23,7 +23,7 @@
                                 <h4>Edit Kwitansi</h4>
                                 <div class="card-header-action">
                                     <a href="{{ route('kwitansi.index') }}" class="btn btn-primary btn-icon"><i
-                                            class="fa-solid fa-arrow-rotate-left"></i></a>
+                                        class="fa-solid fa-arrow-rotate-left"></i></a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -149,7 +149,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group text-right">
-                                        <button type="submit]" class="btn btn-primary btn-lg btn-icon icon-right">Update</button>
+                                        <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right">Update</button>
                                     </div>
                                 </form>
                             </div>
@@ -161,8 +161,8 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <div class="row gutters-sm">
-                                        <div class="col-4 col-md-3 col-sm-3">
-                                            <label for="kode_pagu">Cari Pagu Anggaran</label>
+                                        <div class="col-2 col-md-2 col-sm-2">
+                                            <label for="kode_pagu">Cari Pagu</label>
                                             <div class="input-group mb-3">
                                                 <input type="hidden" class="form-control" name="kode_pagu"
                                                     id="kode_pagu" readonly>
@@ -179,12 +179,17 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-5 col-md-3 col-sm-3">
+                                        <div class="col-4 col-md-4 col-sm-4">
+                                            <label for="uraian">Uraian</label>
+                                            <input type="text" name="uraian" id="uraian" class="form-control"
+                                                readonly>
+                                        </div>
+                                        <div class="col-2 col-md-2 col-sm-2">
                                             <label for="nilai_belanja">Nilai Belanja</label>
                                             <input type="text" name="nilai_belanja" id="nilai_belanja"
                                                 class="number-separator form-control" value="0">
                                         </div>
-                                        <div class="col-4 col-md-3 col-sm-3">
+                                        <div class="col-2 col-md-2 col-sm-2">
                                             <label for="">#</label>
                                             <div class="input-group">
                                                 <button type="button" class="btn btn-success" onclick="simpanItem()">
@@ -192,7 +197,7 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        <div class="col-3">
+                                        <div class="col-2">
                                             <label>Total</label>
                                             <div id="nilai">
                                                 <h4> <b> Rp. <span id="total-belanja"></span>,-</b></h4>

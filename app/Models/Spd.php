@@ -12,6 +12,7 @@ class Spd extends Model
     protected $fillable = [
         'no_spd',
         'spd_tgl',
+        'jenis',
         'spd_uraian',
         'spd_nilai',
         'iwp1',
@@ -20,6 +21,5 @@ class Spd extends Model
         'pph22',
         'pph23',
         'ppn',
-        'jenis'
     ];
 }

@@ -53,14 +53,16 @@
                                                 <td>{{ number_format($spd->spd_nilai) }}</td>
                                                 <td>
                                                     <div class="d-flex justify-content-left">
-                                                        <a href="{{ route('spd.edit', $spd->id) }}"
+                                                        <a href="{{ route('spd.edit', $spd->id) }}" title="Edit"
                                                             class="btn btn-sm btn-info btn-icon">
                                                             <i class="fas fa-edit"></i>
-                                                        </a><br>
-                                                        <a href="{{ route('detail', $spd->id) }}"
-                                                            class="btn btn-sm btn-warning btn-icon">
-                                                            <i class="fa-solid fa-circle-info"></i>
-                                                        </a>
+                                                        </a>&nbsp;
+                                                        @if ($spd->jenis == 'LS')
+                                                            <a href="{{ route('detail', $spd->id) }}" title="Rincian"
+                                                                class="btn btn-sm btn-warning btn-icon">
+                                                                <i class="fa-solid fa-list"></i>
+                                                            </a>
+                                                        @endif
                                                     </div>
                                                 </td>
                                             </tr>

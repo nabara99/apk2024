@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anggaran;
-use App\Models\TempKwitansi;
+use App\Models\SpdRinci;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class TempKwitansiController extends Controller
+class SpdRinciController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
+        //
     }
 
     /**
@@ -34,17 +35,13 @@ class TempKwitansiController extends Controller
         if ($anggaran && $anggaran->sisa_pagu < str_replace(",", "", $request->input('total'))) {
             return response()->json(['message' => 'Saldo tidak cukup !'], 422);
         } else {
-            $data = TempKwitansi::create([
-                'kwitansi_id' => $request->input('kwitansi_id'),
+            $data = SpdRinci::create([
+                'spd_id' => $request->input('spd_id'),
                 'anggaran_id' => $request->input('anggaran_id'),
                 'total' => str_replace(",", "", $request->input('total')),
             ]);
 
-            // $anggaran->update([
-            //     'sisa_pagu' => $anggaran->sisa_pagu - str_replace(",", "", $request->input('total')),
-            // ]);
-
-            $data = TempKwitansi::find($request->input('kwitansi_id'));
+            $data = SpdRinci::find($request->input('spd_id'));
             return response()->json(['message' => 'Data berhasil disimpan', 'data' => $data], 200);
         }
     }
@@ -52,21 +49,21 @@ class TempKwitansiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($kwitansi_id)
+    public function show($spd_id)
     {
-        $detailKwitansi = DB::table('temp_kwitansis')
-            ->join('anggarans', 'temp_kwitansis.anggaran_id', '=', 'anggarans.id')
+        $detailSpd = DB::table('spd_rincis')
+            ->join('anggarans', 'spd_rincis.anggaran_id', '=', 'anggarans.id')
             ->join('rekenings', 'anggarans.rekening_id', '=', 'rekenings.id')
             ->join('subs', 'anggarans.sub_id', '=', 'subs.id')
             ->join('kegiatans', 'subs.kegiatan_id', '=', 'kegiatans.id')
             ->join('programs', 'kegiatans.program_id', '=', 'programs.id')
-            ->selectRaw('uraian, total, temp_kwitansis.id, nama_sub, kode_sub, kode_kegiatan, kode_program, kode_rekening, nama_rekening',)
-            ->where('kwitansi_id', $kwitansi_id)
+            ->selectRaw('uraian, total, spd_rincis.id, nama_sub, kode_sub, kode_kegiatan, kode_program, kode_rekening, nama_rekening',)
+            ->where('spd_id', $spd_id)
             ->get();
-        $total_belanja = $detailKwitansi->sum('total');
+        $total_belanja = $detailSpd->sum('total');
 
         return response()->json([
-            'detailKwitansi' => $detailKwitansi,
+            'detailSpd' => $detailSpd,
             'total_belanja' => $total_belanja,
         ]);
     }
@@ -90,15 +87,15 @@ class TempKwitansiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($detail_id)
+    public function destroy( $detail_id)
     {
-        $detailKwitansi = TempKwitansi::find($detail_id);
+        $detailSpd = SpdRinci::find($detail_id);
 
-        if (!$detailKwitansi) {
+        if (!$detailSpd) {
             return response()->json(['message' => 'Data tidak ditemukan'], 404);
         }
 
-        $detailKwitansi->delete();
+        $detailSpd->delete();
 
         return response()->json(['message' => 'Data berhasil dihapus', 'status' => 'success']);
     }

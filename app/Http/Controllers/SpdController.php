@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSpdRequest;
+use App\Models\Anggaran;
 use App\Models\Spd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,7 +20,7 @@ class SpdController extends Controller
                 return $query->where('spd_uraian', 'like', '%' . $name . '%');
             })
             ->orderBy('id', 'asc')
-            ->paginate(10);
+            ->paginate(5);
         return view('pages.spd.index', compact('spds'));
     }
 
@@ -99,8 +100,9 @@ class SpdController extends Controller
     public function detail($id)
     {
         $spd = Spd::findOrFail($id);
+        $anggarans = Anggaran::all();
 
-        return view('pages.spd.input_detail', compact('spd'));
+        return view('pages.spd.input_detail', compact('spd', 'anggarans'));
     }
 
     /**

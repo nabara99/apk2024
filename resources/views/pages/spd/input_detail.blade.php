@@ -50,17 +50,23 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="row gutters-sm">
-                                            <div class="col-9 col-md-9 col-sm-9">
+                                            <div class="col-8 col-md-8 col-sm-8">
                                                 <label>Uraian</label>
                                                 <textarea class="form-control"
                                                     data-height="80" readonly
                                                     name="spd_uraian">{{$spd->spd_uraian}}</textarea>
                                             </div>
-                                            <div class="col-3 col-md-3 col-sm-3">
+                                            <div class="col-2 col-md-2 col-sm-2">
                                                 <label>Nilai</label>
                                                 <input type="text" value="{{ number_format($spd->spd_nilai) }}"
                                                     class="number-separator form-control" readonly
                                                     name="spd_nilai">
+                                            </div>
+                                            <div class="col-2 col-md-2 col-sm-2">
+                                                <label>Selisih</label>
+                                                <div>
+                                                    <h5> <b> Rp. <span id="selisih"></span>,-</b></h5>
+                                            </div>
                                             </div>
                                         </div>
                                     </div>
@@ -316,6 +322,7 @@
                     $('#detailSpd').empty();
 
                     $('#total-belanja').text(response.total_belanja.toLocaleString());
+                    $('#selisih').text(response.selisih.toLocaleString());
 
                     $.each(response.detailSpd, function(index, detail) {
                         var newRow =
@@ -348,6 +355,7 @@
                 url: '/spdrinci/' + spd_id,
                 success: function(response) {
                     $('#total-belanja').text(response.total_belanja.toLocaleString());
+                    $('#selisih').text(response.selisih.toLocaleString());
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);

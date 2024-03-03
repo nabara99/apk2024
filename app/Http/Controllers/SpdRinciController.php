@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anggaran;
+use App\Models\Spd;
 use App\Models\SpdRinci;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -62,9 +63,13 @@ class SpdRinciController extends Controller
             ->get();
         $total_belanja = $detailSpd->sum('total');
 
+        $spd = Spd::findOrFail($spd_id);
+        $selisih = $spd->spd_nilai - $total_belanja;
+
         return response()->json([
             'detailSpd' => $detailSpd,
             'total_belanja' => $total_belanja,
+            'selisih' => $selisih,
         ]);
     }
 

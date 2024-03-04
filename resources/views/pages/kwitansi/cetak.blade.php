@@ -52,7 +52,7 @@ setlocale(LC_TIME, 'id_ID');
             <td width="1%"></td>
             <td width="22%">Dibukukan tanggal</td>
             <td width="1%">:</td>
-            <td>{{ Carbon::parse($kwitansi->tgl)->formatLocalized('%e %B %Y') }}</td>
+            <td>{{ Carbon::parse($kwitansi->tgl)->isoFormat('D MMMM Y') }}</td>
         </tr>
         <tr style="text-align: left; font-size: 8pt;">
             <td>Kode Program</td>
@@ -188,7 +188,7 @@ setlocale(LC_TIME, 'id_ID');
             <td width="24%"></td>
             <td width="24%"></td>
             <td width="27%" colspan="2">
-                Teluk Kepayang, {{ Carbon::parse($kwitansi->tgl)->formatLocalized('%e %B %Y') }}
+                Teluk Kepayang, {{ Carbon::parse($kwitansi->tgl)->isoFormat('D MMMM Y') }}
             </td>
         </tr>
         <tr style="text-align: center; font-size: 8pt;">

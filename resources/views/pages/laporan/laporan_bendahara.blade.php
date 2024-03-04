@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+use Carbon\Carbon;
+setlocale(LC_TIME, 'id_ID');
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,9 +22,8 @@
             <td colspan="3"><b>LAPORAN PERTANGGUNG JAWABAN UANG PERSEDIAAN</b></td>
         </tr>
         <tr>
-            <td colspan="3"><b>BENDAHARA PENGELUARAN</b> <br><br></td>
+            <td colspan="3"><b>BENDAHARA PENGELUARAN</b></td>
         </tr>
-        <br><br>
         <tr>
             <td width="15%">&nbsp&nbsp&nbsp&nbsp SKPD</td>
             <td width="1%">:</td>
@@ -77,8 +81,22 @@
                         </tfoot>
                     </table>
                 </center>
-                <br>
             </td>
+        <tr>
+            <td colspan="2"></td>
+            <td><br/>Teluk Kepayang, {{ Carbon::parse($endDate)->isoFormat('D MMMM Y') }}</td>
+        </tr>
+        <tr>
+            <td colspan="2"></td>
+            <td>Bendahara Pengeluaran</td>
+        </tr>
+        <tr>
+            <td colspan="2"></td>
+            <td><br/><br/><br/><br/><br/>{{$decision->nama_bp}}</td>
+        </tr>
+        <tr>
+            <td colspan="2"></td>
+            <td>NIP. {{$decision->nip_bp}}</td>
         </tr>
     </table>
 </body>

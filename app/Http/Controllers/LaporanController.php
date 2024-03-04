@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Decision;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -43,10 +44,13 @@ class LaporanController extends Controller
             ->groupBy('kode_program', 'kode_kegiatan', 'kode_sub', 'kode_rekening', 'nama_sub', 'nama_rekening')
             ->get();
 
+        $decision = Decision::first();
+
         return view('pages.laporan.laporan_bendahara', [
             'realisasiBelanja' => $realisasiBelanja,
             'startDate' => $startDate,
-            'endDate' => $endDate
+            'endDate' => $endDate,
+            'decision' => $decision,
         ]);
     }
 

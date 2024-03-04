@@ -25,12 +25,15 @@
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-6">
                     <div class="card card-primary">
-                        <div class="card-header">
-                            <h4>Laporan Bendahara</h4>
-                        </div>
-                        <div class="card-body">
-                            <form action="{{route('laporan.bendahara')}}" method="POST">
-                                @csrf
+                        <form action="{{route('laporan.bendahara')}}" method="POST" target="blank">
+                            @csrf
+                            <div class="card-header">
+                                <h4>Laporan Bendahara</h4>
+                                <div class="card-header-action">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-print"></i></button>
+                                </div>
+                            </div>
+                            <div class="card-body">
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="form-group">
@@ -45,11 +48,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="text-right">
-                                    <button type="submit" class="btn btn-primary">Cetak</button>
-                                </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                     <div class="card card-primary">
                         <div class="card-header">

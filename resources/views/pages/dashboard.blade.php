@@ -67,10 +67,10 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Jumlah Transaksi</h4>
+                                <h4>Capaian (%)</h4>
                             </div>
                             <div class="card-body">
-                                <h6>{{ number_format($kwitansi) }}</h6>
+                                <h6>{{ number_format(($dpas - $sisas) / $dpas * 100,2,",",".") }} %</h6>
                             </div>
                         </div>
                     </div>

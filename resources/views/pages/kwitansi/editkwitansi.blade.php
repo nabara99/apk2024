@@ -459,7 +459,7 @@
                                 popup: 'colored-toast',
                             },
                             showConfirmButton: false,
-                            timer: 60000,
+                            timer: 1500,
                             timerProgressBar: true,
                         })
                         Toast.fire({

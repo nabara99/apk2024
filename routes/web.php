@@ -49,6 +49,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('tempkwitansi', TempKwitansiController::class);
     Route::resource('spdrinci', SpdRinciController::class);
     Route::resource('laporan', LaporanController::class);
+    Route::resource('laporan', LaporanController::class);
+    Route::post('/laporanbendahara', [LaporanController::class, 'laporanBendahara'])->name('laporan.bendahara');
     Route::get('/modalcaripagu', [KwitansiController::class, 'modalCariPagu']);
     Route::get('/modalcaripenerima', [KwitansiController::class, 'modalCariPenerima']);
     Route::resource('pajakdaerah', PajakDaerahController::class);

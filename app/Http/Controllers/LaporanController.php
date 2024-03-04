@@ -12,7 +12,46 @@ class LaporanController extends Controller
      */
     public function index()
     {
+        return view('pages.laporan.index');
+    }
 
+    public function laporanBendahara(Request $request)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $realisasiBelanja = DB::table('temp_kwitansis')
+            ->join('kwitansis', 'temp_kwitansis.kwitansi_id', '=', 'kwitansis.kw_id')
+            ->join('anggarans', 'temp_kwitansis.anggaran_id', '=', 'anggarans.id')
+            ->join('rekenings', 'anggarans.rekening_id', '=', 'rekenings.id')
+            ->join('subs', 'anggarans.sub_id', '=', 'subs.id')
+            ->join('kegiatans', 'subs.kegiatan_id', '=', 'kegiatans.id')
+            ->join('programs', 'kegiatans.program_id', '=', 'programs.id')
+            ->select(
+                'kode_program',
+                'kode_kegiatan',
+                'kode_sub',
+                'nama_sub',
+                'kode_rekening',
+                'nama_rekening',
+                DB::raw('SUM(total) AS total_realisasi') // Hitung total realisasi
+            )
+            ->whereBetween('tgl', [$startDate, $endDate])
+            ->groupBy('kode_program', 'kode_kegiatan', 'kode_sub', 'kode_rekening', 'nama_sub', 'nama_rekening')
+            ->get();
+
+        return view('pages.laporan.laporan_bendahara', [
+            'realisasiBelanja' => $realisasiBelanja,
+            'startDate' => $startDate,
+            'endDate' => $endDate
+        ]);
+    }
+
+    public function laporanRealisasi()
+    {
         $realisasiBelanja = DB::table('temp_kwitansis')
             ->join('kwitansis', 'temp_kwitansis.kwitansi_id', '=', 'kwitansis.kw_id')
             ->join('anggarans', 'temp_kwitansis.anggaran_id', '=', 'anggarans.id')

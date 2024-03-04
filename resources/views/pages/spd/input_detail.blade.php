@@ -81,7 +81,7 @@
                                 <div class="form-group">
                                     <div class="row gutters-sm">
                                         <div class="col-2 col-md-2 col-sm-2">
-                                            <label for="kode_pagu">Cari Pagu</label>
+                                            <label>Cari Pagu</label>
                                             <div class="input-group mb-3">
                                                 <input type="hidden" class="form-control" name="kode_pagu"
                                                     id="kode_pagu" readonly>
@@ -109,7 +109,7 @@
                                                 class="number-separator form-control" value="0">
                                         </div>
                                         <div class="col-2 col-md-2 col-sm-2">
-                                            <label for="">#</label>
+                                            <label>#</label>
                                             <div class="input-group">
                                                 <button type="button" class="btn btn-success" onclick="simpanItem()">
                                                     <i class="fa fa-save"></i> Simpan
@@ -124,7 +124,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <table style="width: 100%"
+                                <table
                                     class="table table-striped table-responsive-lg table-responsive-md table-responsive-sm table-bordered table-hover dataTable">
                                     <thead>
                                         <tr>

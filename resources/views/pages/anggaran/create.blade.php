@@ -30,71 +30,83 @@
                                 <form action="{{ route('anggaran.store') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
-                                        <label class="form-label">Sub Kegiatan</label>
-                                        <select
-                                            class="form-control select2 select2-hidden-accessible @error('sub_id')
-                                            is-invalid
-                                        @enderror"
-                                            style="width: 100%;" tabindex="-1" aria-hidden="true" name="sub_id">
-                                            <option value="" selected disabled>--Pilih Sub Kegiatan--</option>
-                                            @foreach ($subs as $sub)
-                                                <option value="{{ $sub->id }}"
-                                                    {{ old('sub_id') == $sub->id ? 'selected' : '' }}>
-                                                    {{ $sub->kegiatan->program->kode_program }}.{{ $sub->kegiatan->kode_kegiatan }}.{{ $sub->kode_sub }}
-                                                    / {{ $sub->nama_sub }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('sub_id')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label class="form-label">Sub Kegiatan</label>
+                                                <select
+                                                    class="form-control select2 select2-hidden-accessible @error('sub_id')
+                                                    is-invalid
+                                                @enderror"
+                                                    style="width: 100%;" tabindex="-1" aria-hidden="true" name="sub_id">
+                                                    <option value="" selected disabled>--Pilih Sub Kegiatan--</option>
+                                                    @foreach ($subs as $sub)
+                                                        <option value="{{ $sub->id }}"
+                                                            {{ old('sub_id') == $sub->id ? 'selected' : '' }}>
+                                                            {{ $sub->kegiatan->program->kode_program }}.{{ $sub->kegiatan->kode_kegiatan }}.{{ $sub->kode_sub }}
+                                                            / {{ $sub->nama_sub }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('sub_id')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">Rekening</label>
-                                        <select
-                                            class="form-control select2 select2-hidden-accessible @error('rekening_id')
-                                            is-invalid
-                                        @enderror"
-                                            style="width: 100%;" tabindex="-1" aria-hidden="true" name="rekening_id">
-                                            <option value="" selected disabled>--Pilih Rekening--</option>
-                                            @foreach ($rekenings as $rekening)
-                                                <option value="{{ $rekening->id }}"
-                                                    {{ old('rekening_id') == $rekening->id ? 'selected' : '' }}>
-                                                    {{ $rekening->kode_rekening }} / {{ $rekening->nama_rekening }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('rekening_id')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
+                                            <div class="col-6">
+                                                <label class="form-label">Rekening</label>
+                                                <select
+                                                    class="form-control select2 select2-hidden-accessible @error('rekening_id')
+                                                    is-invalid
+                                                @enderror"
+                                                    style="width: 100%;" tabindex="-1" aria-hidden="true" name="rekening_id">
+                                                    <option value="" selected disabled>--Pilih Rekening--</option>
+                                                    @foreach ($rekenings as $rekening)
+                                                        <option value="{{ $rekening->id }}"
+                                                            {{ old('rekening_id') == $rekening->id ? 'selected' : '' }}>
+                                                            {{ $rekening->kode_rekening }} / {{ $rekening->nama_rekening }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('rekening_id')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
-                                        @enderror
-                                    </div>
-                                    <label>Uraian</label>
-                                    <input type="text" value="{{ old('uraian') }}"
-                                        class="form-control @error('uraian')
-                                        is-invalid
-                                    @enderror"
-                                        name="uraian">
-                                    @error('uraian')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
                                         </div>
-                                    @enderror
-
+                                    </div>
                                     <div class="form-group">
-                                        <label>Pagu</label>
-                                        <input type="text" value="{{ old('pagu') }}"
-                                            class="number-separator form-control @error('pagu')
-                                        is-invalid
-                                    @enderror"
-                                            name="pagu">
-                                        @error('pagu')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <label>Uraian</label>
+                                                <input type="text" value="{{ old('uraian') }}"
+                                                    class="form-control @error('uraian')
+                                                    is-invalid
+                                                @enderror"
+                                                    name="uraian">
+                                                @error('uraian')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
-                                        @enderror
+                                            <div class="col-3">
+                                                <label>Pagu</label>
+                                                <input type="text" value="{{ old('pagu') }}"
+                                                    class="number-separator form-control @error('pagu')
+                                                        is-invalid
+                                                    @enderror"
+                                                    name="pagu">
+                                                @error('pagu')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+
                                     </div>
                                     <div class="card-footer text-right">
                                         <button class="btn btn-primary">Simpan</button>
@@ -110,11 +122,6 @@
 
 @push('scripts')
     <!-- JS Libraies -->
-    <script src="{{ asset('library/cleave.js/dist/cleave.min.js') }}"></script>
-    <script src="{{ asset('library/cleave.js/dist/addons/cleave-phone.us.js') }}"></script>
-    <script src="{{ asset('library/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
-    <script src="{{ asset('library/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') }}"></script>
-    <script src="{{ asset('library/bootstrap-timepicker/js/bootstrap-timepicker.min.js') }}"></script>
     <script src="{{ asset('library/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
     <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>

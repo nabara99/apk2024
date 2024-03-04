@@ -89,8 +89,8 @@ class AnggaranController extends Controller
             'sub_id' => $request->sub_id,
             'rekening_id' => $request->rekening_id,
             'uraian' => $request->uraian,
-            // 'pagu' => (int) $request->pagu,
-            // 'sisa_pagu' => (int)$request->pagu,
+            'pagu' => (int) $request->pagu,
+            'sisa_pagu' => (int)$request->sisa_pagu,
         ]);
 
         return redirect()->route('anggaran.index')->with('success', 'Anggaran berhasil diupdate');

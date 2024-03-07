@@ -86,18 +86,18 @@
                 </div>
                 <div class="col-12 col-md-6 col-lg-6">
                     <div class="card card-secondary">
-                        <div class="card-header">
-                            <h4>Card Header</h4>
-                            <div class="card-header-action">
-                                <a href="#"
-                                    class="btn btn-primary">View All</a>
-                                <a href="#"
-                                    class="btn btn-danger">Delete All</a>
+                        <form action="{{route('laporan.realisasi')}}" method="GET" target="blank">
+                            @csrf
+                            <div class="card-header">
+                                <h4>Laporan Renja</h4>
+                                <div class="card-header-action">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-print"></i></button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-body">
-                            <p>Write something here</p>
-                        </div>
+                            <div class="card-body">
+                                Laporan Realisasi Renja update
+                            </div>
+                        </form>
                     </div>
                     <div class="card card-danger">
                         <div class="card-header">

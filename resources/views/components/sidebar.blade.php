@@ -71,12 +71,7 @@
             <li class="menu-header">Laporan</li>
             <li class="{{ str_contains(Route::currentRouteName(), 'laporan.index') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('laporan.index') }}"><i
-                        class="fa-regular fa-file-pdf"></i><span>Perbendaharaan
-                    </span></a>
-            </li>
-            <li class="{{ str_contains(Route::currentRouteName(), 'laporan.realisasi') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('laporan.realisasi') }}"><i
-                        class="fa-regular fa-file-pdf"></i><span>Renja
+                        class="fa-regular fa-file-pdf"></i><span>Laporan
                     </span></a>
             </li>
             @if (auth()->user()->roles == 'ppk')

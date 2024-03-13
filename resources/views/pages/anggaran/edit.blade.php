@@ -114,7 +114,7 @@
                                                     class="number-separator form-control @error('sisa_pagu')
                                                     is-invalid
                                                 @enderror"
-                                                    name="sisa_pagu" value="{{ number_format($anggaran->sisa_pagu) }}" readonly>
+                                                    name="sisa_pagu" value="{{ number_format($anggaran->sisa_pagu) }}">
                                                 @error('sisa_pagu')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}

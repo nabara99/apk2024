@@ -68,7 +68,13 @@ setlocale(LC_TIME, 'id_ID');
                                                         <button class="btn btn-sm btn-warning"
                                                             onclick="edit({{ $kwitansi->kw_id }})" title="edit">
                                                             <i class="fa fa-edit"></i>
-                                                        </button>
+                                                        </button> &nbsp;
+                                                        @if ($kwitansi->nilai !== $kwitansi->sisa)
+                                                            <a href="{{ route('pajak', $kwitansi->kw_id) }}" title="Input Pajak"
+                                                                class="btn btn-sm btn-success btn-icon">
+                                                                <i class="fa-solid fa-dollar"></i>
+                                                            </a>
+                                                        @endif
                                                     </div>
                                                 </td>
                                             </tr>

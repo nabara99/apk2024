@@ -7,6 +7,7 @@ use App\Models\Decision;
 use App\Models\Kwitansi;
 use App\Models\PajakDaerah;
 use App\Models\Penerima;
+use App\Models\Spd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -142,26 +143,12 @@ class KwitansiController extends Controller
         return redirect()->route('kwitansi.index')->with('success', 'Kwitansi berhasil diupdate');
     }
 
-    public function generatePajakDaerah(Request $request)
+    public function pajak($id)
     {
-        try {
-            // Ambil semua kwitansi yang memiliki pajak daerah
-            $kwitansis = Kwitansi::where('pdaerah', '>', 0)->get();
+        $kwitansi = Kwitansi::findOrFail($id);
+        $spds = Spd::all();
 
-            // Loop melalui setiap kwitansi dan buat entri pajak daerah
-            foreach ($kwitansis as $kwitansi) {
-                $pajakDaerah = new PajakDaerah([
-                    'kwitan_id' => $kwitansi->kw_id,
-                    // Masukkan nilai lain sesuai kebutuhan
-                ]);
-
-                $pajakDaerah->save();
-            }
-
-            return response()->json(['message' => 'Pajak Daerah berhasil di-generate'], 200);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Terjadi kesalahan saat meng-generate Pajak Daerah'], 500);
-        }
+        return view('pages.kwitansi.input_pajak', compact('kwitansi', 'spds'));
     }
 
     /**

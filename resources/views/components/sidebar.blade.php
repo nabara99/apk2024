@@ -63,12 +63,6 @@
                             class="fa-solid fa-users-gear"></i><span>Rekanan
                         </span></a>
                 </li>
-                <li class="menu-header">Laporan</li>
-                <li class="{{ str_contains(Route::currentRouteName(), 'laporan.index') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('laporan.index') }}"><i
-                            class="fa-regular fa-file-pdf"></i><span>Laporan
-                        </span></a>
-                </li>
             @endif
             @if (auth()->user()->roles == 'admin')
                 <li class="menu-header">Perbendaharaan</li>
@@ -95,12 +89,6 @@
                 <li class="{{ str_contains(Route::currentRouteName(), 'penerima') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('penerima.index') }}"><i
                             class="fa-solid fa-users-gear"></i><span>Rekanan
-                        </span></a>
-                </li>
-                <li class="menu-header">Laporan</li>
-                <li class="{{ str_contains(Route::currentRouteName(), 'laporan.index') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('laporan.index') }}"><i
-                            class="fa-regular fa-file-pdf"></i><span>Laporan
                         </span></a>
                 </li>
             @endif
@@ -131,20 +119,20 @@
                             class="fa-solid fa-users-gear"></i><span>Rekanan
                         </span></a>
                 </li>
-                <li class="menu-header">Laporan</li>
-                <li class="{{ str_contains(Route::currentRouteName(), 'laporan.index') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('laporan.index') }}"><i
-                            class="fa-regular fa-file-pdf"></i><span>Laporan
-                        </span></a>
-                </li>
             @endif
             @if (auth()->user()->roles == 'viewer')
-                <li class="menu-header">SPJ</li>
-                <li class="{{ str_contains(Route::currentRouteName(), 'view') ? 'active' : '' }}">
-                    <a href="{{ route('view.kwitansi') }}"><i class="fa-solid fa-users"></i>
-                        <span>Kwitansi</span></a>
-                </li>
+            <li class="menu-header">SPJ</li>
+            <li class="{{ str_contains(Route::currentRouteName(), 'view') ? 'active' : '' }}">
+                <a href="{{ route('view.kwitansi') }}"><i class="fa-solid fa-users"></i>
+                    <span>Kwitansi</span></a>
+            </li>
             @endif
+            <li class="menu-header">Laporan</li>
+            <li class="{{ str_contains(Route::currentRouteName(), 'laporan.index') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('laporan.index') }}"><i
+                        class="fa-regular fa-file-pdf"></i><span>Laporan
+                    </span></a>
+            </li>
         </ul>
     </aside>
 </div>

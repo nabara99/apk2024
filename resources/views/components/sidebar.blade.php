@@ -35,6 +35,32 @@
                             class="fa-solid fa-money-check-dollar"></i><span>Anggaran
                         </span></a>
                 </li>
+                <li class="menu-header">Perbendaharaan</li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'spd') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('spd.index') }}"><i
+                            class="fa-solid fa-comments-dollar"></i><span>SP2D
+                        </span></a>
+                </li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'kwitansi') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('kwitansi.index') }}"><i
+                            class="fa-solid fa-cart-shopping"></i><span>Kwitansi
+                        </span></a>
+                </li>
+                <li class="menu-header">Data Umum</li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'pptk') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('pptk.index') }}"><i class="fa-solid fa-user-check"></i><span>PPTK
+                        </span></a>
+                </li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'pengelola') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('pengelola.index') }}"><i
+                            class="fa-solid fa-user-pen"></i><span>Pengelola
+                        </span></a>
+                </li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'penerima') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('penerima.index') }}"><i
+                            class="fa-solid fa-users-gear"></i><span>Rekanan
+                        </span></a>
+                </li>
             @endif
             @if (auth()->user()->roles == 'ppk')
                 <li class="menu-header">Perbendaharaan</li>

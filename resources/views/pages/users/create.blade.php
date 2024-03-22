@@ -96,6 +96,11 @@
                                                     class="selectgroup-input" checked="">
                                                 <span class="selectgroup-button">PPK</span>
                                             </label>
+                                            <label class="selectgroup-item">
+                                                <input type="radio" name="roles" value="viewer"
+                                                    class="selectgroup-input" checked="">
+                                                <span class="selectgroup-button">Viewer</span>
+                                            </label>
                                         </div>
                                     </div>
                                     <div class="card-footer text-right">

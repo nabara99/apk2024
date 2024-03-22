@@ -81,6 +81,12 @@
                                                     @if ($user->roles == 'ppk') checked @endif>
                                                 <span class="selectgroup-button">PPK</span>
                                             </label>
+                                            <label class="selectgroup-item">
+                                                <input type="radio" name="roles" value="viewer"
+                                                    class="selectgroup-input"
+                                                    @if ($user->roles == 'viewer') checked @endif>
+                                                <span class="selectgroup-button">Viewer</span>
+                                            </label>
                                         </div>
                                     </div>
                                     <div class="card-footer text-right">

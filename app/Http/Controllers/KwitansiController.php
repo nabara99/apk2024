@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Anggaran;
 use App\Models\Decision;
 use App\Models\Kwitansi;
-use App\Models\PajakDaerah;
 use App\Models\Penerima;
 use App\Models\Spd;
 use Illuminate\Http\Request;

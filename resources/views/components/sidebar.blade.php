@@ -36,41 +36,114 @@
                         </span></a>
                 </li>
             @endif
-            <li class="menu-header">Perbendaharaan</li>
-            <li class="{{ str_contains(Route::currentRouteName(), 'spd') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('spd.index') }}"><i
-                        class="fa-solid fa-comments-dollar"></i><span>SP2D
-                    </span></a>
-            </li>
-            <li class="{{ str_contains(Route::currentRouteName(), 'kwitansi') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('kwitansi.index') }}"><i
-                        class="fa-solid fa-cart-shopping"></i></i><span>Kwitansi
-                    </span></a>
-            </li>
-            <li class="menu-header">Data Umum</li>
-            <li class="{{ str_contains(Route::currentRouteName(), 'pptk') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('pptk.index') }}"><i class="fa-solid fa-user-check"></i><span>PPTK
-                    </span></a>
-            </li>
-            <li class="{{ str_contains(Route::currentRouteName(), 'pengelola') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('pengelola.index') }}"><i
-                        class="fa-solid fa-user-pen"></i></i><span>Pengelola
-                    </span></a>
-            </li>
-            <li class="{{ str_contains(Route::currentRouteName(), 'penerima') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('penerima.index') }}"><i
-                        class="fa-solid fa-users-gear"></i><span>Rekanan
-                    </span></a>
-            </li>
-            <li class="menu-header">Laporan</li>
-            <li class="{{ str_contains(Route::currentRouteName(), 'laporan.index') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('laporan.index') }}"><i
-                        class="fa-regular fa-file-pdf"></i><span>Laporan
-                    </span></a>
-            </li>
             @if (auth()->user()->roles == 'ppk')
+                <li class="menu-header">Perbendaharaan</li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'spd') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('spd.index') }}"><i
+                            class="fa-solid fa-comments-dollar"></i><span>SP2D
+                        </span></a>
+                </li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'kwitansi') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('kwitansi.index') }}"><i
+                            class="fa-solid fa-cart-shopping"></i><span>Kwitansi
+                        </span></a>
+                </li>
+                <li class="menu-header">Data Umum</li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'pptk') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('pptk.index') }}"><i class="fa-solid fa-user-check"></i><span>PPTK
+                        </span></a>
+                </li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'pengelola') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('pengelola.index') }}"><i
+                            class="fa-solid fa-user-pen"></i><span>Pengelola
+                        </span></a>
+                </li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'penerima') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('penerima.index') }}"><i
+                            class="fa-solid fa-users-gear"></i><span>Rekanan
+                        </span></a>
+                </li>
+                <li class="menu-header">Laporan</li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'laporan.index') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('laporan.index') }}"><i
+                            class="fa-regular fa-file-pdf"></i><span>Laporan
+                        </span></a>
+                </li>
+            @endif
+            @if (auth()->user()->roles == 'admin')
+                <li class="menu-header">Perbendaharaan</li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'spd') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('spd.index') }}"><i
+                            class="fa-solid fa-comments-dollar"></i><span>SP2D
+                        </span></a>
+                </li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'kwitansi') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('kwitansi.index') }}"><i
+                            class="fa-solid fa-cart-shopping"></i><span>Kwitansi
+                        </span></a>
+                </li>
+                <li class="menu-header">Data Umum</li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'pptk') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('pptk.index') }}"><i class="fa-solid fa-user-check"></i><span>PPTK
+                        </span></a>
+                </li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'pengelola') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('pengelola.index') }}"><i
+                            class="fa-solid fa-user-pen"></i><span>Pengelola
+                        </span></a>
+                </li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'penerima') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('penerima.index') }}"><i
+                            class="fa-solid fa-users-gear"></i><span>Rekanan
+                        </span></a>
+                </li>
+                <li class="menu-header">Laporan</li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'laporan.index') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('laporan.index') }}"><i
+                            class="fa-regular fa-file-pdf"></i><span>Laporan
+                        </span></a>
+                </li>
             @endif
             @if (auth()->user()->roles == 'bendahara')
+                <li class="menu-header">Perbendaharaan</li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'spd') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('spd.index') }}"><i
+                            class="fa-solid fa-comments-dollar"></i><span>SP2D
+                        </span></a>
+                </li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'kwitansi') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('kwitansi.index') }}"><i
+                            class="fa-solid fa-cart-shopping"></i><span>Kwitansi
+                        </span></a>
+                </li>
+                <li class="menu-header">Data Umum</li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'pptk') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('pptk.index') }}"><i class="fa-solid fa-user-check"></i><span>PPTK
+                        </span></a>
+                </li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'pengelola') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('pengelola.index') }}"><i
+                            class="fa-solid fa-user-pen"></i><span>Pengelola
+                        </span></a>
+                </li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'penerima') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('penerima.index') }}"><i
+                            class="fa-solid fa-users-gear"></i><span>Rekanan
+                        </span></a>
+                </li>
+                <li class="menu-header">Laporan</li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'laporan.index') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('laporan.index') }}"><i
+                            class="fa-regular fa-file-pdf"></i><span>Laporan
+                        </span></a>
+                </li>
+            @endif
+            @if (auth()->user()->roles == 'viewer')
+                <li class="menu-header">SPJ</li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'view') ? 'active' : '' }}">
+                    <a href="{{ route('view.kwitansi') }}"><i class="fa-solid fa-users"></i>
+                        <span>Kwitansi</span></a>
+                </li>
             @endif
         </ul>
     </aside>

@@ -25,6 +25,7 @@ class Kwitansi extends Model
         'sisa',
         'penerima_id',
         'anggaran_id',
+        'file',
     ];
 
     // public function tempKwitansis()

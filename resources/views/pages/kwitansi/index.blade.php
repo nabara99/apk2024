@@ -49,6 +49,7 @@ setlocale(LC_TIME, 'id_ID');
                                             <th>Uraian</th>
                                             <th>Penerima</th>
                                             <th>Total Bayar (Rp)</th>
+                                            <th>File</th>
                                             <th>Aksi</th>
                                         </tr>
                                         @foreach ($kwitansis as $kwitansi)
@@ -59,6 +60,13 @@ setlocale(LC_TIME, 'id_ID');
                                                 <td>{{ $kwitansi->hal }}</td>
                                                 <td>{{ $kwitansi->penerima->nama_penerima }}</td>
                                                 <td>{{ number_format($kwitansi->nilai) }}</td>
+                                                <td>
+                                                    @if ($kwitansi->file)
+                                                        <a href="{{url($kwitansi->file)}}" target="blank" title="Lihat File"><i class="fa-regular fa-folder-open"></i></i></a>
+                                                    @else
+                                                        <button class="btn btn-sm btn-outline-danger" title="Tidak ada"><i class="fa-regular fa-circle-xmark"></i></button>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     <div class="d-flex justify-content-left">
                                                         <button class="btn btn-sm btn-info"

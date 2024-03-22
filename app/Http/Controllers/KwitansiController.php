@@ -138,6 +138,7 @@ class KwitansiController extends Controller
             'sisa' => str_replace(",", "", $request->sisa),
             'penerima_id' => $request->penerima_id,
             'anggaran_id' => $request->anggaran_id,
+            'file' => $request->file,
         ]);
 
         return redirect()->route('kwitansi.index')->with('success', 'Kwitansi berhasil diupdate');

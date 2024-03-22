@@ -38,7 +38,7 @@
                                                     value="<?= $kwitansis->kw_id ?>" class="form-control" readonly>
                                             </div>
                                             <div class="col-6 col-md-6 col-sm-6">
-                                                <label for="namaanggaran">Penerima</label>
+                                                <label for="namaanggaran">Anggaran</label>
                                                 <div class="input-group mb-3">
                                                     <select
                                                         class="form-control select2 select2-hidden-accessible @error('anggaran_id')
@@ -68,7 +68,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-5 col-md-4 col-sm-4">
-                                                <label for="namapenerima">Anggaran</label>
+                                                <label for="namapenerima">Penerima</label>
                                                 <div class="input-group mb-3">
                                                     <select
                                                         class="form-control select2 select2-hidden-accessible @error('penerima_id')
@@ -145,6 +145,15 @@
                                             <div class="col-10 col-md-8 col-sm-8">
                                                 <label for="uraian">Uraian</label>
                                                 <textarea name="hal" id="hal" data-height="100" class="form-control">{{ $kwitansis->hal }}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-12 col-md-12 col-sm-12">
+                                                <label for="file">Link</label>
+                                                <input type="text" class="form-control" id="file" name="file"
+                                                    value="{{ $kwitansis->file }}">
                                             </div>
                                         </div>
                                     </div>

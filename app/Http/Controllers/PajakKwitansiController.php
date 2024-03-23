@@ -57,6 +57,15 @@ class PajakKwitansiController extends Controller
         return response()->json(['pajakKwitansi' => $pajakKwitansi]);
     }
 
+    public function pajakSpd($id)
+    {
+        $pajakSpd = DB::table('pajak_kwitansis')
+            ->where('spd_id', $id)
+            ->get();
+
+        return response()->json(['pajakSpd' => $pajakSpd]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

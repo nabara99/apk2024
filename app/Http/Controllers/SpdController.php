@@ -105,6 +105,13 @@ class SpdController extends Controller
         return view('pages.spd.input_detail', compact('spd', 'anggarans'));
     }
 
+    public function tax($id)
+    {
+        $spd = Spd::findOrFail($id);
+
+        return view('pages.spd.input_pajak', compact('spd'));
+    }
+
     /**
      * Remove the specified resource from storage.
      */

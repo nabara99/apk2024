@@ -61,4 +61,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pajak/{id}', [KwitansiController::class, 'pajak'])->name('pajak');
     Route::get('/view-kwitansi', [ViewDataController::class, 'index'])->name('view.kwitansi');
     Route::resource('pajak-kwitansi', PajakKwitansiController::class);
+    Route::get('/tax/{id}', [SpdController::class, 'tax'])->name('tax');
+    Route::get('/pajak-spd/{id}', [PajakKwitansiController::class, 'pajakSpd'])->name('pajak-spd');
 });

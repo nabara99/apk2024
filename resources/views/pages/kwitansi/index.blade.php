@@ -75,7 +75,7 @@ setlocale(LC_TIME, 'id_ID');
                                                         <button class="btn btn-sm btn-info"
                                                             onclick="cetak({{ $kwitansi->kw_id }})" title="cetak">
                                                             <i class="fa fa-print"></i>
-                                                        </button> &nbsp
+                                                        </button> &nbsp;
                                                         <button class="btn btn-sm btn-warning"
                                                             onclick="edit({{ $kwitansi->kw_id }})" title="edit">
                                                             <i class="fa fa-edit"></i>

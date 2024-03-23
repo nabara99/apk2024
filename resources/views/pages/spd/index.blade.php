@@ -62,6 +62,12 @@
                                                                 class="btn btn-sm btn-warning btn-icon">
                                                                 <i class="fa-solid fa-list"></i>
                                                             </a>
+                                                        @endif  &nbsp;
+                                                        @if ($spd->pph21 || $spd->ppn)
+                                                            <a href="{{ route('tax', $spd->id) }}" title="Input Pajak"
+                                                                class="btn btn-sm btn-success btn-icon">
+                                                                <i class="fa-solid fa-dollar"></i>
+                                                            </a>
                                                         @endif
                                                     </div>
                                                 </td>

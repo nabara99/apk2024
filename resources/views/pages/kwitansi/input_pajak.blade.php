@@ -31,27 +31,27 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-2 col-md-2 col-sm-2">
-                                            <label>Nomor</label>
-                                            <input type="text" value="{{$kwitansi->kw_id}}/KTK/2024"
+                                            <label for="kwi_id">Nomor</label>
+                                            <input type="text" value="{{$kwitansi->kw_id}}"
                                                 class="form-control" id="kwi_id"
-                                                name="kw_id" readonly>
+                                                name="kwi_id" readonly>
                                         </div>
                                         <div class="col-2 col-md-2 col-sm-2">
-                                            <label>Tanggal</label>
+                                            <label for="tgl">Tanggal</label>
                                             <input type="text" value="{{$kwitansi->tgl}}"
-                                                class="form-control datepicker"
+                                                class="form-control datepicker" id="tgl"
                                                 name="tgl" readonly>
                                         </div>
                                         <div class="col-6 col-md-6 col-sm-6">
-                                            <label>Uraian</label>
+                                            <label for="hal">Uraian</label>
                                             <textarea class="form-control"
-                                                data-height="80" readonly
+                                                data-height="80" readonly id="hal"
                                                 name="hal">{{$kwitansi->hal}}</textarea>
                                         </div>
                                         <div class="col-2 col-md-2 col-sm-2">
-                                            <label>Nilai</label>
+                                            <label for="nilai">Nilai</label>
                                             <input type="text" value="{{ number_format($kwitansi->nilai) }}"
-                                                class="number-separator form-control" readonly
+                                                class="number-separator form-control" readonly id="nilai"
                                                 name="nilai">
                                         </div>
                                     </div>
@@ -66,12 +66,12 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-12 col-md-12 col-sm-12">
-                                            <label>Cari SP2D</label>
+                                            <label for="spd_id">Cari SP2D</label>
                                             <select
                                                 class="form-control select2 select2-hidden-accessible @error('spd_id')
                                                 is-invalid
                                             @enderror"
-                                                style="width: 100%;" tabindex="-1" aria-hidden="true" name="spd_id">
+                                                style="width: 100%;" tabindex="-1" aria-hidden="true" name="spd_id" id="spd_id">
                                                 <option value="" selected disabled>--Pilih SP2D--</option>
                                                 @foreach ($spds as $spd)
                                                     <option value="{{ $spd->id }}"
@@ -103,86 +103,111 @@
                                             <input type="text" name="ntb" id="ntb" class="form-control">
                                         </div>
                                         <div class="col-2 col-md-2 col-sm-2">
-                                            <label for="nilai_belanja">Nilai Belanja</label>
-                                            <input type="text" name="nilai_belanja" id="nilai_belanja"
-                                                class="number-separator form-control" value="0">
+                                            <label for="tgl_setor">Tanggal Bayar</label>
+                                            <input type="text" name="tgl_setor" id="tgl_setor"
+                                                class="form-control datepicker">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-2 col-md-2 col-sm-2">
-                                            <label for="tgl_setor">Tanggal Bayar</label>
-                                            <input type="text" name="tgl_setor" id="tgl_setor"
-                                                class="form-control datepicker">
-                                        </div>
                                         @if($kwitansi->ppn > 1)
                                             <div class="col-2 col-md-2 col-sm-2">
-                                                <label for="">PPN</label>
+                                                <label for="ppn">PPN</label>
                                                 <div class="input-group">
                                                     <button class="btn btn-warning" id="ppn">{{number_format($kwitansi->ppn)}}</button>
                                                 </div>
                                             </div>
+                                            <script>
+                                                document.getElementById('ppn').addEventListener('click', function () {
+                                                    setNilaiPajak({{ $kwitansi->ppn }}, 'PPN');
+                                                });
+                                            </script>
                                         @endif
                                         @if($kwitansi->pph21 > 1)
                                             <div class="col-2 col-md-2 col-sm-2">
-                                                <label for="">PPh 21</label>
+                                                <label for="pph21">PPh 21</label>
                                                 <div class="input-group">
                                                     <button class="btn btn-warning" id="pph21">{{number_format($kwitansi->pph21)}}</button>
                                                 </div>
                                             </div>
+                                            <script>
+                                                document.getElementById('pph21').addEventListener('click', function () {
+                                                    setNilaiPajak({{ $kwitansi->pph21 }}, 'PPh21');
+                                                });
+                                            </script>
                                         @endif
                                         @if($kwitansi->pph22 > 1)
                                             <div class="col-2 col-md-2 col-sm-2">
-                                                <label for="">PPh 22</label>
+                                                <label for="pph22">PPh 22</label>
                                                 <div class="input-group">
                                                     <button class="btn btn-info" id="pph22">{{number_format($kwitansi->pph22)}}</button>
                                                 </div>
                                             </div>
+                                            <script>
+                                                document.getElementById('pph22').addEventListener('click', function () {
+                                                    setNilaiPajak({{ $kwitansi->pph22 }}, 'PPh22');
+                                                });
+                                            </script>
                                         @endif
                                         @if($kwitansi->pph23 > 1)
                                             <div class="col-2 col-md-2 col-sm-2">
-                                                <label for="">PPh 23</label>
+                                                <label for="pph23">PPh 23</label>
                                                 <div class="input-group">
                                                     <button class="btn btn-warning" id="pph23">{{number_format($kwitansi->pph23)}}</button>
                                                 </div>
                                             </div>
+                                            <script>
+                                                document.getElementById('pph23').addEventListener('click', function () {
+                                                    setNilaiPajak({{ $kwitansi->pph23 }}, 'PPh23');
+                                                });
+                                            </script>
                                         @endif
                                         @if($kwitansi->pdaerah > 1)
                                             <div class="col-2 col-md-2 col-sm-2">
-                                                <label for="">Pajak Daerah</label>
+                                                <label for="pdaerah">Pajak Daerah</label>
                                                 <div class="input-group">
                                                     <button class="btn btn-info" id="pdaerah">{{number_format($kwitansi->pdaerah)}}</button>
                                                 </div>
                                             </div>
+                                            <script>
+                                                document.getElementById('pdaerah').addEventListener('click', function () {
+                                                    setNilaiPajak({{ $kwitansi->pdaerah }}, 'Pdaerah');
+                                                });
+                                            </script>
                                         @endif
                                         <div class="col-2 col-md-2 col-sm-2">
-                                            <label for="nilai_belanja">Nilai Pajak</label>
-                                            <input type="text" name="nilai_belanja" id="nilai_belanja"
-                                                class="number-separator form-control" value="0">
+                                            <label for="nilai_pajak">Nilai Pajak</label>
+                                            <input type="text" name="nilai_pajak" id="nilai_pajak"
+                                                class="number-separator form-control" value="0" readonly>
                                         </div>
+                                            <input type="hidden" name="jenis_pajak" id="jenis_pajak"
+                                                class="form-control" readonly>
                                         <div class="col-2 col-md-2 col-sm-2">
-                                            <label>#</label>
+                                            <label for="simpan_item">#</label>
                                             <div class="input-group">
-                                                <button type="button" class="btn btn-success" onclick="simpanItem()">
+                                                <button type="button" class="btn btn-success" id="simpan_item" onclick="simpanItem()">
                                                     <i class="fa fa-save"></i> Simpan
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <table
+                                <table style="width: 100%"
                                     class="table table-striped table-responsive-lg table-responsive-md table-responsive-sm table-bordered table-hover dataTable">
                                     <thead>
                                         <tr>
-                                            <th>Sub Kegiatan</th>
-                                            <th>Rekening</th>
                                             <th>Uraian</th>
-                                            <th>Jumlah</th>
+                                            <th>Jenis</th>
+                                            <th>Billing</th>
+                                            <th>NTPN</th>
+                                            <th>NTB</th>
+                                            <th>Tgl Setor</th>
+                                            <th>Nilai</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="detailSpd">
+                                    <tbody id="pajakKwitansi">
                                     </tbody>
                                 </table>
                                 <div class="viewmodal" style="display: none;"></div>
@@ -192,50 +217,6 @@
                 </div>
             </div>
         </section>
-    </div>
-    <div class="modal fade" id="modalAnggaran" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Anggaran</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <div class="float-right">
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="searchAnggaranInput"
-                                    placeholder="Cari Anggaran" name="spd_uraian">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <table style="width: 100%"
-                        class="table table-striped table-responsive-lg table-responsive-md table-responsive-sm table-bordered table-hover dataTable dtr-inline collapsed">
-                        <thead>
-                            <tr>
-                                <th>Sub Kegiatan</th>
-                                <th>Rekening</th>
-                                <th>Uraian</th>
-                                <th>Pagu</th>
-                                <th>Pilih</th>
-                            </tr>
-                        </thead>
-                        <tbody id="anggaranList">
-                            <!-- Daftar anggaran akan ditampilkan di sini -->
-                        </tbody>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 
@@ -255,18 +236,37 @@
     <script src="{{ asset('js/page/forms-advanced-forms.js') }}"></script>
 
     <script>
+        function formatRupiah(angka) {
+            var reverse = angka.toString().split('').reverse().join('');
+            var ribuan = reverse.match(/\d{1,3}/g);
+            var formatted = ribuan.join(',').split('').reverse().join('');
+            return formatted;
+        }
+
+        function setNilaiPajak(nilai, jenis) {
+            document.getElementById('nilai_pajak').value = formatRupiah(nilai);
+            document.getElementById('jenis_pajak').value = jenis;
+        }
+
         function kosong() {
-            $('#uraian').val('');
-            $('#sisa_pagu').val('');
-            $('#nilai_belanja').val(0);
+            $('#billing').val('');
+            $('#ntpn').val('');
+            $('#ntb').val('');
+            $('#nilai_pajak').val(0);
         }
 
         function simpanItem() {
-            var spd_id = $('#spd_id').val();
-            var anggaran_id = $('#kode_pagu').val();
-            var total = $('#nilai_belanja').val();
+            var spd_id = document.getElementById('spd_id').value;
+            var kwi_id = document.getElementById('kwi_id').value;
+            var uraian_pajak = document.getElementById('hal').value;
+            var nilai_pajak = document.getElementById('nilai_pajak').value;
+            var billing = document.getElementById('billing').value;
+            var ntpn = document.getElementById('ntpn').value;
+            var tgl_setor = document.getElementById('tgl_setor').value;
+            var ntb = document.getElementById('ntb').value;
+            var jenis_pajak = document.getElementById('jenis_pajak').value;
 
-            if (anggaran_id.length == 0) {
+            if (!spd_id) {
                 const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-right',
@@ -280,10 +280,10 @@
                 })
                 Toast.fire({
                     icon: 'error',
-                    title: 'Pagu masih kosong !',
+                    title: 'SP2D belum dipilih !',
                 })
                 return;
-            } else if (total < 1) {
+            } else if (!billing) {
                 const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-right',
@@ -297,20 +297,77 @@
                 })
                 Toast.fire({
                     icon: 'error',
-                    title: 'Nilai belanja belum ada !',
+                    title: 'Billing belum diisi !',
+                })
+                return;
+            } else if (!ntpn) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-right',
+                    iconColor: 'white',
+                    customClass: {
+                        popup: 'colored-toast',
+                    },
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true,
+                })
+                Toast.fire({
+                    icon: 'error',
+                    title: 'NTPN belum diisi !',
+                })
+                return;
+            } else if (!ntb) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-right',
+                    iconColor: 'white',
+                    customClass: {
+                        popup: 'colored-toast',
+                    },
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true,
+                })
+                Toast.fire({
+                    icon: 'error',
+                    title: 'NTB belum diisi !',
+                })
+                return;
+            } else if (nilai_pajak == 0) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-right',
+                    iconColor: 'white',
+                    customClass: {
+                        popup: 'colored-toast',
+                    },
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true,
+                })
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Tombol Pajak belum diklik !',
                 })
                 return;
             } else {
                 $.ajax({
                     type: "POST",
-                    url: "/spdrinci",
+                    url: "/pajak-kwitansi",
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     data: {
                         spd_id: spd_id,
-                        anggaran_id: anggaran_id,
-                        total: total,
+                        kwi_id: kwi_id,
+                        uraian_pajak: uraian_pajak,
+                        nilai_pajak: nilai_pajak,
+                        billing: billing,
+                        ntpn: ntpn,
+                        tgl_setor: tgl_setor,
+                        ntb: ntb,
+                        jenis_pajak: jenis_pajak,
                     },
                     success: function(response) {
                         const Toast = Swal.mixin({
@@ -328,9 +385,8 @@
                             icon: 'success',
                             title: response.message,
                         })
-                        loadDetailSpd(spd_id);
-                        updateTotalBelanja(spd_id);
                         kosong();
+                        loadPajakKwitansi(kwi_id);
                     },
                     error: function(xhr, status, error) {
                         var jsonResponse = JSON.parse(xhr.responseText);
@@ -342,7 +398,7 @@
                                 popup: 'colored-toast',
                             },
                             showConfirmButton: false,
-                            timer: 1500,
+                            timer: 2000,
                             timerProgressBar: true,
                         })
                         Toast.fire({
@@ -352,28 +408,69 @@
                     }
                 });
             }
-
         }
 
-        function hapusDetail(detail_id) {
-            var spd_id = $('#spd_id').val();
+        function loadPajakKwitansi(kwi_id) {
+            $.ajax({
+                type: 'GET',
+                url: '/pajak-kwitansi/' + kwi_id,
+                data: {
+                    kwi_id: kwi_id
+                },
+                success: function(response) {
+                    $('#pajakKwitansi').empty();
+
+                    $.each(response.pajakKwitansi, function(index, pajak) {
+                        var newRow =
+                            '<tr>' +
+                            '<td>' + pajak.uraian_pajak + '</td>' +
+                            '<td>' + pajak.jenis_pajak + '</td>' +
+                            '<td>' + pajak.billing + '</td>' +
+                            '<td>' + pajak.ntpn + '</td>' +
+                            '<td>' + pajak.ntb + '</td>' +
+                            '<td>' + pajak.tgl_setor + '</td>' +
+                            '<td>' + pajak.nilai_pajak.toLocaleString() + '</td>' +
+                            '<td>' +
+                            '<button class="btn btn-sm btn-danger btn-hapus" data-id="' +
+                            pajak.id +
+                            '">Hapus</button>' +
+                            '</td>' +
+                            '</tr>';
+                        $('#pajakKwitansi').append(newRow);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+
+        function hapusPajak(pajak_id) {
+            var kwi_id = $('#kwi_id').val();
             $.ajax({
                 type: 'DELETE',
-                url: '/spdrinci/' + detail_id,
+                url: '/pajak-kwitansi/' + pajak_id,
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {
-                    $('.btn-hapus[data-id="' + detail_id + '"]').closest('tr').remove();
+                    $('.btn-hapus[data-id="' + pajak_id + '"]').closest('tr').remove();
 
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: response.message,
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-right',
+                        iconColor: 'white',
+                        customClass: {
+                            popup: 'colored-toast',
+                        },
                         showConfirmButton: false,
-                        timer: 2000
-                    });
-                    updateTotalBelanja(spd_id);
+                        timer: 1500,
+                        timerProgressBar: true,
+                    })
+                    Toast.fire({
+                        icon: 'success',
+                        title: response.message,
+                    })
                 },
                 error: function(xhr, status, error) {
                     var jsonResponse = JSON.parse(xhr.responseText);
@@ -386,48 +483,33 @@
             });
         }
 
-        $(document).ready(function() {
+    $(document).ready(function() {
+        var kwi_id = $('#kwi_id').val();
+        loadPajakKwitansi(kwi_id);
 
-            $(document).on("click", ".select-anggaran", function() {
-                var selectedAnggaranId = $(this).data("selected-id");
-
-                // Set nilai input dengan ID anggaran yang dipilih
-                $("#anggaranIdInput").val(selectedAnggaranId);
-
-                // Memunculkan data field berdasarkan ID anggaran
-                displayAnggaranData(selectedAnggaranId);
-            });
-
-            $('.nilai_belanja').select2({
-                closeOnSelect: false
-            });
-
-            var spd_id = $('#spd_id').val();
-            loadDetailSpd(spd_id);
-
-            $('#spd_id').change(function() {
-                spd_id = $(this).val();
-                loadDetailSpd(spd_id);
-            });
-
-            $('#detailSpd').on('click', '.btn-hapus', function() {
-                var detail_id = $(this).data('id');
-
-                Swal.fire({
-                    title: 'Kamu yakin?',
-                    text: 'Data akan dihapus!',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Ya, hapus!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        hapusDetail(detail_id);
-                    }
-                });
-            });
-
+        $('#kwi_id').change(function() {
+            kwi_id = $(this).val();
+            loadPajakKwitansi(kwi_id);
         });
+
+        $('#pajakKwitansi').on('click', '.btn-hapus', function() {
+            var pajak_id = $(this).data('id');
+
+            Swal.fire({
+                title: 'Kamu yakin?',
+                text: 'Data akan dihapus!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, hapus!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    hapusPajak(pajak_id);
+                }
+            });
+        });
+    });
+
     </script>
 @endpush

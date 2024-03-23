@@ -93,7 +93,6 @@
                                                     <i class="fa fa-save"></i> Simpan
                                                 </button>&nbsp
                                                 <button class="btn btn-primary" id="btn-simpan-kwitansi">Selesai</button>
-
                                             </div>
                                         </div>
                                         <div class="col-3">
@@ -102,13 +101,6 @@
                                                 <h4> <b> Rp. <span id="total-belanja"></span>,-</b></h4>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row gutters-sm">
-                                        <div class="col-9">
-                                        </div>
-
                                     </div>
                                 </div>
                                 <table style="width: 100%"

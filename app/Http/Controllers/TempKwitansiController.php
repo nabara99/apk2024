@@ -40,10 +40,6 @@ class TempKwitansiController extends Controller
                 'total' => str_replace(",", "", $request->input('total')),
             ]);
 
-            // $anggaran->update([
-            //     'sisa_pagu' => $anggaran->sisa_pagu - str_replace(",", "", $request->input('total')),
-            // ]);
-
             $data = TempKwitansi::find($request->input('kwitansi_id'));
             return response()->json(['message' => 'Data berhasil disimpan', 'data' => $data], 200);
         }

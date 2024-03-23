@@ -17,5 +17,7 @@ class PajakKwitansi extends Model
         'ntpn',
         'tgl_setor',
         'ntb',
+        'nilai_pajak',
+        'jenis_pajak',
     ];
 }

@@ -21,9 +21,6 @@ class LaporanController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-
         $realisasiBelanja = DB::table('temp_kwitansis')
             ->join('kwitansis', 'temp_kwitansis.kwitansi_id', '=', 'kwitansis.kw_id')
             ->join('anggarans', 'temp_kwitansis.anggaran_id', '=', 'anggarans.id')
@@ -170,6 +167,74 @@ class LaporanController extends Controller
         return view('pages.laporan.laporan_renja', compact('realisasiBelanjaUnionSpd', 'totalJanuari', 'totalFebruari',
         'totalMaret', 'totalApril', 'totalMei', 'totalJuni', 'totalJuli', 'totalAgustus', 'totalSeptember', 'totalOktober',
         'totalNovember', 'totalDesember',));
+    }
+
+    public function laporanPajakPusat(Request $request)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $pajakPusat = DB::table('pajak_kwitansis')
+            ->join('spds', 'pajak_kwitansis.spd_id', '=', 'spds.id')
+            ->select(
+                'no_spd',
+                'kwi_id',
+                'uraian_pajak',
+                'jenis_pajak',
+                'nilai_pajak',
+                'billing',
+                'ntpn',
+                'ntb',
+                'tgl_setor',
+            )
+            ->whereBetween('tgl_setor', [$startDate, $endDate])
+            ->get();
+
+        $decision = Decision::first();
+
+        return view('pages.laporan.laporan_pajak_pusat', [
+            'pajakPusat' => $pajakPusat,
+            'startDate' => $startDate,
+            'endDate' => $endDate,
+            'decision' => $decision,
+        ]);
+    }
+
+    public function laporanPajakDaerah(Request $request)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $pajakDaerah = DB::table('pajak_kwitansis')
+            ->join('spds', 'pajak_kwitansis.spd_id', '=', 'spds.id')
+            ->select(
+                'no_spd',
+                'kwi_id',
+                'uraian_pajak',
+                'jenis_pajak',
+                'nilai_pajak',
+                'billing',
+                'ntpn',
+                'ntb',
+                'tgl_setor',
+            )
+            ->whereBetween('tgl_setor', [$startDate, $endDate])
+            ->get();
+
+        $decision = Decision::first();
+
+        return view('pages.laporan.laporan_pajak_daerah', [
+            'pajakDaerah' => $pajakDaerah,
+            'startDate' => $startDate,
+            'endDate' => $endDate,
+            'decision' => $decision,
+        ]);
     }
 
     /**

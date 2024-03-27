@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Decision;
+use App\Models\Spd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -233,6 +234,18 @@ class LaporanController extends Controller
             'pajakDaerah' => $pajakDaerah,
             'startDate' => $startDate,
             'endDate' => $endDate,
+            'decision' => $decision,
+        ]);
+    }
+
+    public function laporanSpd()
+    {
+        $spds = Spd::all();
+
+        $decision = Decision::first();
+
+        return view('pages.laporan.laporan_spd', [
+            'spds' => $spds,
             'decision' => $decision,
         ]);
     }

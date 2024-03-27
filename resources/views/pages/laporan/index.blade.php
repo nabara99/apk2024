@@ -122,24 +122,18 @@
                         </form>
                     </div>
                     <div class="card card-warning">
-                        <div class="card-header">
-                            <h4>Input Button</h4>
-                            <form class="card-header-form">
-                                <div class="input-group">
-                                    <input type="text"
-                                        name="search"
-                                        class="form-control"
-                                        placeholder="Search">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-primary btn-icon"><i
-                                                class="fas fa-search"></i></button>
-                                    </div>
+                        <form action="{{route('laporan.spd')}}" method="GET" target="blank">
+                            @csrf
+                            <div class="card-header">
+                                <h4>Rekap SP2D</h4>
+                                <div class="card-header-action">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-print"></i></button>
                                 </div>
-                            </form>
-                        </div>
-                        <div class="card-body">
-                            <p>Write something here</p>
-                        </div>
+                            </div>
+                            <div class="card-body">
+                                Rekapitulasi SP2D Update
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

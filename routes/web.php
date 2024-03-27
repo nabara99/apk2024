@@ -54,6 +54,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/laporanrealisasi', [LaporanController::class, 'laporanRealisasi'])->name('laporan.realisasi');
     Route::post('/laporan-pajak-pusat', [LaporanController::class, 'laporanPajakPusat'])->name('laporan.pajak');
     Route::post('/laporan-pajak-daerah', [LaporanController::class, 'laporanPajakDaerah'])->name('laporan.pajakdaerah');
+    Route::get('/laporan-spd', [LaporanController::class, 'laporanSpd'])->name('laporan.spd');
     Route::get('/modalcaripagu', [KwitansiController::class, 'modalCariPagu']);
     Route::get('/modalcaripenerima', [KwitansiController::class, 'modalCariPenerima']);
     Route::post('/kwitansi/generate-pajak-daerah', [KwitansiController::class, 'generatePajakDaerah'])->name('kwitansi.generatePajakDaerah');

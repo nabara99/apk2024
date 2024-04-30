@@ -149,7 +149,7 @@
                                                         @enderror"
                                                     name="pph23" id="pph23"
                                                     value="{{ number_format($kwitansis->pph23) }}">
-                                                @error('pph22')
+                                                @error('pph23')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
@@ -163,7 +163,7 @@
                                                         @enderror"
                                                     name="pdaerah" id="pdaerah"
                                                     value="{{ number_format($kwitansis->pdaerah) }}">
-                                                @error('pph22')
+                                                @error('pdaerah')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>

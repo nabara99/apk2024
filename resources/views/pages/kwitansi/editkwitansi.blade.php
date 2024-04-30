@@ -23,7 +23,7 @@
                                 <h4>Edit Kwitansi</h4>
                                 <div class="card-header-action">
                                     <a href="{{ route('kwitansi.index') }}" class="btn btn-primary btn-icon"><i
-                                        class="fa-solid fa-arrow-rotate-left"></i></a>
+                                            class="fa-solid fa-arrow-rotate-left"></i></a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -134,8 +134,9 @@
                                         <div class="row gutters-sm">
                                             <div class="col-2 col-md-2 col-sm-2">
                                                 <label for="pdaerah">Pajak Daerah</label>
-                                                <input type="text" class="number-separator form-control" id="pdaerah"
-                                                    name="pdaerah" value="{{ number_format($kwitansis->pdaerah) }}">
+                                                <input type="text" class="number-separator form-control"
+                                                    id="pdaerah" name="pdaerah"
+                                                    value="{{ number_format($kwitansis->pdaerah) }}">
                                             </div>
                                             <div class="col-2 col-md-2 col-sm-2">
                                                 <label for="sisa">Sisa</label>
@@ -158,7 +159,8 @@
                                         </div>
                                     </div>
                                     <div class="form-group text-right">
-                                        <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right">Update</button>
+                                        <button type="submit"
+                                            class="btn btn-primary btn-lg btn-icon icon-right">Update</button>
                                     </div>
                                 </form>
                             </div>
@@ -280,87 +282,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="modal fade" id="modal-simpan-kwitansi" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Simpan Kwitansi</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-6">
-                                <label for="kwitansi_id">Nomor Kwitansi</label>
-                                <input type="text" class="form-control" id="kwitansi_id" name="kwitansi_id" readonly>
-                                <input type="text" class="form-control" id="idpenerima" name="idpenerima" readonly>
-                                <input type="hidden" class="form-control" id="anggaran_id" name="anggaran_id" readonly>
-                            </div>
-                            <div class="col-6">
-                                <label for="total_belanja">Total Pembayaran</label>
-                                <input type="text" class="form-control" id="total_belanja" name="total_belanja"
-                                    readonly>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="tgl">Tanggal</label>
-                        <input type="text" class="form-control datepicker" id="tgl" name="tgl">
-                    </div>
-                    <div class="form-group">
-                        <label for="hal">Uraian</label>
-                        <input type="text" class="form-control" id="hal" name="hal">
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-6"><label for="ppn">PPN</label>
-                                <input type="text" class="number-separator form-control" id="ppn"
-                                    name="ppn">
-                            </div>
-                            <div class="col-6"><label for="pph21">PPh 21</label>
-                                <input type="text" class="number-separator form-control" id="pph21"
-                                    name="pph21">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-6"><label for="pph22">PPh 22</label>
-                                <input type="text" class="number-separator form-control" id="pph22"
-                                    name="pph22">
-                            </div>
-                            <div class="col-6"><label for="pph23">PPh 23</label>
-                                <input type="text" class="number-separator form-control" id="pph23"
-                                    name="pph23">
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-6"> <label for="pajakdaerah">Pajak Daerah</label>
-                                <input type="text" class="number-separator form-control" id="pajakdaerah"
-                                    name="pajakdaerah">
-                            </div>
-                            <div class="col-6">
-                                <label for="sisa">Sisa Pembayaran</label>
-                                <input type="text" class="form-control" id="sisa" name="sisa" readonly>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-primary" id="btn-simpan">Simpan</button>
-                </div>
-            </div>
-        </div>
-    </div>
     </div>
 
 @endsection
@@ -569,9 +490,9 @@
             var pph21 = parseFloat($('#pph21').val().replace(/[^0-9.-]/g, '')) || 0;
             var pph22 = parseFloat($('#pph22').val().replace(/[^0-9.-]/g, '')) || 0;
             var pph23 = parseFloat($('#pph23').val().replace(/[^0-9.-]/g, '')) || 0;
-            var pajakdaerah = parseFloat($('#pajakdaerah').val().replace(/[^0-9.-]/g, '')) || 0;
+            var pdaerah = parseFloat($('#pdaerah').val().replace(/[^0-9.-]/g, '')) || 0;
 
-            var total_pajak = ppn + pph21 + pph22 + pph23 + pajakdaerah;
+            var total_pajak = ppn + pph21 + pph22 + pph23 + pdaerah;
 
             var sisa_pembayaran = total_belanja - total_pajak;
 
@@ -585,9 +506,6 @@
 
 
         $(document).ready(function() {
-
-
-
             $(".open-modal").click(function() {
                 var anggaranId = $(this).data('id');
 
@@ -664,7 +582,7 @@
                 closeOnSelect: false
             });
 
-            $('#ppn, #pph21, #pph22, #pph23, #pajakdaerah').on('input', function() {
+            $('#ppn, #pph21, #pph22, #pph23, #pdaerah').on('input', function() {
                 hitungSisa();
             });
 

@@ -175,9 +175,6 @@ class LaporanController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-
         $pajakPusat = DB::table('pajak_kwitansis')
             ->join('spds', 'pajak_kwitansis.spd_id', '=', 'spds.id')
             ->select(
@@ -209,9 +206,6 @@ class LaporanController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-
         $pajakDaerah = DB::table('pajak_kwitansis')
             ->join('spds', 'pajak_kwitansis.spd_id', '=', 'spds.id')
             ->select(
@@ -238,9 +232,24 @@ class LaporanController extends Controller
         ]);
     }
 
-    public function laporanSpd()
+    public function laporanSpd(Request $request)
     {
-        $spds = Spd::all();
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $spds = DB::table('spds')
+            // ->select(
+            //     'kode_program',
+            //     'kode_kegiatan',
+            //     'kode_sub',
+            //     'nama_sub',
+            //     'kode_rekening',
+            //     'nama_rekening',
+            //     DB::raw('SUM(total) AS total_realisasi') // Hitung total realisasi
+            // )
+            ->whereBetween('spd_tgl', [$startDate, $endDate])
+            ->orderBy('spd_tgl', 'asc')
+            ->get();
 
         $decision = Decision::first();
 

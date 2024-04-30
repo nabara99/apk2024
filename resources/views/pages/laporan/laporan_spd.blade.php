@@ -45,22 +45,28 @@ setlocale(LC_TIME, 'id_ID');
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $totalNilai = 0;
+                            @endphp
                             @foreach ($spds as $index => $spd)
-                            <tr>
-                                <td>{{$index +1}}</td>
-                                <td>{{$spd->no_spd}}</td>
-                                <td>{{$spd->spd_uraian}}</td>
-                                <td>{{ Carbon::parse($spd->spd_tgl)->isoFormat('D MMMM Y') }}</td>
-                                <td>{{$spd->jenis}}</td>
-                                <td style="text-align: right">{{number_format($spd->spd_nilai) }}</td>
-                            </tr>
+                                <tr>
+                                    <td>{{$index +1}}</td>
+                                    <td>{{$spd->no_spd}}</td>
+                                    <td style="text-align: left">{{$spd->spd_uraian}}</td>
+                                    <td>{{ Carbon::parse($spd->spd_tgl)->isoFormat('D MMMM Y') }}</td>
+                                    <td>{{$spd->jenis}}</td>
+                                    <td style="text-align: right">{{number_format($spd->spd_nilai) }}</td>
+                                </tr>
+                                @php
+                                    $totalNilai += $spd->spd_nilai;
+                                @endphp
                             @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="5" style="text-align:text;">Total</td>
                                 <td style="text-align: right;">
-                                    {{ number_format($spd->sum('spd_nilai')) }}
+                                    {{ number_format($totalNilai) }}
                                 </td>
                             </tr>
                         </tfoot>

@@ -12,7 +12,7 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Dashboard - APK 2024</h1>
+                <h1>Dashboard - SIAPIK 2024</h1>
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
@@ -70,7 +70,18 @@
                                 <h4>Capaian (%)</h4>
                             </div>
                             <div class="card-body">
-                                <h6>{{ number_format(($dpas - $sisas) / $dpas * 100,2,",",".") }} %</h6>
+                                <?php
+                                $dpas = 10;
+                                $sisas = 0;
+
+                                if ($dpas != 0) {
+                                    $result = number_format((($dpas - $sisas) / $dpas) * 100, 2, ',', '.');
+                                    echo "<h6>$result %</h6>";
+                                } else {
+                                    echo '<h6>Undefined</h6>';
+                                }
+                                ?>
+                                {{-- <h6>{{ number_format((($dpas - $sisas) / $dpas) * 100, 2, ',', '.') }} %</h6> --}}
                             </div>
                         </div>
                     </div>

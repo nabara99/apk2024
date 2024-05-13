@@ -4,6 +4,6 @@
         </a>
     </div>
     <div class="footer-right">
-        version 1.3
+        version 1.0
     </div>
 </footer>

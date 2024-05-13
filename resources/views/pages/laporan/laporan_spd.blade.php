@@ -27,13 +27,14 @@ setlocale(LC_TIME, 'id_ID');
         <tr>
             <td width="15%">&nbsp&nbsp&nbsp&nbsp SKPD</td>
             <td width="1%">:</td>
-            <td width="50%" style="text-align: left;">Kecamatan Teluk Kepayang</td>
+            <td width="50%" style="text-align: left;">Kecamatan Sungai Loban</td>
         </tr>
         <tr>
             <td colspan="3">
                 <br>
                 <center>
-                    <table border="1" cellpadding="5" style="border-collapse: collapse; border: 1px solid #000; text-align: center; width: 80%">
+                    <table border="1" cellpadding="5"
+                        style="border-collapse: collapse; border: 1px solid #000; text-align: center; width: 80%">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -50,12 +51,12 @@ setlocale(LC_TIME, 'id_ID');
                             @endphp
                             @foreach ($spds as $index => $spd)
                                 <tr>
-                                    <td>{{$index +1}}</td>
-                                    <td>{{$spd->no_spd}}</td>
-                                    <td style="text-align: left">{{$spd->spd_uraian}}</td>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $spd->no_spd }}</td>
+                                    <td style="text-align: left">{{ $spd->spd_uraian }}</td>
                                     <td>{{ Carbon::parse($spd->spd_tgl)->isoFormat('D MMMM Y') }}</td>
-                                    <td>{{$spd->jenis}}</td>
-                                    <td style="text-align: right">{{number_format($spd->spd_nilai) }}</td>
+                                    <td>{{ $spd->jenis }}</td>
+                                    <td style="text-align: right">{{ number_format($spd->spd_nilai) }}</td>
                                 </tr>
                                 @php
                                     $totalNilai += $spd->spd_nilai;
@@ -79,11 +80,11 @@ setlocale(LC_TIME, 'id_ID');
         </tr>
         <tr>
             <td colspan="2"></td>
-            <td><br/><br/><br/><br/><br/>{{$decision->nama_bp}}</td>
+            <td><br /><br /><br /><br /><br />{{ $decision->nama_bp }}</td>
         </tr>
         <tr>
             <td colspan="2"></td>
-            <td>NIP. {{$decision->nip_bp}}</td>
+            <td>NIP. {{ $decision->nip_bp }}</td>
         </tr>
     </table>
 </body>

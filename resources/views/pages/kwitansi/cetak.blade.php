@@ -26,15 +26,13 @@ setlocale(LC_TIME, 'id_ID');
         <tr>
             <td colspan="9" style="font-size: 16pt">
                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                <b>KECAMATAN TELUK KEPAYANG</b>
+                <b>KECAMATAN SUNGAI LOBAN</b>
             </td>
         </tr>
         <tr>
             <td colspan="9" style="font-size: 8pt">
                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                Alamat : Jln. Valgosons Nomor 1 Desa Teluk Kepayang Kec.Teluk Kepayang Kab.Tanah Bumbu <br>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                Provinsi Kalimantan Selatan Kode Pos 72272 Surel : kec.telukkepayang@gmail.com
+                Alamat : Jln. Pemerintahan Nomor 1 Desa Sari Mulya Kode Pos 72274
             </td>
         </tr>
         <tr>
@@ -188,7 +186,7 @@ setlocale(LC_TIME, 'id_ID');
             <td width="24%"></td>
             <td width="24%"></td>
             <td width="27%" colspan="2">
-                Teluk Kepayang, {{ Carbon::parse($kwitansi->tgl)->isoFormat('D MMMM Y') }}
+                Sungai Loban, {{ Carbon::parse($kwitansi->tgl)->isoFormat('D MMMM Y') }}
             </td>
         </tr>
         <tr style="text-align: center; font-size: 8pt;">

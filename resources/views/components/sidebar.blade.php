@@ -1,7 +1,7 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="{{ route('dashboard') }}">APK 2024</a>
+            <a href="{{ route('dashboard') }}">SIAPIK 2024</a>
         </div>
         <ul class="sidebar-menu">
             @if (auth()->user()->roles == 'admin')
@@ -48,7 +48,8 @@
                 </li>
                 <li class="menu-header">Data Umum</li>
                 <li class="{{ str_contains(Route::currentRouteName(), 'pptk') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('pptk.index') }}"><i class="fa-solid fa-user-check"></i><span>PPTK
+                    <a class="nav-link" href="{{ route('pptk.index') }}"><i
+                            class="fa-solid fa-user-check"></i><span>PPTK
                         </span></a>
                 </li>
                 <li class="{{ str_contains(Route::currentRouteName(), 'pengelola') ? 'active' : '' }}">
@@ -76,7 +77,8 @@
                 </li>
                 <li class="menu-header">Data Umum</li>
                 <li class="{{ str_contains(Route::currentRouteName(), 'pptk') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('pptk.index') }}"><i class="fa-solid fa-user-check"></i><span>PPTK
+                    <a class="nav-link" href="{{ route('pptk.index') }}"><i
+                            class="fa-solid fa-user-check"></i><span>PPTK
                         </span></a>
                 </li>
                 <li class="{{ str_contains(Route::currentRouteName(), 'pengelola') ? 'active' : '' }}">
@@ -104,7 +106,8 @@
                 </li>
                 <li class="menu-header">Data Umum</li>
                 <li class="{{ str_contains(Route::currentRouteName(), 'pptk') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('pptk.index') }}"><i class="fa-solid fa-user-check"></i><span>PPTK
+                    <a class="nav-link" href="{{ route('pptk.index') }}"><i
+                            class="fa-solid fa-user-check"></i><span>PPTK
                         </span></a>
                 </li>
                 <li class="{{ str_contains(Route::currentRouteName(), 'pengelola') ? 'active' : '' }}">
@@ -132,7 +135,8 @@
                 </li>
                 <li class="menu-header">Data Umum</li>
                 <li class="{{ str_contains(Route::currentRouteName(), 'pptk') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('pptk.index') }}"><i class="fa-solid fa-user-check"></i><span>PPTK
+                    <a class="nav-link" href="{{ route('pptk.index') }}"><i
+                            class="fa-solid fa-user-check"></i><span>PPTK
                         </span></a>
                 </li>
                 <li class="{{ str_contains(Route::currentRouteName(), 'pengelola') ? 'active' : '' }}">
@@ -147,11 +151,11 @@
                 </li>
             @endif
             @if (auth()->user()->roles == 'viewer')
-            <li class="menu-header">SPJ</li>
-            <li class="{{ str_contains(Route::currentRouteName(), 'view') ? 'active' : '' }}">
-                <a href="{{ route('view.kwitansi') }}"><i class="fa-solid fa-users"></i>
-                    <span>Kwitansi</span></a>
-            </li>
+                <li class="menu-header">SPJ</li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'view') ? 'active' : '' }}">
+                    <a href="{{ route('view.kwitansi') }}"><i class="fa-solid fa-users"></i>
+                        <span>Kwitansi</span></a>
+                </li>
             @endif
             <li class="menu-header">Laporan</li>
             <li class="{{ str_contains(Route::currentRouteName(), 'laporan.index') ? 'active' : '' }}">

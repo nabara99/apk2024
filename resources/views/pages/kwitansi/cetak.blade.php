@@ -26,13 +26,17 @@ setlocale(LC_TIME, 'id_ID');
         <tr>
             <td colspan="9" style="font-size: 16pt">
                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                <b>KECAMATAN SUNGAI LOBAN</b>
+                <b>KECAMATAN TELUK KEPAYANG</b>
             </td>
         </tr>
         <tr>
             <td colspan="9" style="font-size: 8pt">
                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                Alamat : Jln. Pemerintahan Nomor 1 Desa Sari Mulya Kode Pos 72274
+                Alamat : Jln. Valgosons Nomor 1 Desa Teluk Kepayang Kec. Teluk Kepayang Kab. Tanah Bumbu<br>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Provinsi Kalimantan
+                Selatan Kode Pos 72274
+                Surel :
+                kec.telukkepayang@gmail.com
             </td>
         </tr>
         <tr>

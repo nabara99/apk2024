@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>SI APIK &mdash; 2024</title>
+    <title>APK &mdash; 2024</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ asset('library/bootstrap/dist/css/bootstrap.min.css') }}">
@@ -28,10 +28,11 @@
                     <div class="m-3 p-4">
                         <img src="{{ asset('img/tanbu.png') }}" alt="logo" width="70"
                             class="shadow-light  mb-5 mt-2">
-                        <h4 class="text-dark font-weight-normal">Welcome to <span class="font-weight-bold">SIAPIK</span>
+                        <h4 class="text-dark font-weight-normal">Welcome to <span class="font-weight-bold">APK
+                                2024</span>
                         </h4>
-                        <p class="text-muted">Sistem Administrasi Pengelolaan Informasi Keuangan (SIAPIK) Kecamatan
-                            Sungai Loban, membuat penatausahaan
+                        <p class="text-muted">Aplikasi Keuangan (APK) Kecamatan
+                            Teluk Kepayang, membuat penatausahaan
                             keuangan menjadi lebih cepat</p>
                         <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate="">
                             @csrf
@@ -75,21 +76,21 @@
                         </form>
 
                         <div class="text-small mt-5 text-center">
-                            Copyright &copy; Kecamatan Sungai Loban. Made with 💙 by Ellypsis
+                            Copyright &copy; Kecamatan Teluk Kepayang. Made with 💙 by Ellypsis
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-8 col-12 order-lg-2 min-vh-100 background-walk-y position-relative overlay-gradient-bottom order-1"
-                    data-background="{{ asset('img/unsplash/login-bg.jpg') }}">
+                    data-background="{{ asset('img/unsplash/luca-massimilian-nl21NzVRRlo-unsplash.jpg') }}">
                     <div class="absolute-bottom-left index-2">
                         <div class="text-light p-5 pb-2">
                             <div class="mb-5 pb-3">
                                 <h1 class="display-4 font-weight-bold mb-2">Good Morning</h1>
-                                <h5 class="font-weight-normal text-muted-transparent">Bali, Indonesia</h5>
                             </div>
                             Photo by <a class="text-light bb" target="_blank"
-                                href="https://unsplash.com/photos/a8lTjWJJgLA">Justin Kauffman</a> on <a
-                                class="text-light bb" target="_blank" href="https://unsplash.com">Unsplash</a>
+                                href="https://unsplash.com/photos/person-using-black-laptop-computer-nl21NzVRRlo">Luca
+                                Massimilian</a> on <a class="text-light bb" target="_blank"
+                                href="https://unsplash.com">Unsplash</a>
                         </div>
                     </div>
                 </div>

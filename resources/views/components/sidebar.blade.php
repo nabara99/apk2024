@@ -46,6 +46,11 @@
                             class="fa-solid fa-cart-shopping"></i><span>Kwitansi
                         </span></a>
                 </li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'tu') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('tu.index') }}"><i
+                            class="fa-solid fa-cart-plus"></i><span>Kwitansi TU
+                        </span></a>
+                </li>
                 <li class="menu-header">Data Umum</li>
                 <li class="{{ str_contains(Route::currentRouteName(), 'pptk') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('pptk.index') }}"><i
@@ -131,6 +136,11 @@
                 <li class="{{ str_contains(Route::currentRouteName(), 'kwitansi') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('kwitansi.index') }}"><i
                             class="fa-solid fa-cart-shopping"></i><span>Kwitansi
+                        </span></a>
+                </li>
+                <li class="{{ str_contains(Route::currentRouteName(), 'tu') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('tu.index') }}"><i
+                            class="fa-solid fa-cart-shopping"></i><span>Kwitansi TU
                         </span></a>
                 </li>
                 <li class="menu-header">Data Umum</li>

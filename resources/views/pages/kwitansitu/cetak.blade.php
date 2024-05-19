@@ -10,7 +10,7 @@ setlocale(LC_TIME, 'id_ID');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kwitansi</title>
+    <title>Kwitansi TU</title>
 </head>
 
 <body>
@@ -74,7 +74,7 @@ setlocale(LC_TIME, 'id_ID');
             <td></td>
             <td>Buku Kas No.</td>
             <td>:</td>
-            <td>{{ $kwitansi->kw_id }}/ KTK/ 2024</td>
+            <td>{{ $kwitansi->kw_id }}/ KTK-TU/ 2024</td>
         </tr>
         <tr style="font-size: 8pt;">
             <td>Kode Sub Kegiatan</td>
@@ -130,30 +130,14 @@ setlocale(LC_TIME, 'id_ID');
             <td>:</td>
         </tr>
         <tr style="font-size: 8pt;">
-            <td>IWP 1%</td>
-            <td>:</td>
-            <td>Rp. </td>
-            <td style="text-align: right;">
-                {{ number_format($kwitansi->iwp1) }},-
-            </td>
-        </tr>
-        <tr style="font-size: 8pt;">
-            <td>IWP 8%</td>
-            <td>:</td>
-            <td>Rp. </td>
-            <td style="text-align: right;">
-                {{ number_format($kwitansi->iwp8) }},-
-            </td>
-            <td></td>
-            <td colspan="3" rowspan="4">{{ $kwitansi->hal }}</td>
-        </tr>
-        <tr style="font-size: 8pt;">
             <td>PPN</td>
             <td>:</td>
             <td>Rp. </td>
             <td style="text-align: right;">
                 {{ number_format($kwitansi->ppn) }},-
             </td>
+            <td></td>
+            <td colspan="3" rowspan="4">{{ $kwitansi->hal }}</td>
         </tr>
         <tr style="font-size: 8pt;">
             <td>PPh 21</td>

@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
-class Kwitansi extends Model
+class KwitansiTu extends Model
 {
     use HasFactory;
 
@@ -17,8 +16,6 @@ class Kwitansi extends Model
         'tgl',
         'hal',
         'nilai',
-        'iwp1',
-        'iwp8',
         'ppn',
         'pph21',
         'pph22',

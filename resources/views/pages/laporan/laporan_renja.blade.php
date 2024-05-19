@@ -27,7 +27,7 @@ setlocale(LC_TIME, 'id_ID');
         <tr>
             <td width="15%">&nbsp&nbsp&nbsp&nbsp SKPD</td>
             <td width="1%">:</td>
-            <td width="50%" style="text-align: left;">Kecamatan Sungai Loban</td>
+            <td width="50%" style="text-align: left;">Kecamatan Teluk Kepayang</td>
         </tr>
         <tr>
             <td colspan="3">
@@ -38,10 +38,11 @@ setlocale(LC_TIME, 'id_ID');
                         <?php $spanCount = $realisasiSub->count(); ?>
                         @if ($previousNamaSub !== $namaSub)
                             <?php
-                                $totalJanuariSub = $totalFebruariSub = $totalMaretSub = $totalAprilSub = $totalMeiSub = $totalJuniSub = $totalJuliSub = $totalAgustusSub = $totalSeptemberSub = $totalOktoberSub = $totalNovemberSub = $totalDesemberSub = $totalPagu = $sisaPagu = 0;
+                            $totalJanuariSub = $totalFebruariSub = $totalMaretSub = $totalAprilSub = $totalMeiSub = $totalJuniSub = $totalJuliSub = $totalAgustusSub = $totalSeptemberSub = $totalOktoberSub = $totalNovemberSub = $totalDesemberSub = $totalPagu = $sisaPagu = 0;
                             ?>
                             <?php $previousNamaSub = $namaSub; ?>
-                            <table border="1" cellpadding="5" style="border-collapse: collapse; border: 1px solid #000; text-align: center; width: 80%">
+                            <table border="1" cellpadding="5"
+                                style="border-collapse: collapse; border: 1px solid #000; text-align: center; width: 80%">
                                 <thead>
                                     <tr>
                                         <th rowspan="2">Sub Kegiatan</th>
@@ -70,42 +71,59 @@ setlocale(LC_TIME, 'id_ID');
                                 <tbody>
                                     @foreach ($realisasiSub as $index => $realisasi)
                                         <?php
-                                            $totalJanuariSub += $realisasi->januari_total;
-                                            $totalFebruariSub += $realisasi->februari_total;
-                                            $totalMaretSub += $realisasi->maret_total;
-                                            $totalAprilSub += $realisasi->april_total;
-                                            $totalMeiSub += $realisasi->mei_total;
-                                            $totalJuniSub += $realisasi->juni_total;
-                                            $totalJuliSub += $realisasi->juli_total;
-                                            $totalAgustusSub += $realisasi->agustus_total;
-                                            $totalSeptemberSub += $realisasi->september_total;
-                                            $totalOktoberSub += $realisasi->oktober_total;
-                                            $totalNovemberSub += $realisasi->november_total;
-                                            $totalDesemberSub += $realisasi->desember_total;
-                                            $totalPagu += $realisasi->pagu;
-                                            $sisaPagu += $realisasi->sisa_pagu;
+                                        $totalJanuariSub += $realisasi->januari_total;
+                                        $totalFebruariSub += $realisasi->februari_total;
+                                        $totalMaretSub += $realisasi->maret_total;
+                                        $totalAprilSub += $realisasi->april_total;
+                                        $totalMeiSub += $realisasi->mei_total;
+                                        $totalJuniSub += $realisasi->juni_total;
+                                        $totalJuliSub += $realisasi->juli_total;
+                                        $totalAgustusSub += $realisasi->agustus_total;
+                                        $totalSeptemberSub += $realisasi->september_total;
+                                        $totalOktoberSub += $realisasi->oktober_total;
+                                        $totalNovemberSub += $realisasi->november_total;
+                                        $totalDesemberSub += $realisasi->desember_total;
+                                        $totalPagu += $realisasi->pagu;
+                                        $sisaPagu += $realisasi->sisa_pagu;
                                         ?>
                                         <tr>
                                             @if ($index === 0)
-                                                <td style="text-align: left" rowspan="{{ $spanCount }}">{{ $namaSub }}</td>
+                                                <td style="text-align: left" rowspan="{{ $spanCount }}">
+                                                    {{ $namaSub }}</td>
                                             @endif
-                                            <td style="text-align: left">{{ $realisasi->kode_rekening }} <br> {{ $realisasi->nama_rekening }}</td>
+                                            <td style="text-align: left">{{ $realisasi->kode_rekening }} <br>
+                                                {{ $realisasi->nama_rekening }}</td>
                                             <td style="text-align: left">{{ $realisasi->uraian }}</td>
                                             <td style="text-align: right">{{ number_format($realisasi->pagu) }}</td>
-                                            <td style="text-align: right">{{ number_format($realisasi->januari_total) }}</td>
-                                            <td style="text-align: right">{{ number_format($realisasi->februari_total) }}</td>
-                                            <td style="text-align: right">{{ number_format($realisasi->maret_total) }}</td>
-                                            <td style="text-align: right">{{ number_format($realisasi->april_total) }}</td>
-                                            <td style="text-align: right">{{ number_format($realisasi->mei_total) }}</td>
-                                            <td style="text-align: right">{{ number_format($realisasi->juni_total) }}</td>
-                                            <td style="text-align: right">{{ number_format($realisasi->juli_total) }}</td>
-                                            <td style="text-align: right">{{ number_format($realisasi->agustus_total) }}</td>
-                                            <td style="text-align: right">{{ number_format($realisasi->september_total) }}</td>
-                                            <td style="text-align: right">{{ number_format($realisasi->oktober_total) }}</td>
-                                            <td style="text-align: right">{{ number_format($realisasi->november_total) }}</td>
-                                            <td style="text-align: right">{{ number_format($realisasi->desember_total) }}</td>
-                                            <td style="text-align: right">{{ number_format($realisasi->januari_total+$realisasi->februari_total+$realisasi->maret_total+$realisasi->april_total+$realisasi->mei_total+$realisasi->juni_total+$realisasi->juli_total+$realisasi->agustus_total+$realisasi->september_total+$realisasi->oktober_total+$realisasi->november_total+$realisasi->desember_total) }}</td>
-                                            <td style="text-align: right">{{ number_format($realisasi->sisa_pagu) }}</td>
+                                            <td style="text-align: right">{{ number_format($realisasi->januari_total) }}
+                                            </td>
+                                            <td style="text-align: right">
+                                                {{ number_format($realisasi->februari_total) }}</td>
+                                            <td style="text-align: right">{{ number_format($realisasi->maret_total) }}
+                                            </td>
+                                            <td style="text-align: right">{{ number_format($realisasi->april_total) }}
+                                            </td>
+                                            <td style="text-align: right">{{ number_format($realisasi->mei_total) }}
+                                            </td>
+                                            <td style="text-align: right">{{ number_format($realisasi->juni_total) }}
+                                            </td>
+                                            <td style="text-align: right">{{ number_format($realisasi->juli_total) }}
+                                            </td>
+                                            <td style="text-align: right">
+                                                {{ number_format($realisasi->agustus_total) }}</td>
+                                            <td style="text-align: right">
+                                                {{ number_format($realisasi->september_total) }}</td>
+                                            <td style="text-align: right">
+                                                {{ number_format($realisasi->oktober_total) }}</td>
+                                            <td style="text-align: right">
+                                                {{ number_format($realisasi->november_total) }}</td>
+                                            <td style="text-align: right">
+                                                {{ number_format($realisasi->desember_total) }}</td>
+                                            <td style="text-align: right">
+                                                {{ number_format($realisasi->januari_total + $realisasi->februari_total + $realisasi->maret_total + $realisasi->april_total + $realisasi->mei_total + $realisasi->juni_total + $realisasi->juli_total + $realisasi->agustus_total + $realisasi->september_total + $realisasi->oktober_total + $realisasi->november_total + $realisasi->desember_total) }}
+                                            </td>
+                                            <td style="text-align: right">{{ number_format($realisasi->sisa_pagu) }}
+                                            </td>
                                         </tr>
                                     @endforeach
                                     <tr style="text-align: right">
@@ -123,8 +141,9 @@ setlocale(LC_TIME, 'id_ID');
                                         <td>{{ number_format($totalOktoberSub) }}</td>
                                         <td>{{ number_format($totalNovemberSub) }}</td>
                                         <td>{{ number_format($totalDesemberSub) }}</td>
-                                        <td>{{ number_format($totalJanuariSub + $totalFebruariSub + $totalMaretSub + $totalAprilSub + $totalMeiSub + $totalJuniSub + $totalJuliSub + $totalAgustusSub + $totalSeptemberSub + $totalOktoberSub + $totalNovemberSub + $totalDesemberSub) }}</td>
-                                        <td>{{number_format($sisaPagu) }}</td>
+                                        <td>{{ number_format($totalJanuariSub + $totalFebruariSub + $totalMaretSub + $totalAprilSub + $totalMeiSub + $totalJuniSub + $totalJuliSub + $totalAgustusSub + $totalSeptemberSub + $totalOktoberSub + $totalNovemberSub + $totalDesemberSub) }}
+                                        </td>
+                                        <td>{{ number_format($sisaPagu) }}</td>
                                     </tr>
                                 </tbody>
                             </table>

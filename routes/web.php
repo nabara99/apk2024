@@ -5,8 +5,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DecisionController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\KwitansiController;
+use App\Http\Controllers\KwitansiTuController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PajakKwitansiController;
+use App\Http\Controllers\PajakKwitansiTuController;
 use App\Http\Controllers\PenerimaContoller;
 use App\Http\Controllers\PptkContoller;
 use App\Http\Controllers\ProgramController;
@@ -15,6 +17,7 @@ use App\Http\Controllers\SpdController;
 use App\Http\Controllers\SpdRinciController;
 use App\Http\Controllers\SubController;
 use App\Http\Controllers\TempKwitansiController;
+use App\Http\Controllers\TempKwitansiTuController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ViewDataController;
 use Illuminate\Support\Facades\Route;
@@ -60,8 +63,17 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/kwitansi/generate-pajak-daerah', [KwitansiController::class, 'generatePajakDaerah'])->name('kwitansi.generatePajakDaerah');
     Route::get('/detail/{id}', [SpdController::class, 'detail'])->name('detail');
     Route::get('/pajak/{id}', [KwitansiController::class, 'pajak'])->name('pajak');
+
     Route::get('/view-kwitansi', [ViewDataController::class, 'index'])->name('view.kwitansi');
+
     Route::resource('pajak-kwitansi', PajakKwitansiController::class);
+
     Route::get('/tax/{id}', [SpdController::class, 'tax'])->name('tax');
     Route::get('/pajak-spd/{id}', [PajakKwitansiController::class, 'pajakSpd'])->name('pajak-spd');
+
+    Route::resource('tu', KwitansiTuController::class);
+    Route::resource('tempkwitansitu', TempKwitansiTuController::class);
+    Route::get('/pajak-tu/{id}', [KwitansiTuController::class, 'pajak'])->name('pajak-tu');
+
+    Route::resource('pajak-kwitansi-tu', PajakKwitansiTuController::class);
 });

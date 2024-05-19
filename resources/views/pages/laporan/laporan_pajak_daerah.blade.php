@@ -22,12 +22,13 @@ setlocale(LC_TIME, 'id_ID');
             <td colspan="3"><b>LAPORAN PAJAK DAERAH</b></td>
         </tr>
         <tr>
-            <td colspan="3"><b>Periode {{ Carbon::parse($startDate)->isoFormat('D MMMM Y') }} s.d. {{ Carbon::parse($endDate)->isoFormat('D MMMM Y') }}</b></td>
+            <td colspan="3"><b>Periode {{ Carbon::parse($startDate)->isoFormat('D MMMM Y') }} s.d.
+                    {{ Carbon::parse($endDate)->isoFormat('D MMMM Y') }}</b></td>
         </tr>
         <tr>
             <td width="15%">&nbsp&nbsp&nbsp&nbsp SKPD</td>
             <td width="1%">:</td>
-            <td width="50%" style="text-align: left;">Kecamatan Sungai Loban</td>
+            <td width="50%" style="text-align: left;">Kecamatan Teluk Kepayang</td>
         </tr>
         <tr>
             <td width="15%">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -40,7 +41,8 @@ setlocale(LC_TIME, 'id_ID');
             <td colspan="3">
                 <br>
                 <center>
-                    <table border="1" cellpadding="5" style="border-collapse: collapse; border: 1px solid #000; text-align: center; width: 80%">
+                    <table border="1" cellpadding="5"
+                        style="border-collapse: collapse; border: 1px solid #000; text-align: center; width: 80%">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -62,7 +64,7 @@ setlocale(LC_TIME, 'id_ID');
                                 @if ($pajak->jenis_pajak != 'Pdaerah')
                                 @else
                                     <tr>
-                                        <td>{{$no++}}</td>
+                                        <td>{{ $no++ }}</td>
                                         <td>{{ $pajak->no_spd }}</td>
                                         <td style="text-align: left;">{{ $pajak->uraian_pajak }}</td>
                                         <td>{{ $pajak->billing }}</td>
@@ -90,7 +92,7 @@ setlocale(LC_TIME, 'id_ID');
             </td>
         <tr>
             <td colspan="2"></td>
-            <td><br/>Sungai Loban, {{ Carbon::parse($endDate)->isoFormat('D MMMM Y') }}</td>
+            <td><br />Teluk Kepayang, {{ Carbon::parse($endDate)->isoFormat('D MMMM Y') }}</td>
         </tr>
         <tr>
             <td colspan="2"></td>
@@ -98,11 +100,11 @@ setlocale(LC_TIME, 'id_ID');
         </tr>
         <tr>
             <td colspan="2"></td>
-            <td><br/><br/><br/><br/><br/>{{$decision->nama_bp}}</td>
+            <td><br /><br /><br /><br /><br />{{ $decision->nama_bp }}</td>
         </tr>
         <tr>
             <td colspan="2"></td>
-            <td>NIP. {{$decision->nip_bp}}</td>
+            <td>NIP. {{ $decision->nip_bp }}</td>
         </tr>
     </table>
 </body>

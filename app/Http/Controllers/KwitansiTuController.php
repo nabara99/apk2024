@@ -4,60 +4,45 @@ namespace App\Http\Controllers;
 
 use App\Models\Anggaran;
 use App\Models\Decision;
-use App\Models\Kwitansi;
+use App\Models\KwitansiTu;
 use App\Models\Penerima;
 use App\Models\Spd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class KwitansiController extends Controller
+class KwitansiTuController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $kwitansis = Kwitansi::when($request->input('hal'), function ($query, $name) {
+        $kwitansitus = KwitansiTu::when($request->input('hal'), function ($query, $name) {
             return $query->where('hal', 'like', '%' . $name . '%');
         })
             ->orderBy('kw_id', 'asc')
             ->paginate(5);
-        return view('pages.kwitansi.index', compact('kwitansis'));
+        return view('pages.kwitansitu.index', compact('kwitansitus'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        $lastFaktur = DB::table('kwitansis')->orderBy('kw_id', 'desc')->first();
-        $item = new Kwitansi();
+        $lastFaktur = DB::table('kwitansi_tus')->orderBy('kw_id', 'desc')->first();
+        $item = new KwitansiTu();
         $item->no_faktur = $lastFaktur ? $lastFaktur->kw_id + 1 : 1;
 
         $anggarans = Anggaran::all();
         $penerimas = Penerima::all();
 
-        return view('pages.kwitansi.create', compact('item', 'anggarans', 'penerimas'));
+        return view('pages.kwitansitu.create', compact('item', 'anggarans', 'penerimas'));
     }
 
-    public function modalcaripagu()
-    {
-        $anggarans = DB::table('anggarans')
-            ->join('subs', 'anggarans.sub_id', '=', 'subs.id')
-            ->join('rekenings', 'anggarans.rekening_id', '=', 'rekenings.id')
-            ->join('kegiatans', 'subs.kegiatan_id', '=', 'kegiatans.id')
-            ->join('programs', 'kegiatans.program_id', '=', 'programs.id')
-            ->selectRaw('anggarans.id, sisa_pagu,nama_sub, kode_sub, kode_kegiatan, kode_program, uraian, kode_rekening')
-            ->get();
-
-        return response()->json(['data' => $anggarans]);
-    }
-
-    public function modalcaripenerima()
-    {
-        $penerimas = Penerima::all();
-
-        return response()->json(['data' => $penerimas]);
-    }
-
-
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         try {
@@ -70,15 +55,13 @@ class KwitansiController extends Controller
             $kw_id = $request->input('kwitansi_id');
             $tgl = $request->input('tgl');
 
-            $data = Kwitansi::create([
+            $data = KwitansiTu::create([
                 'kw_id' => $kw_id,
                 'tgl' => $tgl,
                 'hal' => $request->input('hal'),
                 'nilai' => str_replace(",", "", $request->input('total_belanja')),
                 'penerima_id' => $request->input('idpenerima'),
                 'anggaran_id' => $request->input('anggaran_id'),
-                'iwp1' => str_replace(",", "", $request->input('iwp1')),
-                'iwp8' => str_replace(",", "", $request->input('iwp8')),
                 'ppn' => str_replace(",", "", $request->input('ppn')),
                 'pph21' => str_replace(",", "", $request->input('pph21')),
                 'pph22' => str_replace(",", "", $request->input('pph22')),
@@ -99,9 +82,9 @@ class KwitansiController extends Controller
     public function show($kwitansi_id)
     {
         $pengelolas = Decision::all();
-        $kwitansi = Kwitansi::where('kw_id', $kwitansi_id)->firstOrFail();
+        $kwitansi = KwitansiTu::where('kw_id', $kwitansi_id)->firstOrFail();
         return view(
-            'pages.kwitansi.cetak',
+            'pages.kwitansitu.cetak',
             [
                 'kwitansi' => $kwitansi,
                 'pengelolas' => $pengelolas
@@ -116,8 +99,16 @@ class KwitansiController extends Controller
     {
         $penerimas = Penerima::all();
         $anggarans = Anggaran::all();
-        $kwitansis = Kwitansi::findOrFail($kwitansi_id);
-        return view('pages.kwitansi.editkwitansi', compact('penerimas', 'kwitansis', 'anggarans'));
+        $kwitansis = KwitansiTu::findOrFail($kwitansi_id);
+        return view('pages.kwitansitu.editkwitansi', compact('penerimas', 'kwitansis', 'anggarans'));
+    }
+
+    public function pajak($id)
+    {
+        $kwitansi = KwitansiTu::findOrFail($id);
+        $spds = Spd::all();
+
+        return view('pages.kwitansitu.input_pajak', compact('kwitansi', 'spds'));
     }
 
     /**
@@ -125,7 +116,7 @@ class KwitansiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $kwitansi = Kwitansi::findOrFail($id);
+        $kwitansi = KwitansiTu::findOrFail($id);
 
         $kwitansi->update([
             'tgl' => $request->tgl,
@@ -142,15 +133,7 @@ class KwitansiController extends Controller
             'file' => $request->file,
         ]);
 
-        return redirect()->route('kwitansi.index')->with('success', 'Kwitansi berhasil diupdate');
-    }
-
-    public function pajak($id)
-    {
-        $kwitansi = Kwitansi::findOrFail($id);
-        $spds = Spd::all();
-
-        return view('pages.kwitansi.input_pajak', compact('kwitansi', 'spds'));
+        return redirect()->route('tu.index')->with('success', 'Kwitansi berhasil diupdate');
     }
 
     /**

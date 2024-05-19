@@ -65,7 +65,7 @@ class LaporanController extends Controller
                 'subs.nama_sub as nama_sub',
                 'kegiatans.kode_kegiatan as kode_kegiatan',
                 'programs.kode_program as kode_program',
-                DB::raw('SUM(total) AS total'), // Menggunakan fungsi agregasi SUM untuk mendapatkan total
+                DB::raw('SUM(total) AS total'),
                 DB::raw('MONTH(kwitansis.tgl) AS bulan')
             )
             ->join('kwitansis', 'temp_kwitansis.kwitansi_id', '=', 'kwitansis.kw_id')
@@ -74,9 +74,51 @@ class LaporanController extends Controller
             ->join('subs', 'anggarans.sub_id', '=', 'subs.id')
             ->join('kegiatans', 'subs.kegiatan_id', '=', 'kegiatans.id')
             ->join('programs', 'kegiatans.program_id', '=', 'programs.id')
-            ->groupBy('anggarans.uraian', 'anggarans.pagu', 'anggarans.sisa_pagu', 'rekenings.kode_rekening',
-            'rekenings.nama_rekening', 'subs.kode_sub', 'subs.nama_sub', 'kegiatans.kode_kegiatan',
-            'programs.kode_program', 'bulan');
+            ->groupBy(
+                'anggarans.uraian',
+                'anggarans.pagu',
+                'anggarans.sisa_pagu',
+                'rekenings.kode_rekening',
+                'rekenings.nama_rekening',
+                'subs.kode_sub',
+                'subs.nama_sub',
+                'kegiatans.kode_kegiatan',
+                'programs.kode_program',
+                'bulan'
+            );
+
+        $realisasiTu = DB::table('temp_kwitansi_tus')
+            ->select(
+                'anggarans.uraian as uraian',
+                'anggarans.pagu as pagu',
+                'anggarans.sisa_pagu as sisa_pagu',
+                'rekenings.kode_rekening as kode_rekening',
+                'rekenings.nama_rekening as nama_rekening',
+                'subs.kode_sub as kode_sub',
+                'subs.nama_sub as nama_sub',
+                'kegiatans.kode_kegiatan as kode_kegiatan',
+                'programs.kode_program as kode_program',
+                DB::raw('SUM(total) AS total'),
+                DB::raw('MONTH(kwitansi_tus.tgl) AS bulan')
+            )
+            ->join('kwitansi_tus', 'temp_kwitansi_tus.kwitansi_id', '=', 'kwitansi_tus.kw_id')
+            ->join('anggarans', 'temp_kwitansi_tus.anggaran_id', '=', 'anggarans.id')
+            ->join('rekenings', 'anggarans.rekening_id', '=', 'rekenings.id')
+            ->join('subs', 'anggarans.sub_id', '=', 'subs.id')
+            ->join('kegiatans', 'subs.kegiatan_id', '=', 'kegiatans.id')
+            ->join('programs', 'kegiatans.program_id', '=', 'programs.id')
+            ->groupBy(
+                'anggarans.uraian',
+                'anggarans.pagu',
+                'anggarans.sisa_pagu',
+                'rekenings.kode_rekening',
+                'rekenings.nama_rekening',
+                'subs.kode_sub',
+                'subs.nama_sub',
+                'kegiatans.kode_kegiatan',
+                'programs.kode_program',
+                'bulan'
+            );
 
         $realisasiSpd = DB::table('spd_rincis')
             ->select(
@@ -98,10 +140,20 @@ class LaporanController extends Controller
             ->join('subs', 'anggarans.sub_id', '=', 'subs.id')
             ->join('kegiatans', 'subs.kegiatan_id', '=', 'kegiatans.id')
             ->join('programs', 'kegiatans.program_id', '=', 'programs.id')
-            ->groupBy('anggarans.uraian', 'anggarans.pagu', 'anggarans.sisa_pagu', 'rekenings.kode_rekening',
-            'rekenings.nama_rekening', 'subs.kode_sub', 'subs.nama_sub', 'kegiatans.kode_kegiatan',
-            'programs.kode_program', 'bulan');
-        $combinedQuery = $realisasiBelanja->union($realisasiSpd);
+            ->groupBy(
+                'anggarans.uraian',
+                'anggarans.pagu',
+                'anggarans.sisa_pagu',
+                'rekenings.kode_rekening',
+                'rekenings.nama_rekening',
+                'subs.kode_sub',
+                'subs.nama_sub',
+                'kegiatans.kode_kegiatan',
+                'programs.kode_program',
+                'bulan'
+            );
+        // $combinedQuery = $realisasiBelanja->union($realisasiSpd);
+        $combinedQuery = $realisasiBelanja->union($realisasiTu)->union($realisasiSpd);
 
         $realisasiBelanjaUnionSpd = DB::table(DB::raw("({$combinedQuery->toSql()}) as combined"))
             ->mergeBindings($combinedQuery)
@@ -128,8 +180,17 @@ class LaporanController extends Controller
                 DB::raw('SUM(CASE WHEN bulan = 11 THEN total ELSE 0 END) AS november_total'),
                 DB::raw('SUM(CASE WHEN bulan = 12 THEN total ELSE 0 END) AS desember_total'),
             )
-            ->groupBy('uraian', 'kode_rekening', 'nama_rekening', 'nama_sub', 'kode_sub', 'kode_kegiatan',
-                'kode_program', 'pagu', 'sisa_pagu')
+            ->groupBy(
+                'uraian',
+                'kode_rekening',
+                'nama_rekening',
+                'nama_sub',
+                'kode_sub',
+                'kode_kegiatan',
+                'kode_program',
+                'pagu',
+                'sisa_pagu'
+            )
             ->orderBy('kode_program', 'asc')
             ->orderBy('kode_kegiatan', 'asc')
             ->orderBy('kode_sub', 'asc')
@@ -165,9 +226,21 @@ class LaporanController extends Controller
             $totalDesember += $realisasi->desember_total;
         }
 
-        return view('pages.laporan.laporan_renja', compact('realisasiBelanjaUnionSpd', 'totalJanuari', 'totalFebruari',
-        'totalMaret', 'totalApril', 'totalMei', 'totalJuni', 'totalJuli', 'totalAgustus', 'totalSeptember', 'totalOktober',
-        'totalNovember', 'totalDesember',));
+        return view('pages.laporan.laporan_renja', compact(
+            'realisasiBelanjaUnionSpd',
+            'totalJanuari',
+            'totalFebruari',
+            'totalMaret',
+            'totalApril',
+            'totalMei',
+            'totalJuni',
+            'totalJuli',
+            'totalAgustus',
+            'totalSeptember',
+            'totalOktober',
+            'totalNovember',
+            'totalDesember',
+        ));
     }
 
     public function laporanPajakPusat(Request $request)
@@ -238,15 +311,6 @@ class LaporanController extends Controller
         $endDate = $request->input('end_date');
 
         $spds = DB::table('spds')
-            // ->select(
-            //     'kode_program',
-            //     'kode_kegiatan',
-            //     'kode_sub',
-            //     'nama_sub',
-            //     'kode_rekening',
-            //     'nama_rekening',
-            //     DB::raw('SUM(total) AS total_realisasi') // Hitung total realisasi
-            // )
             ->whereBetween('spd_tgl', [$startDate, $endDate])
             ->orderBy('spd_tgl', 'asc')
             ->get();

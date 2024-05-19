@@ -20,9 +20,9 @@
                     <div class="col-12 col-md-12 col-lg-12 col-sm-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Buat Kwitansi</h4>
+                                <h4>Buat Kwitansi TU</h4>
                                 <div class="card-header-action">
-                                    <a href="{{ route('kwitansi.index') }}" class="btn btn-primary btn-icon"><i
+                                    <a href="{{ route('tu.index') }}" class="btn btn-primary btn-icon"><i
                                             class="fa-solid fa-arrow-rotate-left"></i></a>
                                 </div>
                             </div>
@@ -250,18 +250,6 @@
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-6"><label for="iwp1">IWP 1</label>
-                                <input type="text" class="number-separator form-control" id="iwp1"
-                                    name="iwp1">
-                            </div>
-                            <div class="col-6"><label for="iwp8">IWP 8</label>
-                                <input type="text" class="number-separator form-control" id="iwp8"
-                                    name="iwp8">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
                             <div class="col-6"><label for="ppn">PPN</label>
                                 <input type="text" class="number-separator form-control" id="ppn"
                                     name="ppn">
@@ -373,7 +361,7 @@
             } else {
                 $.ajax({
                     type: "POST",
-                    url: "/tempkwitansi",
+                    url: "/tempkwitansitu",
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
@@ -428,7 +416,7 @@
         function loadDetailKwitansi(kwitansi_id) {
             $.ajax({
                 type: 'GET',
-                url: '/tempkwitansi/' + kwitansi_id,
+                url: '/tempkwitansitu/' + kwitansi_id,
                 data: {
                     kwitansi_id: kwitansi_id
                 },
@@ -465,7 +453,7 @@
         function updateTotalBelanja(kwitansi_id) {
             $.ajax({
                 type: 'GET',
-                url: '/tempkwitansi/' + kwitansi_id,
+                url: '/tempkwitansitu/' + kwitansi_id,
                 success: function(response) {
                     $('#total-belanja').text(response.total_belanja.toLocaleString());
                 },
@@ -479,7 +467,7 @@
             var kwitansi_id = $('#kw_id').val();
             $.ajax({
                 type: 'DELETE',
-                url: '/tempkwitansi/' + detail_id,
+                url: '/tempkwitansitu/' + detail_id,
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -517,15 +505,13 @@
         function hitungSisa() {
             var total_belanja = parseFloat($('#total_belanja').val().replace(/[^0-9.-]/g, '')) || 0;
 
-            var iwp1 = parseFloat($('#iwp1').val().replace(/[^0-9.-]/g, '')) || 0;
-            var iwp8 = parseFloat($('#iwp8').val().replace(/[^0-9.-]/g, '')) || 0;
             var ppn = parseFloat($('#ppn').val().replace(/[^0-9.-]/g, '')) || 0;
             var pph21 = parseFloat($('#pph21').val().replace(/[^0-9.-]/g, '')) || 0;
             var pph22 = parseFloat($('#pph22').val().replace(/[^0-9.-]/g, '')) || 0;
             var pph23 = parseFloat($('#pph23').val().replace(/[^0-9.-]/g, '')) || 0;
             var pajakdaerah = parseFloat($('#pajakdaerah').val().replace(/[^0-9.-]/g, '')) || 0;
 
-            var total_pajak = iwp1 + iwp8 + ppn + pph21 + pph22 + pph23 + pajakdaerah;
+            var total_pajak = ppn + pph21 + pph22 + pph23 + pajakdaerah;
 
             var sisa_pembayaran = total_belanja - total_pajak;
 
@@ -735,7 +721,7 @@
 
                 $.ajax({
                     type: 'GET',
-                    url: '/tempkwitansi/' + kwitansi_id,
+                    url: '/tempkwitansitu/' + kwitansi_id,
                     success: function(response) {
                         var total_belanja = response.total_belanja;
                         var penerima = idpenerima;
@@ -753,7 +739,7 @@
                 });
             });
 
-            $('#iwp1, #iwp8, #ppn, #pph21, #pph22, #pph23, #pajakdaerah').on('input', function() {
+            $('#ppn, #pph21, #pph22, #pph23, #pajakdaerah').on('input', function() {
                 hitungSisa();
             });
 
@@ -763,8 +749,6 @@
                 var total_belanja = $('#total_belanja').val();
                 var tgl = $('#tgl').val();
                 var hal = $('#hal').val();
-                var iwp1 = $('#iwp1').val();
-                var iwp8 = $('#iwp8').val();
                 var ppn = $('#ppn').val();
                 var pph21 = $('#pph21').val();
                 var pph22 = $('#pph22').val();
@@ -793,7 +777,7 @@
                 }
                 $.ajax({
                     type: "POST",
-                    url: "/kwitansi",
+                    url: "/tu",
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
@@ -803,8 +787,6 @@
                         total_belanja: total_belanja,
                         tgl: tgl,
                         hal: hal,
-                        iwp1: iwp1,
-                        iwp8: iwp8,
                         ppn: ppn,
                         pph21: pph21,
                         pph22: pph22,
@@ -825,7 +807,7 @@
                                 confirmButtonText: 'Ya, cetak'
                             }).then((result) => {
                                 if (result.isConfirmed) {
-                                    var windowCetak = window.open('/kwitansi/' +
+                                    var windowCetak = window.open('/tu/' +
                                         kwitansi_id,
                                         "Cetak Kwitansi",
                                         "width=1200, height=800");

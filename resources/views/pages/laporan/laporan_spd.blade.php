@@ -27,7 +27,7 @@ setlocale(LC_TIME, 'id_ID');
         <tr>
             <td width="15%">&nbsp&nbsp&nbsp&nbsp SKPD</td>
             <td width="1%">:</td>
-            <td width="50%" style="text-align: left;">Kecamatan Sungai Loban</td>
+            <td width="50%" style="text-align: left;">Kecamatan Teluk Kepayang</td>
         </tr>
         <tr>
             <td colspan="3">

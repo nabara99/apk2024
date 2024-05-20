@@ -129,6 +129,7 @@ setlocale(LC_TIME, 'id_ID');
             <td>Untuk Pembayaran</td>
             <td>:</td>
         </tr>
+
         @if ($kwitansi->iwp1)
             <tr style="font-size: 8pt;">
                 <td>IWP 1%</td>

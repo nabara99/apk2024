@@ -86,7 +86,7 @@ setlocale(LC_TIME, 'id_ID');
             </td>
         <tr>
             <td colspan="2"></td>
-            <td><br />Sungai Loban, {{ Carbon::parse($endDate)->isoFormat('D MMMM Y') }}</td>
+            <td><br />Teluk Kepayang, {{ Carbon::parse($endDate)->isoFormat('D MMMM Y') }}</td>
         </tr>
         <tr>
             <td colspan="2"></td>

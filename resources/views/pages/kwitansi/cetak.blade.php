@@ -129,24 +129,26 @@ setlocale(LC_TIME, 'id_ID');
             <td>Untuk Pembayaran</td>
             <td>:</td>
         </tr>
-        <tr style="font-size: 8pt;">
-            <td>IWP 1%</td>
-            <td>:</td>
-            <td>Rp. </td>
-            <td style="text-align: right;">
-                {{ number_format($kwitansi->iwp1) }},-
-            </td>
-        </tr>
-        <tr style="font-size: 8pt;">
-            <td>IWP 8%</td>
-            <td>:</td>
-            <td>Rp. </td>
-            <td style="text-align: right;">
-                {{ number_format($kwitansi->iwp8) }},-
-            </td>
-            <td></td>
-            <td colspan="3" rowspan="4">{{ $kwitansi->hal }}</td>
-        </tr>
+        @if ($kwitansi->iwp1)
+            <tr style="font-size: 8pt;">
+                <td>IWP 1%</td>
+                <td>:</td>
+                <td>Rp. </td>
+                <td style="text-align: right;">
+                    {{ number_format($kwitansi->iwp1) }},-
+                </td>
+            </tr>
+            <tr style="font-size: 8pt;">
+                <td>IWP 8%</td>
+                <td>:</td>
+                <td>Rp. </td>
+                <td style="text-align: right;">
+                    {{ number_format($kwitansi->iwp8) }},-
+                </td>
+                <td></td>
+                <td colspan="3" rowspan="4">{{ $kwitansi->hal }}</td>
+            </tr>
+        @endif
         <tr style="font-size: 8pt;">
             <td>PPN</td>
             <td>:</td>

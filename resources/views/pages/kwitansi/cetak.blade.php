@@ -146,8 +146,6 @@ setlocale(LC_TIME, 'id_ID');
                 <td style="text-align: right;">
                     {{ number_format($kwitansi->iwp8) }},-
                 </td>
-                <td></td>
-                <td colspan="3" rowspan="4">{{ $kwitansi->hal }}</td>
             </tr>
         @endif
         <tr style="font-size: 8pt;">
@@ -157,6 +155,8 @@ setlocale(LC_TIME, 'id_ID');
             <td style="text-align: right;">
                 {{ number_format($kwitansi->ppn) }},-
             </td>
+            <td></td>
+            <td colspan="3" rowspan="4">{{ $kwitansi->hal }}</td>
         </tr>
         <tr style="font-size: 8pt;">
             <td>PPh 21</td>

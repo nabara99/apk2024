@@ -81,9 +81,16 @@
                     </div>
                 </div>
                 <div class="col-lg-8 col-12 order-lg-2 min-vh-100 background-walk-y position-relative overlay-gradient-bottom order-1"
-                    data-background="{{ asset('img/unsplash/luca-massimilian-nl21NzVRRlo-unsplash.jpg') }}">
+                    data-background="{{ asset('img/hutri.jpg') }}">
                     <div class="absolute-bottom-left index-2">
                         <div class="text-light p-5 pb-2">
+                            <div class="mb-5 pb-3">
+                                <h1 class="display-4 font-weight-bold mb-2">Good Morning</h1>
+                            </div>
+
+                        </div>>
+                    </div>
+                    {{-- <div class="text-light p-5 pb-2">
                             <div class="mb-5 pb-3">
                                 <h1 class="display-4 font-weight-bold mb-2">Good Morning</h1>
                             </div>
@@ -91,11 +98,11 @@
                                 href="https://unsplash.com/photos/person-using-black-laptop-computer-nl21NzVRRlo">Luca
                                 Massimilian</a> on <a class="text-light bb" target="_blank"
                                 href="https://unsplash.com">Unsplash</a>
-                        </div>
-                    </div>
+                        </div> --}}
                 </div>
             </div>
-        </section>
+    </div>
+    </section>
     </div>
 
     <!-- General JS Scripts -->

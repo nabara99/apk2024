@@ -20,15 +20,15 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Daftar Pengguna</h4>
-                                <a href="{{ route('user.create') }}" class="btn btn-primary">Tambah Pengguna</a>
+                                <h4>Jumlah Desa / Kelurahan {{ $jumlahDesa }}</h4>
+                                {{-- <a href="{{ route('desa.create') }}" class="btn btn-primary">Tambah Desa/Kelurahan</a> --}}
                             </div>
                             <div class="card-body">
                                 <div class="float-right">
                                     <form method="GET">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Cari pengguna"
-                                                name="name">
+                                            <input type="text" class="form-control" placeholder="Cari desa"
+                                                name="nama_desa">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                             </div>
@@ -39,47 +39,32 @@
                                 <div class="table-responsive">
                                     <table class="table-striped table">
                                         <tr>
-                                            <th>Nama</th>
-                                            <th>Email</th>
-                                            <th>Status</th>
-                                            <th>Kec | Desa/Kel | No.TPS</th>
-                                            <th></th>
+                                            <th>Kecamatan</th>
+                                            <th>Desa/ Kelurahan</th>
+                                            <th>Aksi</th>
                                         </tr>
-                                        @foreach ($users as $user)
+                                        @foreach ($desas as $desa)
                                             <tr>
-                                                <td>{{ $user->name }}</td>
-                                                <td>{{ $user->email }}</td>
-                                                <td>{{ $user->roles }}</td>
-                                                @if ($user->tps_id)
-                                                    <td>
-                                                        {{ $user->tps->desa->kecamatan->nama_kec }} |
-                                                        {{ $user->tps->desa->nama_desa }} |
-                                                        {{ $user->tps->no_tps }}
-                                                    </td>
-                                                @elseif ($user->desa_id)
-                                                    <td>
-                                                        {{ $user->desa->kecamatan->nama_kec }} |
-                                                        {{ $user->desa->nama_desa }}
-                                                    </td>
-                                                @else
-                                                    <td>-</td>
-                                                @endif
+                                                <td>{{ $desa->kecamatan->nama_kec }}</td>
+                                                <td>{{ $desa->nama_desa }}
+                                                </td>
                                                 <td>
                                                     <div class="d-flex justify-content-left">
-                                                        <a href="{{ route('user.edit', $user->id) }}"
-                                                            class="btn btn-sm btn-info btn-icon" title="edit">
-                                                            <i class="fa-solid fa-pencil"></i>
+                                                        <a href="{{ route('desa.edit', $desa->id) }}"
+                                                            class="btn btn-sm btn-info btn-icon">
+                                                            <i class="fas fa-edit"></i>
+                                                            Edit
                                                         </a>
-                                                        <form action="{{ route('user.destroy', $user->id) }}"
+                                                        {{-- <form action="{{ route('anggaran.destroy', $anggaran->id) }}"
                                                             method="POST" class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                             <input type="hidden" name="_token"
                                                                 value="{{ csrf_token() }}" />
                                                             <button class="btn btn-sm btn-danger btn-icon confirm-delete"
-                                                                onclick="return confirm('Yakin menghapus data?')" title="hapus">
-                                                                <i class="fa-solid fa-trash"></i>
+                                                                onclick="return confirm('Yakin menghapus data?')">
+                                                                <i class="fas fa-times"></i> Hapus
                                                             </button>
-                                                        </form>
+                                                        </form> --}}
                                                     </div>
                                                 </td>
                                             </tr>
@@ -88,7 +73,7 @@
                                     </table>
                                 </div>
                                 <div class="float-right">
-                                    {{ $users->withQueryString()->links() }}
+                                    {{ $desas->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>

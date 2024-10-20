@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Anggaran;
-use App\Models\Desa;
-use App\Models\Kwitansi;
-use App\Models\Tps;
-use App\Models\User;
+use App\Models\Dpt;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class DashboardController extends Controller
+class DptController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $total_desa = Desa::count('id');
-        $total_tps = Tps::count('id');
-        $total_user = User::count('id');
-        return view('pages.dashboard', compact('total_desa', 'total_tps', 'total_user'));
+        $jumlah_dpt = Dpt::count('id');
+        $dpts = Dpt::when($request->input('nama'), function ($query, $value) {
+            return $query->where('nama', 'like', '%' . $value . '%')
+                ->orWhere('nik', 'like', '%' . $value . '%');
+        })
+            ->orderBy('id', 'asc')
+            ->paginate(10);
+
+        return view('pages.dpt.index', compact('dpts', 'jumlah_dpt'));
     }
 
     /**
@@ -42,7 +42,7 @@ class DashboardController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Dpt $dpt)
     {
         //
     }
@@ -50,7 +50,7 @@ class DashboardController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Dpt $dpt)
     {
         //
     }
@@ -58,7 +58,7 @@ class DashboardController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Dpt $dpt)
     {
         //
     }
@@ -66,7 +66,7 @@ class DashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Dpt $dpt)
     {
         //
     }

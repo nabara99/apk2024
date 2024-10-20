@@ -21,8 +21,10 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4>Edit Pengguna</h4>
-                                <a href="{{ route('user.index') }}" class="btn btn-primary btn-icon"><i
-                                        class="fa-solid fa-arrow-left"></i> Kembali</a>
+                                <div class="card-header-action">
+                                    <a href="{{ route('user.index') }}" class="btn btn-primary btn-icon"><i
+                                        class="fa-solid fa-arrow-rotate-left" title="kembali"></i></a>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <form action="{{ route('user.update', $user) }}" method="POST">
@@ -64,22 +66,16 @@
                                                 <span class="selectgroup-button">Admin</span>
                                             </label>
                                             <label class="selectgroup-item">
-                                                <input type="radio" name="roles" value="bendahara"
+                                                <input type="radio" name="roles" value="pps"
                                                     class="selectgroup-input"
-                                                    @if ($user->roles == 'bendahara') checked @endif>
-                                                <span class="selectgroup-button">Bendahara</span>
+                                                    @if ($user->roles == 'pps') checked @endif>
+                                                <span class="selectgroup-button">PPS</span>
                                             </label>
                                             <label class="selectgroup-item">
-                                                <input type="radio" name="roles" value="user"
+                                                <input type="radio" name="roles" value="kpps"
                                                     class="selectgroup-input"
-                                                    @if ($user->roles == 'user') checked @endif>
-                                                <span class="selectgroup-button">User</span>
-                                            </label>
-                                            <label class="selectgroup-item">
-                                                <input type="radio" name="roles" value="ppk"
-                                                    class="selectgroup-input"
-                                                    @if ($user->roles == 'ppk') checked @endif>
-                                                <span class="selectgroup-button">PPK</span>
+                                                    @if ($user->roles == 'kpps') checked @endif>
+                                                <span class="selectgroup-button">KPPS</span>
                                             </label>
                                             <label class="selectgroup-item">
                                                 <input type="radio" name="roles" value="viewer"
@@ -89,6 +85,49 @@
                                             </label>
                                         </div>
                                     </div>
+
+                                    <!-- Dropdown TPS -->
+                                    <div class="form-group" id="tps-select-group" @if($user->roles != 'kpps') style="display: none;" @endif>
+                                        <label>Pilih TPS</label>
+                                        <select
+                                            class="form-control select2 @error('tps_id') is-invalid @enderror"
+                                            style="width: 100%;" name="tps_id">
+                                            <option value="" disabled>--Pilih TPS--</option>
+                                            @foreach ($tps_list as $tps)
+                                                <option value="{{ $tps->id }}"
+                                                    @if ($user->tps_id == $tps->id) selected @endif>
+                                                    {{ $tps->desa->kecamatan->nama_kec }} | {{ $tps->desa->nama_desa }} | {{ $tps->no_tps }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('tps_id')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+
+                                    <!-- Dropdown Desa -->
+                                    <div class="form-group" id="desa-select-group" @if($user->roles != 'pps') style="display: none;" @endif>
+                                        <label>Pilih Desa</label>
+                                        <select
+                                            class="form-control select2 @error('desa_id') is-invalid @enderror"
+                                            style="width: 100%;" name="desa_id">
+                                            <option value="" disabled>--Pilih Desa--</option>
+                                            @foreach ($desa_list as $desa)
+                                                <option value="{{ $desa->id }}"
+                                                    @if ($user->desa_id == $desa->id) selected @endif>
+                                                    {{ $desa->kecamatan->nama_kec }} | {{ $desa->nama_desa }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('desa_id')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+
                                     <div class="card-footer text-right">
                                         <button class="btn btn-primary">Update</button>
                                     </div>
@@ -114,4 +153,29 @@
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('js/page/forms-advanced-forms.js') }}"></script>
+
+    <!-- Custom Script untuk Dropdown TPS dan Desa -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const roleRadios = document.querySelectorAll('input[name="roles"]');
+            const tpsSelectGroup = document.getElementById('tps-select-group');
+            const desaSelectGroup = document.getElementById('desa-select-group');
+
+            roleRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'kpps') {
+                        tpsSelectGroup.style.display = 'block';
+                        desaSelectGroup.style.display = 'none';
+                    } else if (this.value === 'pps') {
+                        tpsSelectGroup.style.display = 'none';
+                        desaSelectGroup.style.display = 'block';
+                    } else {
+                        tpsSelectGroup.style.display = 'none';
+                        desaSelectGroup.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
 @endpush

@@ -23,7 +23,21 @@ class User extends Authenticatable
         'email',
         'password',
         'roles',
+        'tps_id',
+        'desa_id',
     ];
+
+    public function tps()
+    {
+        return $this->belongsTo(Tps::class);
+    }
+
+    public function desa()
+    {
+        return $this->belongsTo(Desa::class);
+    }
+
+
 
     /**
      * The attributes that should be hidden for serialization.

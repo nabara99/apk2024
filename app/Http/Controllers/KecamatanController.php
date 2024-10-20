@@ -2,25 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Anggaran;
 use App\Models\Desa;
-use App\Models\Kwitansi;
-use App\Models\Tps;
-use App\Models\User;
+use App\Models\Kecamatan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class DashboardController extends Controller
+class KecamatanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $total_desa = Desa::count('id');
-        $total_tps = Tps::count('id');
-        $total_user = User::count('id');
-        return view('pages.dashboard', compact('total_desa', 'total_tps', 'total_user'));
+        
     }
 
     /**
@@ -42,7 +35,7 @@ class DashboardController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Kecamatan $kecamatan)
     {
         //
     }
@@ -50,7 +43,7 @@ class DashboardController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Kecamatan $kecamatan)
     {
         //
     }
@@ -58,7 +51,7 @@ class DashboardController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Kecamatan $kecamatan)
     {
         //
     }
@@ -66,7 +59,7 @@ class DashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Kecamatan $kecamatan)
     {
         //
     }
